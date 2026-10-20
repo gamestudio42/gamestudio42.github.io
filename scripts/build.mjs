@@ -339,14 +339,14 @@ function page(lang, games) {
       </header>
 
       <section id="games">
-        <h2><span class="dollar">$</span>${esc(t.gamesHeading)}</h2>
+        <h2><span class="dollar">$</span> ${esc(t.gamesHeading)}</h2>
         <div class="games">
       ${cards}
         </div>
       </section>
 
       <section id="manifesto">
-        <h2><span class="dollar">$</span>${esc(t.manifestoHeading)}</h2>
+        <h2><span class="dollar">$</span> ${esc(t.manifestoHeading)}</h2>
         <div class="manifesto">
           <pre>${esc(t.manifesto)}</pre>
           <p class="meta">${esc(t.shipHeading)}</p>
@@ -355,7 +355,7 @@ function page(lang, games) {
       </section>
 
       <section id="remix">
-        <h2><span class="dollar">$</span>${esc(t.remixHeading)}</h2>
+        <h2><span class="dollar">$</span> ${esc(t.remixHeading)}</h2>
         <div class="guide">
           <p>${esc(t.remixIntro)}</p>
           <pre>${esc(t.remixCode)}</pre>
@@ -368,7 +368,7 @@ function page(lang, games) {
       </section>
 
       <section id="devlog">
-        <h2><span class="dollar">$</span>${esc(t.followHeading)}</h2>
+        <h2><span class="dollar">$</span> ${esc(t.followHeading)}</h2>
         <p>${esc(t.follow)}</p>
         <p class="links">
           ${follow}
