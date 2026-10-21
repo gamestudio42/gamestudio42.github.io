@@ -1,5 +1,5 @@
 /**
- * Build the Game Studio 42 catalog as static EN and PT pages.
+ * Build the Game Studio 42 catalog as static pages (en, pt, es, fr, de).
  * Discovers public org repos tagged `gs42-game` and reads each gs42.json.
  */
 import { execSync } from "node:child_process";
@@ -12,6 +12,14 @@ const DIST = join(ROOT, "dist");
 const ORG = "gamestudio42";
 const SITE = "https://gamestudio42.github.io";
 const TOPIC = "gs42-game";
+
+const LOCALES = [
+  { id: "en", path: "/", hreflang: "en" },
+  { id: "pt", path: "/pt/", hreflang: "pt" },
+  { id: "es", path: "/es/", hreflang: "es" },
+  { id: "fr", path: "/fr/", hreflang: "fr" },
+  { id: "de", path: "/de/", hreflang: "de" },
+];
 
 const FALLBACK = [
   {
@@ -145,6 +153,162 @@ pnpm dev`,
     footer: "Licença MIT · construído à vista ·",
     share: (title, play) => `Jogue ${title} no navegador — open source, sem instalar. ${play}`,
   },
+  es: {
+    htmlLang: "es",
+    title: "Game Studio 42 — juegos open source en el navegador",
+    description: "Juegos open source. Un clic para jugar, dos para hacer fork.",
+    prompt: "gamestudio42@github:~$",
+    name: "Game Studio 42",
+    tagline: "Juegos open source. Un clic para jugar, dos para hacer fork.",
+    playRandom: "./play --aleatorio",
+    seeGames: "ls games/",
+    github: "git remote -v",
+    gamesHeading: "ls games/",
+    play: "./play",
+    code: "git clone",
+    fork: "fork",
+    copy: "cp link",
+    copied: "copiado",
+    stars: "estrellas",
+    forks: "forks",
+    updated: (label) => `actualizado ${label}`,
+    today: "hoy",
+    yesterday: "ayer",
+    daysAgo: (n) => `hace ${n} días`,
+    manifestoHeading: "cat MANIFESTO.md",
+    manifesto: `# Game Studio 42
+
+- Cada juego es gratis y corre en el navegador.
+- Todo el código es público bajo licencia MIT.
+- Hecho a la vista, commit a commit.
+- Haz fork, remixa, publica el tuyo.
+`,
+    shipHeading: "Cómo publicamos",
+    ship: [
+      "El juego vive en un repositorio público de GitHub.",
+      "Una GitHub Action lo construye.",
+      "GitHub Pages lo hospeda. Se juega en minutos.",
+    ],
+    remixHeading: "git clone",
+    remixIntro: "Clona un juego, cambia las reglas, publica tu fork en tus Pages.",
+    remixCode: `git clone https://github.com/gamestudio42/urbe.git
+cd urbe
+pnpm install
+pnpm dev`,
+    help: "Ayuda a construirlo",
+    issues: "good first issues",
+    discussions: "Discussions",
+    followHeading: "tail -f devlog",
+    follow: "Dale una estrella para seguir el próximo commit. El RSS está en GitHub Releases.",
+    commits: "commits",
+    feed: "releases.atom",
+    footer: "Licencia MIT · hecho a la vista ·",
+    share: (title, play) => `Juega ${title} en el navegador — open source, sin instalar. ${play}`,
+  },
+  fr: {
+    htmlLang: "fr",
+    title: "Game Studio 42 — jeux open source dans le navigateur",
+    description: "Jeux open source. Un clic pour jouer, deux pour forker.",
+    prompt: "gamestudio42@github:~$",
+    name: "Game Studio 42",
+    tagline: "Jeux open source. Un clic pour jouer, deux pour forker.",
+    playRandom: "./play --aleatoire",
+    seeGames: "ls games/",
+    github: "git remote -v",
+    gamesHeading: "ls games/",
+    play: "./play",
+    code: "git clone",
+    fork: "fork",
+    copy: "cp link",
+    copied: "copié",
+    stars: "étoiles",
+    forks: "forks",
+    updated: (label) => `mis à jour ${label}`,
+    today: "aujourd'hui",
+    yesterday: "hier",
+    daysAgo: (n) => `il y a ${n} jours`,
+    manifestoHeading: "cat MANIFESTO.md",
+    manifesto: `# Game Studio 42
+
+- Chaque jeu est gratuit et tourne dans le navigateur.
+- Tout le code est public sous licence MIT.
+- Construit à vue, commit après commit.
+- Forkez, remixez, publiez le vôtre.
+`,
+    shipHeading: "Comment on publie",
+    ship: [
+      "Le jeu vit dans un dépôt GitHub public.",
+      "Une GitHub Action le compile.",
+      "GitHub Pages l'héberge. Jouable en quelques minutes.",
+    ],
+    remixHeading: "git clone",
+    remixIntro: "Clonez un jeu, changez les règles, publiez votre fork sur vos Pages.",
+    remixCode: `git clone https://github.com/gamestudio42/urbe.git
+cd urbe
+pnpm install
+pnpm dev`,
+    help: "Aidez à construire",
+    issues: "good first issues",
+    discussions: "Discussions",
+    followHeading: "tail -f devlog",
+    follow: "Mettez une étoile pour suivre le prochain commit. Le RSS est sur GitHub Releases.",
+    commits: "commits",
+    feed: "releases.atom",
+    footer: "Licence MIT · construit à vue ·",
+    share: (title, play) => `Jouez à ${title} dans le navigateur — open source, sans installer. ${play}`,
+  },
+  de: {
+    htmlLang: "de",
+    title: "Game Studio 42 — Open-Source-Spiele im Browser",
+    description: "Open-Source-Spiele. Ein Klick zum Spielen, zwei zum Forken.",
+    prompt: "gamestudio42@github:~$",
+    name: "Game Studio 42",
+    tagline: "Open-Source-Spiele. Ein Klick zum Spielen, zwei zum Forken.",
+    playRandom: "./play --zufall",
+    seeGames: "ls games/",
+    github: "git remote -v",
+    gamesHeading: "ls games/",
+    play: "./play",
+    code: "git clone",
+    fork: "fork",
+    copy: "cp link",
+    copied: "kopiert",
+    stars: "Sterne",
+    forks: "Forks",
+    updated: (label) => `aktualisiert ${label}`,
+    today: "heute",
+    yesterday: "gestern",
+    daysAgo: (n) => `vor ${n} Tagen`,
+    manifestoHeading: "cat MANIFESTO.md",
+    manifesto: `# Game Studio 42
+
+- Jedes Spiel ist kostenlos und läuft im Browser.
+- Der gesamte Code ist öffentlich unter der MIT-Lizenz.
+- Offen gebaut, Commit für Commit.
+- Forken, remixen, selbst veröffentlichen.
+`,
+    shipHeading: "So veröffentlichen wir",
+    ship: [
+      "Das Spiel lebt in einem öffentlichen GitHub-Repo.",
+      "Eine GitHub Action baut es.",
+      "GitHub Pages hostet es. In Minuten spielbar.",
+    ],
+    remixHeading: "git clone",
+    remixIntro: "Klone ein Spiel, ändere die Regeln, veröffentliche deinen Fork auf deinen Pages.",
+    remixCode: `git clone https://github.com/gamestudio42/urbe.git
+cd urbe
+pnpm install
+pnpm dev`,
+    help: "Hilf mitzubauen",
+    issues: "good first issues",
+    discussions: "Discussions",
+    followHeading: "tail -f devlog",
+    follow: "Gib einen Stern, um den nächsten Commit zu sehen. RSS liegt bei GitHub Releases.",
+    commits: "Commits",
+    feed: "releases.atom",
+    footer: "MIT-Lizenz · offen gebaut ·",
+    share: (title, play) => `Spiel ${title} im Browser — Open Source, ohne Installation. ${play}`,
+  },
 };
 
 function token() {
@@ -276,9 +440,28 @@ function card(game, lang, t) {
       </article>`;
 }
 
+function localePath(id) {
+  return LOCALES.find((item) => item.id === id)?.path || "/";
+}
+
+function hreflangLinks() {
+  const links = LOCALES.map(
+    (item) => `    <link rel="alternate" hreflang="${item.hreflang}" href="${SITE}${item.path}" />`,
+  );
+  links.push(`    <link rel="alternate" hreflang="x-default" href="${SITE}/" />`);
+  return links.join("\n");
+}
+
+function langNav(lang) {
+  return LOCALES.map((item) => {
+    const current = item.id === lang ? ' aria-current="page"' : "";
+    return `          <a href="${item.path}" data-lang="${item.id}"${current}>${item.id.toUpperCase()}</a>`;
+  }).join("\n");
+}
+
 function page(lang, games) {
   const t = COPY[lang];
-  const selfUrl = lang === "en" ? `${SITE}/` : `${SITE}/pt/`;
+  const selfUrl = `${SITE}${localePath(lang)}`;
   const cards = games.map((game) => card(game, lang, t)).join("\n      ");
   const follow = games
     .map(
@@ -311,9 +494,7 @@ function page(lang, games) {
     <meta name="twitter:description" content="${esc(t.description)}" />
     <meta name="twitter:image" content="${SITE}/og-image.jpg" />
     <link rel="canonical" href="${selfUrl}" />
-    <link rel="alternate" hreflang="en" href="${SITE}/" />
-    <link rel="alternate" hreflang="pt" href="${SITE}/pt/" />
-    <link rel="alternate" hreflang="x-default" href="${SITE}/" />
+${hreflangLinks()}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -324,8 +505,7 @@ function page(lang, games) {
     <div class="wrap">
       <header class="hero">
         <nav class="lang" aria-label="Language">
-          <a href="/" data-lang="en"${lang === "en" ? ' aria-current="page"' : ""}>EN</a>
-          <a href="/pt/" data-lang="pt"${lang === "pt" ? ' aria-current="page"' : ""}>PT</a>
+${langNav(lang)}
         </nav>
         <img class="mark" src="/brand/logo-badge.svg" width="96" height="96" alt="${esc(t.name)}" />
         <p class="prompt"><span class="host">${esc(t.prompt)}</span> <span class="cursor" aria-hidden="true"></span></p>
@@ -412,9 +592,11 @@ function copyStatic() {
 
 const games = await collectGames();
 if (!games.length) throw new Error("no games to publish");
-mkdirSync(join(DIST, "pt"), { recursive: true });
 copyStatic();
-writeFileSync(join(DIST, "index.html"), page("en", games));
-writeFileSync(join(DIST, "pt/index.html"), page("pt", games));
+for (const locale of LOCALES) {
+  const dir = locale.id === "en" ? DIST : join(DIST, locale.id);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "index.html"), page(locale.id, games));
+}
 writeFileSync(join(DIST, "games.json"), JSON.stringify(games, null, 2));
-console.log(`built ${games.length} games → ${DIST}`);
+console.log(`built ${games.length} games × ${LOCALES.length} locales → ${DIST}`);

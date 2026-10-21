@@ -1,15 +1,40 @@
 (function () {
   const KEY = "gs42-lang";
-  const here = location.pathname.startsWith("/pt") ? "pt" : "en";
+  const PATHS = {
+    en: "/",
+    pt: "/pt/",
+    es: "/es/",
+    fr: "/fr/",
+    de: "/de/",
+  };
+
+  function localeFromPath(pathname) {
+    const match = pathname.match(/^\/(pt|es|fr|de)(?:\/|$)/);
+    return match ? match[1] : "en";
+  }
+
+  function localeFromNavigator() {
+    const lang = (navigator.language || "en").toLowerCase();
+    if (lang.startsWith("pt")) return "pt";
+    if (lang.startsWith("es")) return "es";
+    if (lang.startsWith("fr")) return "fr";
+    if (lang.startsWith("de")) return "de";
+    return "en";
+  }
+
+  const here = localeFromPath(location.pathname);
   const stored = localStorage.getItem(KEY);
 
-  if (stored && stored !== here) {
-    location.replace((stored === "pt" ? "/pt/" : "/") + location.hash);
+  if (stored && PATHS[stored] && stored !== here) {
+    location.replace(PATHS[stored] + location.hash);
     return;
   }
-  if (!stored && navigator.language.toLowerCase().startsWith("pt") && here !== "pt") {
-    location.replace("/pt/" + location.hash);
-    return;
+  if (!stored) {
+    const suggested = localeFromNavigator();
+    if (suggested !== here) {
+      location.replace(PATHS[suggested] + location.hash);
+      return;
+    }
   }
 
   document.querySelectorAll("[data-lang]").forEach((anchor) => {

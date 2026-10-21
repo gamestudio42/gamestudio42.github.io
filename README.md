@@ -5,6 +5,11 @@ https://gamestudio42.github.io/.
 
 Open-source games. Play in one click. Fork in two.
 
+Locales: [`/`](https://gamestudio42.github.io/) (EN), [`/pt/`](https://gamestudio42.github.io/pt/),
+[`/es/`](https://gamestudio42.github.io/es/), [`/fr/`](https://gamestudio42.github.io/fr/),
+[`/de/`](https://gamestudio42.github.io/de/). The page follows `navigator.language`
+until the visitor picks one.
+
 ## How a game appears here
 
 1. Add a public repo under `gamestudio42`.
@@ -16,7 +21,10 @@ Open-source games. Play in one click. Fork in two.
   "title": "Urbe",
   "tagline": {
     "en": "You set the conditions. The city decides the rest.",
-    "pt": "Você cria as condições. A cidade decide o resto."
+    "pt": "Você cria as condições. A cidade decide o resto.",
+    "es": "Tú pones las condiciones. La ciudad decide el resto.",
+    "fr": "Vous posez les conditions. La ville décide du reste.",
+    "de": "Du setzt die Bedingungen. Die Stadt entscheidet den Rest."
   },
   "cover": "docs/screenshots/menu.jpg",
   "genre": "city-builder",
