@@ -563,6 +563,11 @@ ${langNav(lang)}
     <div id="toast" hidden></div>
     <script id="games-data" type="application/json">${JSON.stringify(payload)}</script>
     <script src="/site.js"></script>
+    <script
+      data-goatcounter="https://gamestudio42.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+    ></script>
   </body>
 </html>
 `;
