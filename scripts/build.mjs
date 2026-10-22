@@ -32,6 +32,15 @@ const FALLBACK = [
     pushed_at: new Date().toISOString(),
   },
   {
+    name: "neo-urbe",
+    default_branch: "main",
+    html_url: "https://github.com/gamestudio42/neo-urbe",
+    homepage: "https://gamestudio42.github.io/neo-urbe/",
+    stargazers_count: 0,
+    forks_count: 0,
+    pushed_at: new Date().toISOString(),
+  },
+  {
     name: "mineboss",
     default_branch: "master",
     html_url: "https://github.com/gamestudio42/mineboss",
