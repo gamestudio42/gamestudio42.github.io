@@ -1,0 +1,146 @@
+[
+  {
+    "name": "plot42",
+    "title": "Plot 42",
+    "tagline": {
+      "en": "Five games. One studio lot.",
+      "pt": "Cinco jogos. Um lote do estúdio.",
+      "es": "Cinco juegos. Un lote del estudio.",
+      "fr": "Cinq jeux. Un lot d'atelier.",
+      "de": "Fünf Spiele. Ein Studio-Grundstück."
+    },
+    "cover": "/assets/games/plot42-full.webp",
+    "genre": "collection",
+    "tech": [
+      "TypeScript",
+      "PixiJS",
+      "Web Worker"
+    ],
+    "order": 0,
+    "play": "https://gamestudio42.github.io/plot42/",
+    "code": "https://github.com/gamestudio42/plot42",
+    "fork": "https://github.com/gamestudio42/plot42/fork",
+    "discussions": "https://github.com/gamestudio42/plot42/discussions",
+    "commits": "https://github.com/gamestudio42/plot42/commits",
+    "atom": "https://github.com/gamestudio42/plot42/releases.atom",
+    "coverSmall": "/assets/games/plot42-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
+    "default_branch": "main"
+  },
+  {
+    "name": "urbe",
+    "title": "Urbe",
+    "tagline": {
+      "en": "You set the conditions. The city decides the rest.",
+      "pt": "Você cria as condições. A cidade decide o resto.",
+      "es": "Tú pones las condiciones. La ciudad decide el resto.",
+      "fr": "Vous posez les conditions. La ville décide du reste.",
+      "de": "Du setzt die Bedingungen. Die Stadt entscheidet den Rest."
+    },
+    "cover": "/assets/games/urbe-full.webp",
+    "genre": "city-builder",
+    "tech": [
+      "TypeScript",
+      "PixiJS",
+      "Web Worker"
+    ],
+    "order": 1,
+    "play": "https://gamestudio42.github.io/urbe/",
+    "code": "https://github.com/gamestudio42/urbe",
+    "fork": "https://github.com/gamestudio42/urbe/fork",
+    "discussions": "https://github.com/gamestudio42/urbe/discussions",
+    "commits": "https://github.com/gamestudio42/urbe/commits",
+    "atom": "https://github.com/gamestudio42/urbe/releases.atom",
+    "coverSmall": "/assets/games/urbe-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
+    "default_branch": "main"
+  },
+  {
+    "name": "neo-urbe",
+    "title": "Neo Urbe",
+    "tagline": {
+      "en": "Raise a neon skyline. Keep the grid alive.",
+      "pt": "Erga um horizonte de neon. Mantenha a rede viva.",
+      "es": "Levanta un horizonte de neón. Mantén viva la red.",
+      "fr": "Dresse un horizon néon. Garde le réseau en vie.",
+      "de": "Errichte eine Neon-Skyline. Halt das Netz am Leben."
+    },
+    "cover": "/assets/games/neo-urbe-full.webp",
+    "genre": "city-builder",
+    "tech": [
+      "TypeScript",
+      "PixiJS",
+      "Web Worker"
+    ],
+    "order": 2,
+    "play": "https://gamestudio42.github.io/neo-urbe/",
+    "code": "https://github.com/gamestudio42/neo-urbe",
+    "fork": "https://github.com/gamestudio42/neo-urbe/fork",
+    "discussions": "https://github.com/gamestudio42/neo-urbe/discussions",
+    "commits": "https://github.com/gamestudio42/neo-urbe/commits",
+    "atom": "https://github.com/gamestudio42/neo-urbe/releases.atom",
+    "coverSmall": "/assets/games/neo-urbe-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
+    "default_branch": "main"
+  },
+  {
+    "name": "mineboss",
+    "title": "MineBoss",
+    "tagline": {
+      "en": "A block adventure in the browser. Build, explore, fight optional bosses.",
+      "pt": "Aventura de blocos no navegador. Construa, explore e lute com chefões opcionais.",
+      "es": "Una aventura de bloques en el navegador. Construye, explora y lucha contra jefes opcionales.",
+      "fr": "Une aventure de blocs dans le navigateur. Construisez, explorez, affrontez des boss optionnels.",
+      "de": "Ein Block-Abenteuer im Browser. Bauen, erkunden, optionale Bosse bekämpfen."
+    },
+    "cover": "/assets/games/mineboss-full.webp",
+    "genre": "voxel-sandbox",
+    "tech": [
+      "TypeScript",
+      "three.js",
+      "Vite"
+    ],
+    "order": 3,
+    "play": "https://gamestudio42.github.io/mineboss/",
+    "code": "https://github.com/gamestudio42/mineboss",
+    "fork": "https://github.com/gamestudio42/mineboss/fork",
+    "discussions": "https://github.com/gamestudio42/mineboss/discussions",
+    "commits": "https://github.com/gamestudio42/mineboss/commits",
+    "atom": "https://github.com/gamestudio42/mineboss/releases.atom",
+    "coverSmall": "/assets/games/mineboss-800.webp",
+    "coverWidth": 1280,
+    "coverHeight": 720,
+    "default_branch": "master"
+  },
+  {
+    "name": "urbe-oasis",
+    "title": "Urbe Oasis",
+    "tagline": {
+      "en": "Shade the lots. Follow the spring.",
+      "pt": "Faça sombra nos lotes. Siga a nascente.",
+      "es": "Da sombra a los lotes. Sigue el manantial.",
+      "fr": "Ombrage les parcelles. Suis la source.",
+      "de": "Beschatte die Grundstücke. Folge der Quelle."
+    },
+    "cover": "/assets/games/urbe-oasis-full.webp",
+    "coverSmall": "/assets/games/urbe-oasis-800.webp",
+    "coverWidth": 1280,
+    "coverHeight": 720,
+    "genre": "city-builder",
+    "tech": [
+      "TypeScript",
+      "PixiJS",
+      "Web Worker"
+    ],
+    "order": 2.5,
+    "play": "https://gamestudio42.github.io/urbe-oasis/",
+    "code": "https://github.com/gamestudio42/urbe-oasis",
+    "fork": "https://github.com/gamestudio42/urbe-oasis/fork",
+    "commits": "https://github.com/gamestudio42/urbe-oasis/commits",
+    "atom": "https://github.com/gamestudio42/urbe-oasis/releases.atom",
+    "default_branch": "main"
+  }
+]

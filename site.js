@@ -1,81 +1,105 @@
 (function () {
+  "use strict";
+  const PATHS = { en: "/", pt: "/pt/", es: "/es/", fr: "/fr/", de: "/de/" };
   const KEY = "gs42-lang";
-  const PATHS = {
-    en: "/",
-    pt: "/pt/",
-    es: "/es/",
-    fr: "/fr/",
-    de: "/de/",
-  };
+  const here = document.documentElement.lang.split("-")[0];
+  let stored;
+  try { stored = localStorage.getItem(KEY); } catch { /* Storage can be disabled. */ }
 
-  function localeFromPath(pathname) {
-    const match = pathname.match(/^\/(pt|es|fr|de)(?:\/|$)/);
-    return match ? match[1] : "en";
-  }
-
-  function localeFromNavigator() {
-    const lang = (navigator.language || "en").toLowerCase();
-    if (lang.startsWith("pt")) return "pt";
-    if (lang.startsWith("es")) return "es";
-    if (lang.startsWith("fr")) return "fr";
-    if (lang.startsWith("de")) return "de";
-    return "en";
-  }
-
-  const here = localeFromPath(location.pathname);
-  const stored = localStorage.getItem(KEY);
-
-  if (stored && PATHS[stored] && stored !== here) {
-    location.replace(PATHS[stored] + location.hash);
-    return;
-  }
-  if (!stored) {
-    const suggested = localeFromNavigator();
-    if (suggested !== here) {
-      location.replace(PATHS[suggested] + location.hash);
+  // Explicit locale URLs always win. Only the root negotiates the initial language.
+  if (location.pathname === "/" || location.pathname === "/index.html") {
+    const browserLocale = (navigator.language || "en").toLowerCase().split("-")[0];
+    const preferred = PATHS[stored] ? stored : PATHS[browserLocale] ? browserLocale : "en";
+    if (preferred !== "en") {
+      location.replace(PATHS[preferred] + location.search + location.hash);
       return;
     }
   }
-
+  document.body.classList.add("js");
   document.querySelectorAll("[data-lang]").forEach((anchor) => {
+    anchor.href = PATHS[anchor.dataset.lang] + location.search + location.hash;
     anchor.addEventListener("click", () => {
-      localStorage.setItem(KEY, anchor.getAttribute("data-lang") || here);
+      anchor.href = PATHS[anchor.dataset.lang] + location.search + location.hash;
+      try { localStorage.setItem(KEY, anchor.dataset.lang || here); } catch { /* Navigation still works. */ }
     });
   });
 
-  const dataNode = document.getElementById("games-data");
-  const games = dataNode ? JSON.parse(dataNode.textContent) : [];
+  const menu = document.querySelector(".menu-toggle");
+  function closeMenu() {
+    document.body.classList.remove("menu-open");
+    menu?.setAttribute("aria-expanded", "false");
+  }
+  if (menu) {
+    menu.hidden = false;
+    menu.addEventListener("click", () => {
+      const open = document.body.classList.toggle("menu-open");
+      menu.setAttribute("aria-expanded", String(open));
+    });
+    document.querySelectorAll(".nav-links a").forEach((anchor) => anchor.addEventListener("click", closeMenu));
+  }
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    const open = document.body.classList.contains("menu-open");
+    closeMenu();
+    if (open) menu?.focus();
+    document.querySelectorAll(".language-picker[open]").forEach((picker) => {
+      picker.open = false;
+      picker.querySelector("summary").focus();
+    });
+  });
+  document.addEventListener("click", (event) => {
+    document.querySelectorAll(".language-picker[open]").forEach((picker) => {
+      if (!picker.contains(event.target)) picker.open = false;
+    });
+  });
 
-  document.querySelectorAll("[data-random]").forEach((el) => {
-    el.addEventListener("click", (event) => {
+  let games = [];
+  try { games = JSON.parse(document.getElementById("games-data")?.textContent || "[]"); } catch { /* Static links remain available. */ }
+  const playable = games.filter((game) => game.genre !== "collection");
+  document.querySelectorAll("[data-random]").forEach((anchor) => {
+    anchor.addEventListener("click", (event) => {
+      if (!playable.length || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
-      if (!games.length) return;
-      const pick = games[Math.floor(Math.random() * games.length)];
-      location.href = pick.play;
+      location.href = playable[Math.floor(Math.random() * playable.length)].play;
     });
   });
 
   const toast = document.getElementById("toast");
-  let toastTimer = 0;
-  function showToast(message) {
+  let toastTimer;
+  function notify(message) {
     if (!toast) return;
-    toast.textContent = "$ " + message;
-    toast.hidden = false;
+    toast.textContent = message;
+    toast.classList.add("visible");
     clearTimeout(toastTimer);
-    toastTimer = window.setTimeout(() => {
-      toast.hidden = true;
-    }, 1800);
+    toastTimer = setTimeout(() => toast.classList.remove("visible"), 3500);
   }
-
+  async function copy(text, button) {
+    try {
+      await navigator.clipboard.writeText(text);
+      notify(button.dataset.copied);
+    } catch {
+      notify(button.dataset.copyFailed);
+    }
+  }
   document.querySelectorAll("[data-copy]").forEach((button) => {
-    button.addEventListener("click", async () => {
-      const text = button.getAttribute("data-copy") || "";
-      try {
-        await navigator.clipboard.writeText(text);
-        showToast(button.getAttribute("data-copied") || "copied");
-      } catch {
-        showToast("clipboard unavailable");
-      }
-    });
+    button.hidden = false;
+    button.addEventListener("click", () => copy(button.dataset.copy, button));
   });
+
+  const select = document.getElementById("repo-select");
+  const commands = document.querySelector("#clone-commands code");
+  if (select && commands) {
+    select.closest("label").hidden = false;
+    document.querySelector(".terminal-repo-name").hidden = true;
+    select.addEventListener("change", () => {
+      const game = games.find((game) => game.name === select.value);
+      if (!game) return;
+      commands.textContent = `git clone ${game.code}.git\ncd ${game.name}\npnpm install\npnpm dev`;
+      document.querySelector(".source-repo").href = game.code;
+      document.querySelector(".source-issues").href = `${game.code}/issues`;
+    });
+    const button = document.querySelector("[data-copy-commands]");
+    button.hidden = false;
+    button.addEventListener("click", () => copy(commands.textContent, button));
+  }
 })();
