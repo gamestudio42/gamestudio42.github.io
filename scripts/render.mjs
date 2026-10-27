@@ -52,10 +52,10 @@ function logo(home) {
   return `<a class="brand" href="${home}" aria-label="Game Studio 42"><span class="brand-mark" aria-hidden="true"></span><span>GAME STUDIO <b>42</b><small>INDEPENDENT & OPEN SOURCE</small></span></a>`;
 }
 
-function card(game, lang, t, index) {
+function card(game, lang, t, index, count) {
   return `<article class="game-card game-${esc(game.name)}" id="game-${esc(game.name)}">
     <a class="game-image" href="${esc(game.play)}" aria-label="${esc(t.play)} — ${esc(game.title)}">
-      ${photo(game, t)}<span class="game-number">${String(index + 1).padStart(2, "0")}</span><span class="image-arrow">${diagonal}</span>
+      ${photo(game, t, { sizes: index === 0 && count % 2 ? "100vw" : "(max-width: 700px) 100vw, 50vw" })}<span class="game-number">${String(index + 1).padStart(2, "0")}</span><span class="image-arrow">${diagonal}</span>
     </a>
     <div class="game-meta"><span>${esc(t.genres[game.genre] || game.genre)}</span><span class="platform"><i></i>${t.browser}</span></div>
     <div class="game-title"><h3><a href="${esc(game.play)}">${esc(game.title)}</a></h3><span aria-hidden="true">↗</span></div>
@@ -105,7 +105,7 @@ export function page(locale, games) {
     <section class="collection section container" id="games" aria-labelledby="collection-title">
       <div class="section-top"><p class="eyebrow">${t.collectionLabel}</p><span class="section-counter">[ ${String(playable.length).padStart(2, "0")} ]</span></div>
       <div class="section-heading"><h2 id="collection-title">${lines(t.collectionTitle)}</h2><div><p>${t.collectionIntro}</p><a class="text-link random-link" data-random href="${esc(first.play)}"><span aria-hidden="true">⤨</span>${t.surprise}${arrow}</a></div></div>
-      <div class="games-grid">${playable.map((game, index) => card(game, lang, t, index)).join("\n")}</div>
+      <div class="games-grid">${playable.map((game, index) => card(game, lang, t, index, playable.length)).join("\n")}</div>
       ${plot ? `<a class="collection-banner" href="${esc(plot.play)}"><span class="plot-symbol" aria-hidden="true">42<span>LAB</span></span><div><span class="eyebrow">PLOT 42 / ${esc(t.genres.collection)}</span><h3>${t.collectionMore}</h3><p>${t.plotIntro}</p></div><span class="text-link">${t.plotAction}${diagonal}</span></a>` : ""}
     </section>
     ${oasis ? `<section class="oasis-feature" id="oasis" aria-labelledby="oasis-title">

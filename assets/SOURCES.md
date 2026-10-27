@@ -16,3 +16,5 @@ gerado ou alterações na cena. O enquadramento de apresentação é feito por C
 Space Grotesk: https://github.com/google/fonts/tree/main/ofl/spacegrotesk
 Fonte variável servida localmente. Licença SIL Open Font License 1.1, incluída em
 `fonts/OFL.txt`. Marca e ícones do estúdio já faziam parte deste repositório.
+
+- Vazante: `https://raw.githubusercontent.com/gamestudio42/vazante/main/docs/screenshots/battle.jpg` (captura oficial de gameplay; convertida para WebP em duas resoluções). Código MIT; créditos de recursos de terceiros em https://github.com/gamestudio42/vazante/blob/main/docs/assets.md.
