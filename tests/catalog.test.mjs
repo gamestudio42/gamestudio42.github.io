@@ -10,7 +10,7 @@ const quiet = () => {};
 
 test("offline build includes Oasis and every existing catalog entry without requests", async () => {
   const games = await collectGames({ curated, offline: true, request: () => assert.fail("offline request") });
-  assert.deepEqual(games.map((game) => game.name), ["plot42", "vazante", "urbe", "neo-urbe", "urbe-oasis", "mineboss"]);
+  assert.deepEqual(games.map((game) => game.name), ["plot42", "vazante", "urbe-oasis", "neo-urbe", "urbe", "mineboss"]);
   assert.equal(games.find((game) => game.name === "urbe-oasis").play, "https://gamestudio42.github.io/urbe-oasis/");
 });
 
@@ -29,12 +29,13 @@ test("Oasis is fetched even without the discovery topic and keeps its real local
   const request = async (path) => {
     calls.push(path);
     if (path.startsWith("/orgs/")) return [{ name: "urbe", topics: ["gs42-game"] }];
-    if (path.includes("/urbe-oasis/")) return { title: "Urbe Oasis", cover: "apps/oasis/public/favicon.svg", tagline: { pt: "Uma nova descrição." }, genre: "city-builder" };
+    if (path.includes("/urbe-oasis/")) return { title: "Urbe Oasis", cover: "apps/oasis/public/favicon.svg", tagline: { pt: "Uma nova descrição." }, genre: "city-builder", order: 99 };
     throw new Error("404");
   };
   const games = await collectGames({ curated, request, warn: quiet });
   const oasis = games.find((game) => game.name === "urbe-oasis");
   assert.ok(calls.includes("/repos/gamestudio42/urbe-oasis/contents/gs42.json"));
+  assert.equal(oasis.order, 1);
   assert.equal(oasis.cover, "/assets/games/urbe-oasis-full.webp");
   assert.equal(oasis.tagline.pt, "Uma nova descrição.");
   assert.equal(oasis.tagline.en, curated.find((game) => game.name === "urbe-oasis").tagline.en);

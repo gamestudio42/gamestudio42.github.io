@@ -45,7 +45,7 @@
       "PixiJS",
       "Web Worker"
     ],
-    "order": 1,
+    "order": 2.5,
     "play": "https://gamestudio42.github.io/urbe/",
     "code": "https://github.com/gamestudio42/urbe",
     "fork": "https://github.com/gamestudio42/urbe/fork",
@@ -135,7 +135,7 @@
       "PixiJS",
       "Web Worker"
     ],
-    "order": 2.5,
+    "order": 1,
     "play": "https://gamestudio42.github.io/urbe-oasis/",
     "code": "https://github.com/gamestudio42/urbe-oasis",
     "fork": "https://github.com/gamestudio42/urbe-oasis/fork",

@@ -74,7 +74,7 @@ export function page(locale, games) {
   const oasis = find("urbe-oasis");
   const plot = find("plot42");
   const playable = games.filter((game) => game.name !== "plot42");
-  const worlds = [find("urbe"), find("neo-urbe"), oasis].filter(Boolean);
+  const worlds = [oasis, find("neo-urbe"), find("urbe")].filter(Boolean);
   const first = worlds[0] || playable[0];
   const payload = games.map(({ name, title, play, code, genre }) => ({ name, title, play, code, genre }));
   const json = JSON.stringify(payload).replace(/</g, "\\u003c");

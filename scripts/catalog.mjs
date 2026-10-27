@@ -57,7 +57,7 @@ function normalize(repo, manifest, saved) {
     ...(saved?.coverSmall ? { coverSmall: saved.coverSmall } : {}),
     genre: typeof manifest.genre === "string" ? manifest.genre : "",
     tech: Array.isArray(manifest.tech) ? manifest.tech.filter((item) => typeof item === "string") : [],
-    order: Number.isFinite(manifest.order) ? manifest.order : (saved?.order ?? 99),
+    order: saved?.order ?? (Number.isFinite(manifest.order) ? manifest.order : 99),
     play: safeUrl(repo.homepage, saved?.play || `${SITE}/${name}/`),
     code,
     fork: `${code}/fork`,
