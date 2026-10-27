@@ -365,8 +365,97 @@ a:hover { color: var(--accent); }
   .game-image:hover img, .world:hover img, .button:hover { transform: none; }
 }
 
-/* An odd collection opens with a full-width game, keeping the remaining pairs aligned. */
+/* Editorial refinement: readable gameplay, a compact mobile opening and a clear lead game. */
+.game-image { aspect-ratio: 16 / 10; }
+.game-image img { filter: none; }
+.game-info { min-width: 0; }
+.game-info > p { margin-top: 14px; min-height: 48px; font-size: 15px; line-height: 1.7; }
+.game-meta { font-size: 11px; }
+.code-link { font-size: 13px; }
+.hero-worlds { right: -10%; width: 68%; grid-template-columns: 1.35fr 1fr .8fr; }
+.hero-worlds::after { background: linear-gradient(90deg, #10131099, transparent 20%), linear-gradient(0deg, var(--bg), transparent 18%); }
+.world-0 { transform: translateY(25px); z-index: 2; border-color: #e5ba8699; }
+.world-0 img { filter: saturate(1) brightness(1); }
+.world-1 { transform: translateY(75px); }
+.world-2 { transform: translateY(95px); }
+.world-label { font-size: 13px; flex-wrap: wrap; }
+.world-play { display: none; font-size: 12px; color: var(--accent); }
+.oasis-feature { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; padding: 72px max(40px, calc((100vw - 1328px) / 2)); }
+.oasis-content.container { width: auto; margin: 0; padding: 0; grid-column: 1; grid-row: 1; }
+.oasis-image { position: relative; inset: auto; z-index: auto; grid-column: 2; grid-row: 1; overflow: hidden; border: 1px solid #d5b48b33; }
+.oasis-image img { width: 100%; height: auto; object-fit: contain; filter: none; transform: none; }
+.oasis-image-label { display: block; padding: 14px 18px; color: #d0bda7; font: 11px/1.5 var(--mono); background: #292218; }
+.oasis-wordmark { margin-top: 30px; }
+.oasis-content h2 { font-size: clamp(36px, 3.5vw, 54px); }
+.oasis-content > p:not(.eyebrow) { font-size: 16px; }
+.oasis-content ul { font-size: 11px; line-height: 1.7; }
+.oasis-caption.container { width: 100%; grid-column: 1 / -1; padding-bottom: 0; margin: 0; font-size: 11px; }
+.studio-intro > p, .studio-values p, .source-intro { font-size: 16px; line-height: 1.8; }
+.eyebrow, .hero-content .eyebrow { font-size: 11px; }
 @media (min-width: 701px) {
-  .games-grid > .game-card:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
-  .games-grid > .game-card:first-child:nth-last-child(odd) .game-image { aspect-ratio: 21 / 9; }
+  .games-grid > .game-card:first-child:nth-last-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px; align-items: center; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+  .games-grid > .game-card:first-child:nth-last-child(odd) .game-image { aspect-ratio: 16 / 9; }
+  .games-grid > .game-card:first-child:nth-last-child(odd) .game-meta { margin-top: 0; }
+  .games-grid > .game-card:first-child:nth-last-child(odd) h3 { font-size: clamp(36px, 4vw, 60px); }
+}
+@media (max-width: 1000px) {
+  .oasis-feature { grid-template-columns: 1fr; padding: 60px 24px; gap: 32px; }
+  .oasis-content.container { grid-row: 1; }
+  .oasis-image { grid-column: 1; grid-row: 2; }
+  .oasis-caption.container { grid-row: 3; }
+  .oasis-content > p:not(.eyebrow) { max-width: 650px; }
+}
+@media (max-width: 800px) {
+  .hero { display: flex; flex-direction: column; padding-bottom: 28px; }
+  .hero-content { order: 0; padding-top: 40px; padding-bottom: 26px; }
+  .hero h1 { font-size: clamp(44px, 8.5vw, 68px); }
+  .hero-intro { margin-top: 20px; font-size: 15px; line-height: 1.65; }
+  .hero-content .eyebrow { font-size: 10px; margin-bottom: 20px; }
+  .hero-actions { margin-top: 22px; gap: 10px 20px; }
+  .hero-actions .button { font-size: 13px; }
+  .hero-worlds { order: 1; position: relative; inset: auto; width: calc(100% - 48px); margin: 0 auto; height: auto; display: block; transform: none; z-index: auto; }
+  .hero-worlds::after { display: none; }
+  .world { display: none; }
+  .world-0 { display: block; transform: none; aspect-ratio: 16 / 9; }
+  .world-0 img { object-position: center; }
+  .world-label { font-size: 14px; padding: 26px 16px 14px; }
+  .world-play { display: inline; margin-left: auto; }
+  .world-label svg { margin-left: 0; }
+  .hero-bottom { position: relative; inset: auto; order: 2; margin-top: 18px; font-size: 10px; }
+  .capture-label { font-size: 9px; }
+  .game-meta { font-size: 11px; flex-wrap: wrap; }
+  .code-link, .play-link { font-size: 13px; }
+  .section-heading p { font-size: 15px; }
+  .principles span { font-size: 11px; }
+  .studio-values p { font-size: 15px; }
+  .oasis-code { font-size: 13px; }
+}
+@media (max-width: 520px) {
+  .hero-worlds { width: calc(100% - 40px); }
+  .hero h1 { font-size: clamp(42px, 12vw, 58px); }
+  .hero-actions .text-link { font-size: 13px; }
+  .hero-bottom { display: none; }
+  .hero-content { padding-top: 32px; }
+  .hero-content .eyebrow { font-size: 10px; line-height: 1.6; }
+  .hero-intro { font-size: 14px; }
+  .world-0 { aspect-ratio: 16 / 9; }
+  .world-label { font-size: 13px; }
+  .oasis-feature { padding-inline: 20px; }
+  .oasis-content .button { font-size: 14px; }
+  .oasis-content ul { font-size: 11px; }
+  .oasis-content > p:not(.eyebrow) { font-size: 15px; }
+  .oasis-caption.container { font-size: 10px; }
+  .collection-banner p { font-size: 14px; }
+  .footer-top p, .footer-bottom { font-size: 11px; }
+  .terminal pre, .source-section .terminal pre { font-size: 11px; line-height: 2.2; padding-inline: 16px; }
+}
+.game-card { display: flex; flex-direction: column; }
+.game-info { display: flex; flex-direction: column; flex: 1; }
+.game-info > p { margin-bottom: 20px; }
+.game-info .card-actions { margin-top: auto; }
+@media (max-width: 360px) {
+  .header-inner { gap: 6px; padding-block: 10px; }
+  .brand { font-size: 12px; gap: 6px; }
+  .header-tools { gap: 2px; }
+  .language-picker summary { padding-inline: 4px; }
 }

@@ -170,6 +170,13 @@
     "fork": "https://github.com/gamestudio42/vazante/fork",
     "commits": "https://github.com/gamestudio42/vazante/commits",
     "atom": "https://github.com/gamestudio42/vazante/releases.atom",
-    "default_branch": "main"
+    "default_branch": "main",
+    "description": {
+      "en": "Lead squads through Porto Velário, protect supply trucks and fortify your base against the horde. Take direct control of a soldier in the same battle.",
+      "pt": "Lidere esquadrões por Porto Velário, proteja caminhões de suprimentos e fortifique sua base contra a horda. Assuma o controle de um soldado na mesma batalha.",
+      "es": "Dirige escuadrones por Porto Velário, protege los camiones de suministros y fortifica tu base contra la horda. Controla a un soldado en la misma batalla.",
+      "fr": "Menez vos escouades dans Porto Velário, protégez le ravitaillement et fortifiez votre base contre la horde. Prenez le contrôle d’un soldat dans la même bataille.",
+      "de": "Führe Trupps durch Porto Velário, schütze Versorgungslaster und befestige deine Basis gegen die Horde. Übernimm in derselben Schlacht die Kontrolle über einen Soldaten."
+    }
   }
 ]

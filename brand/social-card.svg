@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630">
+<defs><clipPath id="a"><rect x="610" y="45" width="545" height="320" rx="6"/></clipPath><clipPath id="b"><rect x="610" y="385" width="262" height="200" rx="6"/></clipPath><clipPath id="c"><rect x="892" y="385" width="263" height="200" rx="6"/></clipPath></defs>
+<rect width="1200" height="630" fill="#101310"/>
+<rect x="44" y="46" width="5" height="27" fill="#c2f879"/>
+<text x="64" y="67" fill="#f2f3e9" font-family="DejaVu Sans, sans-serif" font-weight="bold" font-size="23">GAME STUDIO <tspan fill="#c2f879">42</tspan></text>
+<text x="44" y="205" fill="#f2f3e9" font-family="DejaVu Sans, sans-serif" font-size="56" letter-spacing="-2">Small studio.</text>
+<text x="44" y="275" fill="#c2f879" font-family="DejaVu Sans, sans-serif" font-size="56" letter-spacing="-2">Boundless worlds.</text>
+<text x="44" y="345" fill="#b5bdaa" font-family="DejaVu Sans, sans-serif" font-size="20">Cities. Survival. Systems in motion.</text>
+<rect x="44" y="403" width="282" height="48" fill="#c2f879"/>
+<text x="64" y="434" fill="#101310" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="bold">PLAY IN YOUR BROWSER</text>
+<text x="44" y="555" fill="#b5bdaa" font-family="DejaVu Sans, sans-serif" font-size="17">FREE TO PLAY / OPEN SOURCE</text>
+<text x="44" y="584" fill="#c2f879" font-family="DejaVu Sans, sans-serif" font-size="17">gamestudio42.github.io</text>
+<image xlink:href="../assets/games/urbe-oasis-full.webp" x="610" y="45" width="545" height="320" preserveAspectRatio="xMidYMid slice" clip-path="url(#a)"/>
+<rect x="626" y="317" width="148" height="32" fill="#101310"/><text x="639" y="338" fill="#f2f3e9" font-family="DejaVu Sans, sans-serif" font-size="16">URBE OASIS</text>
+<image xlink:href="../assets/games/vazante-full.webp" x="610" y="385" width="262" height="200" preserveAspectRatio="xMidYMid slice" clip-path="url(#b)"/>
+<rect x="623" y="546" width="108" height="27" fill="#101310"/><text x="634" y="565" fill="#f2f3e9" font-family="DejaVu Sans, sans-serif" font-size="14">VAZANTE</text>
+<image xlink:href="../assets/games/neo-urbe-full.webp" x="892" y="385" width="263" height="200" preserveAspectRatio="xMidYMid slice" clip-path="url(#c)"/>
+<rect x="905" y="546" width="114" height="27" fill="#101310"/><text x="916" y="565" fill="#f2f3e9" font-family="DejaVu Sans, sans-serif" font-size="14">NEO URBE</text>
+</svg>

@@ -18,3 +18,5 @@ Fonte variável servida localmente. Licença SIL Open Font License 1.1, incluíd
 `fonts/OFL.txt`. Marca e ícones do estúdio já faziam parte deste repositório.
 
 - Vazante: `https://raw.githubusercontent.com/gamestudio42/vazante/main/docs/screenshots/battle.jpg` (captura oficial de gameplay; convertida para WebP em duas resoluções). Código MIT; créditos de recursos de terceiros em https://github.com/gamestudio42/vazante/blob/main/docs/assets.md.
+
+A imagem de compartilhamento `og-image.jpg` é composta a partir das capturas oficiais acima. A fonte editável é `brand/social-card.svg` (1200 × 630).

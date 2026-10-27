@@ -32,6 +32,14 @@ Sem credenciais, tenta a API pública. Falhas da API preservam os jogos conhecid
 - `data/games.json`: catálogo editorial e fallback completo dos jogos conhecidos.
 - `assets/games/`: screenshots locais em WebP, com versões responsivas.
 - `assets/SOURCES.md`: origem das imagens e licença da fonte.
+- `brand/social-card.svg`: fonte editável da imagem de compartilhamento (1200 × 630).
+
+Para exportar a imagem social com Inkscape e ImageMagick:
+
+```sh
+inkscape brand/social-card.svg --export-filename=/tmp/gs42-social.png
+magick /tmp/gs42-social.png -quality 90 og-image.jpg
+```
 
 O catálogo inclui Urbe, Neo Urbe, Urbe Oasis, MineBoss, Vazante e a coleção Plot 42.
 Urbe Oasis participa da abertura, do catálogo e de uma seção própria. A capa local

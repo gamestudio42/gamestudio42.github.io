@@ -28,13 +28,13 @@ function head(locale, title, description, { noindex = false } = {}) {
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${url}">
-  <meta property="og:image" content="${SITE}/og-image.jpg">
+  <meta property="og:image" content="${SITE}/og-image.jpg?v=2">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(description)}">
-  <meta name="twitter:image" content="${SITE}/og-image.jpg">
+  <meta name="twitter:image" content="${SITE}/og-image.jpg?v=2">
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png?v=2" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -55,15 +55,15 @@ function logo(home) {
 function card(game, lang, t, index, count) {
   return `<article class="game-card game-${esc(game.name)}" id="game-${esc(game.name)}">
     <a class="game-image" href="${esc(game.play)}" aria-label="${esc(t.play)} — ${esc(game.title)}">
-      ${photo(game, t, { sizes: index === 0 && count % 2 ? "100vw" : "(max-width: 700px) 100vw, 50vw" })}<span class="game-number">${String(index + 1).padStart(2, "0")}</span><span class="image-arrow">${diagonal}</span>
+      ${photo(game, t, { sizes: "(max-width: 700px) 100vw, 50vw" })}<span class="game-number">${String(index + 1).padStart(2, "0")}</span><span class="image-arrow">${diagonal}</span>
     </a>
-    <div class="game-meta"><span>${esc(t.genres[game.genre] || game.genre)}</span><span class="platform"><i></i>${t.browser}</span></div>
+    <div class="game-info"><div class="game-meta"><span>${esc(t.genres[game.genre] || game.genre)}</span><span class="platform"><i></i>${t.browser}</span></div>
     <div class="game-title"><h3><a href="${esc(game.play)}">${esc(game.title)}</a></h3><span aria-hidden="true">↗</span></div>
-    <p>${esc(game.tagline[lang] || game.tagline.en || "")}</p>
+    <p>${esc(game.description?.[lang] || game.tagline[lang] || game.tagline.en || "")}</p>
     <div class="card-actions"><a class="text-link play-link" href="${esc(game.play)}" aria-label="${esc(t.play)} — ${esc(game.title)}">${esc(t.play)} ${arrow}</a>
       <a class="code-link" href="${esc(game.code)}" aria-label="${esc(t.code)} — ${esc(game.title)}">${codeIcon}${esc(t.code)}</a>
       <button hidden class="icon-button share-button" type="button" data-copy="${esc(game.play)}" data-copied="${esc(t.copied)}" data-copy-failed="${esc(t.copyFailed)}" aria-label="${esc(t.share)} — ${esc(game.title)}">${copyIcon}</button>
-    </div>
+    </div></div>
   </article>`;
 }
 
@@ -92,7 +92,7 @@ export function page(locale, games) {
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-worlds">${worlds.map((game, index) => `<a class="world world-${index}" href="${esc(game.play)}" aria-label="${t.play} — ${esc(game.title)}">${photo(game, t, { hero: true, sizes: "(max-width: 700px) 40vw, 28vw" })}<span class="world-label"><small>0${index + 1}</small>${esc(game.title)} ${diagonal}</span></a>`).join("")}</div>
+      <div class="hero-worlds">${worlds.map((game, index) => `<a class="world world-${index}" href="${esc(game.play)}" aria-label="${t.play} — ${esc(game.title)}">${photo(game, t, { hero: true, sizes: index === 0 ? "(max-width: 800px) 90vw, 35vw" : "25vw" })}<span class="world-label"><small>0${index + 1}</small>${esc(game.title)}<span class="world-play">${esc(t.play)}</span> ${diagonal}</span></a>`).join("")}</div>
       <div class="container hero-content">
         <p class="eyebrow"><span class="status-dot"></span>${t.eyebrow}</p>
         <h1 id="hero-title">${t.heroLine1}<br><span>${t.heroLine2}<br>${t.heroLine3}</span></h1>
@@ -109,7 +109,7 @@ export function page(locale, games) {
       ${plot ? `<a class="collection-banner" href="${esc(plot.play)}"><span class="plot-symbol" aria-hidden="true">42<span>LAB</span></span><div><span class="eyebrow">PLOT 42 / ${esc(t.genres.collection)}</span><h3>${t.collectionMore}</h3><p>${t.plotIntro}</p></div><span class="text-link">${t.plotAction}${diagonal}</span></a>` : ""}
     </section>
     ${oasis ? `<section class="oasis-feature" id="oasis" aria-labelledby="oasis-title">
-      <div class="oasis-image">${photo(oasis, t, { sizes: "100vw" })}</div><div class="oasis-shade"></div>
+      <div class="oasis-image">${photo(oasis, t, { sizes: "(max-width: 900px) 100vw, 55vw" })}<span class="oasis-image-label">${t.screenshot} / URBE OASIS</span></div>
       <div class="container oasis-content"><p class="eyebrow">${t.oasisLabel}</p><span class="oasis-wordmark">URBE <b>OASIS</b></span><h2 id="oasis-title">${t.oasisLine1}<br><em>${t.oasisLine2}</em></h2><p>${t.oasisIntro}</p><ul>${t.oasisFeatures.map((feature) => `<li>${feature}</li>`).join("")}</ul><a class="button button-sand" href="${esc(oasis.play)}">${t.oasisPlay}${arrow}</a><a class="text-link oasis-code" href="${esc(oasis.code)}">${t.code}${codeIcon}</a></div>
       <div class="container oasis-caption"><span>${t.oasisCaption}</span><span>03 / GS42</span></div>
     </section>` : ""}
