@@ -459,3 +459,6 @@ a:hover { color: var(--accent); }
   .header-tools { gap: 2px; }
   .language-picker summary { padding-inline: 4px; }
 }
+
+/* Frame the crossroads and fallen horde rather than the squad sidebar. */
+.world-vazante img { object-position: 61% 42%; filter: saturate(1) brightness(1); }

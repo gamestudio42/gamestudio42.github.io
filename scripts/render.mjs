@@ -75,6 +75,7 @@ export function page(locale, games) {
   const plot = find("plot42");
   const playable = games.filter((game) => game.name !== "plot42");
   const worlds = [oasis, find("neo-urbe"), find("urbe")].filter(Boolean);
+  const heroWorlds = [oasis, find("neo-urbe"), find("vazante")].filter(Boolean);
   const first = worlds[0] || playable[0];
   const payload = games.map(({ name, title, play, code, genre }) => ({ name, title, play, code, genre }));
   const json = JSON.stringify(payload).replace(/</g, "\\u003c");
@@ -92,7 +93,7 @@ export function page(locale, games) {
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-worlds">${worlds.map((game, index) => `<a class="world world-${index}" href="${esc(game.play)}" aria-label="${t.play} — ${esc(game.title)}">${photo(game, t, { hero: true, sizes: index === 0 ? "(max-width: 800px) 90vw, 35vw" : "25vw" })}<span class="world-label"><small>0${index + 1}</small>${esc(game.title)}<span class="world-play">${esc(t.play)}</span> ${diagonal}</span></a>`).join("")}</div>
+      <div class="hero-worlds">${heroWorlds.map((game, index) => `<a class="world world-${index} world-${esc(game.name)}" href="${esc(game.play)}" aria-label="${t.play} — ${esc(game.title)}">${photo(game, t, { hero: true, sizes: index === 0 ? "(max-width: 800px) 90vw, 35vw" : "25vw" })}<span class="world-label"><small>0${index + 1}</small>${esc(game.title)}<span class="world-play">${esc(t.play)}</span> ${diagonal}</span></a>`).join("")}</div>
       <div class="container hero-content">
         <p class="eyebrow"><span class="status-dot"></span>${t.eyebrow}</p>
         <h1 id="hero-title">${t.heroLine1}<br><span>${t.heroLine2}<br>${t.heroLine3}</span></h1>
