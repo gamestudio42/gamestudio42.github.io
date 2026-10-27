@@ -33,7 +33,7 @@ Sem credenciais, tenta a API pública. Falhas da API preservam os jogos conhecid
 - `assets/games/`: screenshots locais em WebP, com versões responsivas.
 - `assets/SOURCES.md`: origem das imagens e licença da fonte.
 
-O catálogo inclui Urbe, Neo Urbe, Urbe Oasis, MineBoss e a coleção Plot 42.
+O catálogo inclui Urbe, Neo Urbe, Urbe Oasis, MineBoss, Vazante e a coleção Plot 42.
 Urbe Oasis participa da abertura, do catálogo e de uma seção própria. A capa local
 é preservada mesmo quando o manifesto do jogo aponta para um favicon.
 

@@ -364,3 +364,9 @@ a:hover { color: var(--accent); }
   .world:hover { translate: none; }
   .game-image:hover img, .world:hover img, .button:hover { transform: none; }
 }
+
+/* An odd collection opens with a full-width game, keeping the remaining pairs aligned. */
+@media (min-width: 701px) {
+  .games-grid > .game-card:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+  .games-grid > .game-card:first-child:nth-last-child(odd) .game-image { aspect-ratio: 21 / 9; }
+}

@@ -142,5 +142,34 @@
     "commits": "https://github.com/gamestudio42/urbe-oasis/commits",
     "atom": "https://github.com/gamestudio42/urbe-oasis/releases.atom",
     "default_branch": "main"
+  },
+  {
+    "name": "vazante",
+    "title": "Vazante",
+    "tagline": {
+      "en": "Command the squads. Hold the city. Take the rifle.",
+      "pt": "Comande os esquadrões. Defenda a cidade. Assuma o rifle.",
+      "es": "Dirige los escuadrones. Defiende la ciudad. Toma el fusil.",
+      "fr": "Commandez les escouades. Défendez la ville. Prenez le fusil.",
+      "de": "Befehle deinen Trupps. Halte die Stadt. Greif zum Gewehr."
+    },
+    "cover": "/assets/games/vazante-full.webp",
+    "coverSmall": "/assets/games/vazante-800.webp",
+    "coverWidth": 1600,
+    "coverHeight": 900,
+    "genre": "real-time-tactics",
+    "tech": [
+      "TypeScript",
+      "Three.js",
+      "React",
+      "Web Worker"
+    ],
+    "order": 0.5,
+    "play": "https://gamestudio42.github.io/vazante/",
+    "code": "https://github.com/gamestudio42/vazante",
+    "fork": "https://github.com/gamestudio42/vazante/fork",
+    "commits": "https://github.com/gamestudio42/vazante/commits",
+    "atom": "https://github.com/gamestudio42/vazante/releases.atom",
+    "default_branch": "main"
   }
 ]
