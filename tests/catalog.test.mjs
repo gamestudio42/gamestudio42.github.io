@@ -107,3 +107,29 @@ test("404 has recovery links for all five languages and is not indexed", () => {
   assert.ok(html.includes('content="noindex"'));
   for (const locale of LOCALES) assert.ok(html.includes(`href="${locale.path}"`));
 });
+
+test("Snap Store is optional, localized and retained across catalog refreshes", async () => {
+  const request = async (path) => {
+    if (path.startsWith("/orgs/")) return [];
+    if (path.includes("/vazante/")) return { title: "Vazante", genre: "real-time-tactics", tagline: {} };
+    throw new Error("404");
+  };
+  for (const offline of [true, false]) {
+    const games = await collectGames({ curated, request, offline, warn: quiet });
+    assert.deepEqual(games.filter((game) => game.snapStore).map((game) => game.name), ["vazante"]);
+    for (const locale of LOCALES) {
+      const html = page(locale, games);
+      assert.equal((html.match(/class="snap-store-link"/g) || []).length, 1);
+      assert.ok(html.includes('href="https://snapcraft.io/vazante"'));
+      assert.ok(html.includes('src="https://snapcraft.io/en/dark/install.svg" width="182" height="56"'));
+      assert.ok(html.includes(COPY[locale.id].installLinux));
+      assert.ok(html.includes(COPY[locale.id].snapStoreLabel.replace("{title}", "Vazante")));
+      assert.equal((html.match(/ · Linux/g) || []).length, 1);
+    }
+  }
+  const withoutStore = curated.map(({ snapStore, ...game }) => game);
+  assert.ok(!page(LOCALES[0], withoutStore).includes('class="snap-store-link"'));
+  const futureGame = structuredClone(withoutStore);
+  futureGame.find((game) => game.name === "urbe").snapStore = "https://snapcraft.io/another-game";
+  assert.ok(page(LOCALES[0], futureGame).includes('href="https://snapcraft.io/another-game"'));
+});

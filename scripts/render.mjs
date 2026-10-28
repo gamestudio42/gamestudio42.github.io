@@ -1,5 +1,5 @@
 import { COPY, LOCALES } from "./content.mjs";
-import { SITE } from "./catalog.mjs";
+import { SITE, safeUrl } from "./catalog.mjs";
 
 export const esc = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
 const lines = (value) => value.split("\n").map(esc).join("<br>");
@@ -53,17 +53,19 @@ function logo(home) {
 }
 
 function card(game, lang, t, index, count) {
+  const snapStore = safeUrl(game.snapStore);
   return `<article class="game-card game-${esc(game.name)}" id="game-${esc(game.name)}">
     <a class="game-image" href="${esc(game.play)}" aria-label="${esc(t.play)} — ${esc(game.title)}">
       ${photo(game, t, { sizes: "(max-width: 700px) 100vw, 50vw" })}<span class="game-number">${String(index + 1).padStart(2, "0")}</span><span class="image-arrow">${diagonal}</span>
     </a>
-    <div class="game-info"><div class="game-meta"><span>${esc(t.genres[game.genre] || game.genre)}</span><span class="platform"><i></i>${t.browser}</span></div>
+    <div class="game-info"><div class="game-meta"><span>${esc(t.genres[game.genre] || game.genre)}</span><span class="platform"><i></i>${t.browser}${snapStore ? " · Linux" : ""}</span></div>
     <div class="game-title"><h3><a href="${esc(game.play)}">${esc(game.title)}</a></h3><span aria-hidden="true">↗</span></div>
     <p>${esc(game.description?.[lang] || game.tagline[lang] || game.tagline.en || "")}</p>
     <div class="card-actions"><a class="text-link play-link" href="${esc(game.play)}" aria-label="${esc(t.play)} — ${esc(game.title)}">${esc(t.play)} ${arrow}</a>
       <a class="code-link" href="${esc(game.code)}" aria-label="${esc(t.code)} — ${esc(game.title)}">${codeIcon}${esc(t.code)}</a>
       <button hidden class="icon-button share-button" type="button" data-copy="${esc(game.play)}" data-copied="${esc(t.copied)}" data-copy-failed="${esc(t.copyFailed)}" aria-label="${esc(t.share)} — ${esc(game.title)}">${copyIcon}</button>
-    </div></div>
+    </div>
+    ${snapStore ? `<div class="store-actions"><span>${esc(t.installLinux)}</span><a class="snap-store-link" href="${esc(snapStore)}" aria-label="${esc(t.snapStoreLabel.replace("{title}", game.title))}"><img src="https://snapcraft.io/en/dark/install.svg" width="182" height="56" alt="Get it from the Snap Store" loading="lazy" decoding="async"></a></div>` : ""}</div>
   </article>`;
 }
 
