@@ -121,8 +121,18 @@ export function page(locale, games) {
       <div class="community-modes"><article><span class="value-number" aria-hidden="true">01 /</span><h3>${t.sharedTitle}</h3><p>${t.sharedBody}</p></article><article><span class="value-number" aria-hidden="true">02 /</span><h3>${t.adoptionTitle}</h3><p>${t.adoptionBody}</p></article></div>
       <p class="community-benefit">${t.communityBenefit}</p>
       <div class="community-actions"><a class="button button-primary" href="https://github.com/gamestudio42/.github/issues/new?template=project-submission.yml">${t.proposeProject}${arrow}</a><a class="text-link" href="https://github.com/gamestudio42/.github/blob/main/docs/PROJECT_SUBMISSIONS.md#${lang === "pt" ? "português" : "english"}">${t.submissionGuide}${diagonal}</a></div>
+      <aside class="community-license" aria-labelledby="license-title"><h3 id="license-title">${t.licenseTitle}</h3><p>${t.licenseBody}</p><a class="text-link" href="https://github.com/gamestudio42/.github/blob/main/docs/PROJECT_SUBMISSIONS.md#${lang === "pt" ? "licenciamento-por-categoria" : "licensing-by-category"}">${t.licenseGuide}${diagonal}</a></aside>
       <p class="community-languages">${t.submissionLanguages}</p><p class="community-note">${t.communityNote}</p>
     </div></section>
+    <section class="support-section section container" id="support" aria-labelledby="support-title">
+      <p class="eyebrow">${t.supportLabel}</p>
+      <div class="support-heading"><h2 id="support-title">${t.supportTitle}</h2><p>${t.supportIntro}</p></div>
+      <div class="support-grid">
+        <article><h3>${t.sponsorTitle}</h3><p>${t.sponsorBody}</p><p class="support-status">${t.sponsorStatus}</p><a class="text-link" href="mailto:talkgamestudio42@gmail.com?subject=${encodeURIComponent(t.sponsorSubject)}">${t.sponsorAction}${arrow}</a></article>
+        <article><h3>${t.servicesTitle}</h3><p>${t.servicesBody}</p><a class="button button-primary" href="mailto:talkgamestudio42@gmail.com?subject=${encodeURIComponent(t.servicesSubject)}">${t.servicesAction}${arrow}</a></article>
+      </div>
+      <p class="support-note">${t.supportNote}</p>
+    </section>
     <section class="source-section" id="open-source" aria-labelledby="source-title"><div class="container source-layout"><div><p class="eyebrow">${t.sourceLabel}</p><h2 id="source-title">${lines(t.sourceTitle)}</h2><p class="source-intro">${t.sourceIntro}</p><a class="text-link source-repo" href="${esc(first.code)}">${githubIcon}${t.repo}${diagonal}</a><a class="text-link source-issues" href="${esc(first.code)}/issues">${t.contribute}${arrow}</a></div>
       <div class="terminal"><div class="terminal-bar"><span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>~/gamestudio42</span><span class="terminal-shell">bash</span></div>
         <div class="terminal-project"><span class="terminal-repo-name">${esc(first.title)}</span><label class="repo-picker" hidden>${t.chooseRepo}<select id="repo-select">${worlds.map((game) => `<option value="${esc(game.name)}">${esc(game.title)}</option>`).join("")}</select></label><button hidden class="icon-button command-copy" type="button" data-copy-commands data-copied="${t.commandsCopied}" data-copy-failed="${t.commandsFailed}" aria-label="${t.copyCommands}">${copyIcon}</button></div>
