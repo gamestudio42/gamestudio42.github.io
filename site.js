@@ -35,7 +35,14 @@
       const open = document.body.classList.toggle("menu-open");
       menu.setAttribute("aria-expanded", String(open));
     });
-    document.querySelectorAll(".nav-links a").forEach((anchor) => anchor.addEventListener("click", closeMenu));
+    document.querySelectorAll(".nav-links a").forEach((anchor) => anchor.addEventListener("click", () => {
+      closeMenu();
+      const target = document.getElementById(anchor.dataset.section);
+      if (target) {
+        target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
+    }));
   }
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
@@ -52,6 +59,35 @@
       if (!picker.contains(event.target)) picker.open = false;
     });
   });
+
+  // Map the game showcase and code section to their parent navigation topics.
+  const navLinks = [...document.querySelectorAll(".nav-links [data-section]")];
+  const sectionTopics = { games: "games", oasis: "games", studio: "studio", community: "community", support: "support", "open-source": "community" };
+  const sections = [...document.querySelectorAll("main > section")];
+  const header = document.querySelector(".site-header");
+  let navFrame = 0;
+  function updateNavigation() {
+    navFrame = 0;
+    const edge = (header?.getBoundingClientRect().bottom || 0) + 24;
+    const section = sections.find((item) => {
+      const bounds = item.getBoundingClientRect();
+      return bounds.top <= edge && bounds.bottom > edge;
+    });
+    const active = sectionTopics[section?.id];
+    navLinks.forEach((anchor) => {
+      if (anchor.dataset.section === active) anchor.setAttribute("aria-current", "location");
+      else anchor.removeAttribute("aria-current");
+    });
+  }
+  function scheduleNavigation() {
+    if (!navFrame) navFrame = requestAnimationFrame(updateNavigation);
+  }
+  window.addEventListener("scroll", scheduleNavigation, { passive: true });
+  window.addEventListener("resize", scheduleNavigation);
+  window.addEventListener("hashchange", scheduleNavigation);
+  window.addEventListener("load", scheduleNavigation);
+  if (header && typeof ResizeObserver !== "undefined") new ResizeObserver(scheduleNavigation).observe(header);
+  updateNavigation();
 
   let games = [];
   try { games = JSON.parse(document.getElementById("games-data")?.textContent || "[]"); } catch { /* Static links remain available. */ }

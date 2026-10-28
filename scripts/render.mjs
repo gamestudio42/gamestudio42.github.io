@@ -86,7 +86,7 @@ export function page(locale, games) {
   <a class="skip-link" href="#main">${t.skip}</a>
   <header class="site-header">
     <div class="header-inner">${logo(locale.path)}
-      <nav class="nav-links" id="main-nav" aria-label="${t.navigation}"><a href="#games">${t.games}</a><a href="#studio">${t.studio}</a><a href="#open-source">${t.source} ${diagonal}</a></nav>
+      <nav class="nav-links" id="main-nav" aria-label="${t.navigation}"><a data-section="games" href="#games">${t.games}</a><a data-section="studio" href="#studio">${t.studio}</a><a data-section="community" href="#community">${t.communityNav}</a><a data-section="support" class="nav-support" href="#support">${t.supportNav}</a><a class="nav-mobile-github" href="https://github.com/gamestudio42">GitHub ${diagonal}</a></nav>
       <div class="header-tools">${languageNav(locale, t)}<a class="header-github icon-button" href="https://github.com/gamestudio42" aria-label="${t.github}">${githubIcon}</a><button class="menu-toggle" hidden type="button" aria-expanded="false" aria-controls="main-nav">${t.menu}<span aria-hidden="true">☰</span></button></div>
     </div>
   </header>
@@ -120,7 +120,7 @@ export function page(locale, games) {
       <div class="community-heading"><h2 id="community-title">${esc(t.communityTitle.replace(/\n/g, " "))}</h2><p>${t.communityIntro}</p></div>
       <div class="community-modes"><article><span class="value-number" aria-hidden="true">01 /</span><h3>${t.sharedTitle}</h3><p>${t.sharedBody}</p></article><article><span class="value-number" aria-hidden="true">02 /</span><h3>${t.adoptionTitle}</h3><p>${t.adoptionBody}</p></article></div>
       <p class="community-benefit">${t.communityBenefit}</p>
-      <div class="community-actions"><a class="button button-primary" href="https://github.com/gamestudio42/.github/issues/new?template=project-submission.yml">${t.proposeProject}${arrow}</a><a class="text-link" href="https://github.com/gamestudio42/.github/blob/main/docs/PROJECT_SUBMISSIONS.md#${lang === "pt" ? "português" : "english"}">${t.submissionGuide}${diagonal}</a></div>
+      <div class="community-actions"><a class="button button-primary" href="https://github.com/gamestudio42/.github/issues/new?template=project-submission.yml">${t.proposeProject}${arrow}</a><a class="text-link" href="https://github.com/gamestudio42/.github/blob/main/docs/PROJECT_SUBMISSIONS.md#${lang === "pt" ? "português" : "english"}">${t.submissionGuide}${diagonal}</a><a class="text-link" href="#open-source">${t.source}${arrow}</a></div>
       <aside class="community-license" aria-labelledby="license-title"><h3 id="license-title">${t.licenseTitle}</h3><p>${t.licenseBody}</p><a class="text-link" href="https://github.com/gamestudio42/.github/blob/main/docs/PROJECT_SUBMISSIONS.md#${lang === "pt" ? "licenciamento-por-categoria" : "licensing-by-category"}">${t.licenseGuide}${diagonal}</a></aside>
       <p class="community-languages">${t.submissionLanguages}</p><p class="community-note">${t.communityNote}</p>
     </div></section>
