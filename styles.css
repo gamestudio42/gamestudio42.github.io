@@ -487,3 +487,25 @@ a:hover { color: var(--accent); }
   .community-modes h3 { font-size: 23px; }
   .community-heading > p, .community-modes p, .community-benefit { font-size: 15px; }
 }
+
+/* Licensing choices and sustainable development. */
+.community-license { margin-top: 32px; padding: 24px 0 0; border-top: 1px solid var(--line); max-width: 95ch; }
+.community-license h3 { font-size: 22px; margin-bottom: 12px; }
+.community-license p { font-size: 15px; line-height: 1.8; }
+.community-license .text-link { margin-top: 10px; }
+.support-heading { max-width: 920px; margin-top: 28px; }
+.support-heading h2 { text-wrap: balance; }
+.support-heading > p { max-width: 70ch; margin-top: 24px; font-size: 17px; line-height: 1.8; }
+.support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-top: 40px; }
+.support-grid article { display: flex; flex-direction: column; align-items: flex-start; padding: 32px; background: var(--panel); border: 1px solid var(--line); min-width: 0; }
+.support-grid h3 { font-size: 28px; margin-bottom: 18px; }
+.support-grid p { line-height: 1.8; margin-bottom: 24px; }
+.support-grid .support-status { font: 12px/1.8 var(--mono); color: var(--accent); }
+.support-grid a { margin-top: auto; max-width: 100%; }
+.support-grid .button { text-align: left; }
+.support-note { max-width: 95ch; margin-top: 28px; font-size: 14px; line-height: 1.8; }
+@media (max-width: 800px) {
+  .support-grid { grid-template-columns: 1fr; gap: 20px; }
+  .support-grid article { padding: 24px; }
+  .support-heading > p { font-size: 16px; }
+}
