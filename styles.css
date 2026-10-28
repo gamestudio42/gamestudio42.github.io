@@ -531,3 +531,9 @@ a:hover { color: var(--accent); }
   .menu-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 8px; min-height: 44px; border: 1px solid #414d36; background: transparent; font-size: 11px; }
   .menu-toggle span { font-size: 16px; }
 }
+
+/* Keep optional Linux installation separate from browser and source actions. */
+.store-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.store-actions > span { color: var(--muted); font-size: 13px; }
+.snap-store-link { display: inline-flex; flex-shrink: 0; border-radius: 6px; }
+.snap-store-link img { display: block; width: 182px; height: 56px; }

@@ -145,6 +145,7 @@
   },
   {
     "name": "vazante",
+    "snapStore": "https://snapcraft.io/vazante",
     "title": "Vazante",
     "tagline": {
       "en": "Command the squads. Hold the city. Take the rifle.",
