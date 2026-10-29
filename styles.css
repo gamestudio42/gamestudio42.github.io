@@ -537,3 +537,25 @@ a:hover { color: var(--accent); }
 .store-actions > span { color: var(--muted); font-size: 13px; }
 .snap-store-link { display: inline-flex; flex-shrink: 0; border-radius: 6px; }
 .snap-store-link img { display: block; width: 182px; height: 56px; }
+
+/* Share content rows across each pair, including optional store actions. */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 701px) {
+    .games-grid { row-gap: 0; }
+    .games-grid > .game-card:not(:first-child:nth-last-child(odd)) {
+      display: grid;
+      grid-row: span 6;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+      margin-bottom: 56px;
+    }
+    .games-grid > .game-card:not(:first-child:nth-last-child(odd)) .game-info {
+      display: grid;
+      grid-row: span 5;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+    .games-grid > .game-card:not(:first-child:nth-last-child(odd)) .card-actions { margin-top: 0; }
+    .games-grid > .game-card:first-child:nth-last-child(odd) { margin-bottom: 56px; }
+  }
+}
