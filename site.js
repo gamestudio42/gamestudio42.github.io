@@ -130,7 +130,9 @@
     select.addEventListener("change", () => {
       const game = games.find((game) => game.name === select.value);
       if (!game) return;
-      commands.textContent = `git clone ${game.code}.git\ncd ${game.name}\npnpm install\npnpm dev`;
+      commands.textContent = `git clone ${game.code}.git\ncd ${game.name}`;
+      document.querySelector(".project-guide").href = `${game.code}#readme`;
+      document.querySelector(".project-license").href = `${game.code}/blob/${encodeURIComponent(game.default_branch || "main")}/LICENSE`;
       document.querySelector(".source-repo").href = game.code;
       document.querySelector(".source-issues").href = `${game.code}/issues`;
     });

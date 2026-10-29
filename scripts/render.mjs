@@ -79,7 +79,7 @@ export function page(locale, games) {
   const worlds = [oasis, find("neo-urbe"), find("urbe")].filter(Boolean);
   const heroWorlds = [oasis, find("neo-urbe"), find("vazante")].filter(Boolean);
   const first = worlds[0] || playable[0];
-  const payload = games.map(({ name, title, play, code, genre }) => ({ name, title, play, code, genre }));
+  const payload = games.map(({ name, title, play, code, genre, default_branch }) => ({ name, title, play, code, genre, default_branch }));
   const json = JSON.stringify(payload).replace(/</g, "\\u003c");
   return `<!doctype html>
 <html lang="${locale.htmlLang}">
@@ -116,7 +116,7 @@ export function page(locale, games) {
       <div class="container oasis-content"><p class="eyebrow">${t.oasisLabel}</p><span class="oasis-wordmark">URBE <b>OASIS</b></span><h2 id="oasis-title">${t.oasisLine1}<br><em>${t.oasisLine2}</em></h2><p>${t.oasisIntro}</p><ul>${t.oasisFeatures.map((feature) => `<li>${feature}</li>`).join("")}</ul><a class="button button-sand" href="${esc(oasis.play)}">${t.oasisPlay}${arrow}</a><a class="text-link oasis-code" href="${esc(oasis.code)}">${t.code}${codeIcon}</a></div>
       <div class="container oasis-caption"><span>${t.oasisCaption}</span><span>03 / GS42</span></div>
     </section>` : ""}
-    <section class="studio section container" id="studio" aria-labelledby="studio-title"><p class="eyebrow">${t.studioLabel}</p><div class="studio-layout"><div class="studio-intro"><h2 id="studio-title">${lines(t.studioTitle)}</h2><p>${t.studioIntro}</p><a class="text-link" href="https://github.com/gamestudio42">${t.github}${diagonal}</a><div class="studio-monogram" aria-hidden="true">42<span>ALWAYS<br>EXPLORING.</span></div></div><ol class="studio-values">${t.values.map(([title, body], i) => `<li><span class="value-number">0${i + 1}</span><div><h3>${title}</h3><p>${body}</p></div></li>`).join("")}</ol></div></section>
+    <section class="studio section container" id="studio" aria-labelledby="studio-title"><p class="eyebrow">${t.studioLabel}</p><div class="studio-layout"><div class="studio-intro"><h2 id="studio-title">${lines(t.studioTitle)}</h2><p>${t.studioIntro}</p><div class="studio-people"><h3>${t.studioPeopleTitle}</h3><p>${t.studioPeople}</p></div><a class="text-link" href="https://github.com/gamestudio42">${t.github}${diagonal}</a><div class="studio-monogram" aria-hidden="true">42<span>ALWAYS<br>EXPLORING.</span></div></div><ol class="studio-values">${t.values.map(([title, body], i) => `<li><span class="value-number">0${i + 1}</span><div><h3>${title}</h3><p>${body}</p></div></li>`).join("")}</ol></div></section>
     <section class="community-section section" id="community" aria-labelledby="community-title"><div class="container">
       <p class="eyebrow">${t.communityLabel}</p>
       <div class="community-heading"><h2 id="community-title">${esc(t.communityTitle.replace(/\n/g, " "))}</h2><p>${t.communityIntro}</p></div>
@@ -131,21 +131,20 @@ export function page(locale, games) {
       <div class="support-heading"><h2 id="support-title">${t.supportTitle}</h2><p>${t.supportIntro}</p></div>
       <div class="support-grid">
         <article><h3>${t.sponsorTitle}</h3><p>${t.sponsorBody}</p><p class="support-status">${t.sponsorStatus}</p><a class="text-link" href="mailto:talkgamestudio42@gmail.com?subject=${encodeURIComponent(t.sponsorSubject)}">${t.sponsorAction}${arrow}</a></article>
-        <article><h3>${t.servicesTitle}</h3><p>${t.servicesBody}</p><a class="button button-primary" href="mailto:talkgamestudio42@gmail.com?subject=${encodeURIComponent(t.servicesSubject)}">${t.servicesAction}${arrow}</a></article>
+        <article><h3>${t.servicesTitle}</h3><p>${t.servicesBody}</p><ul class="service-examples">${t.serviceExamples.map(item => `<li>${esc(item)}</li>`).join("")}</ul><a class="button button-primary" href="mailto:talkgamestudio42@gmail.com?subject=${encodeURIComponent(t.servicesSubject)}">${t.servicesAction}${arrow}</a></article>
       </div>
+      <div class="contact-direct"><h3>${t.contactLabel}</h3><p>${t.contactHint}</p><div class="contact-actions"><a href="mailto:talkgamestudio42@gmail.com">talkgamestudio42@gmail.com</a><button hidden type="button" class="text-link" data-copy="talkgamestudio42@gmail.com" data-copied="${t.emailCopied}" data-copy-failed="${t.emailCopyFailed}">${t.copyEmail}${copyIcon}</button></div></div>
       <p class="support-note">${t.supportNote}</p>
     </section>
     <section class="source-section" id="open-source" aria-labelledby="source-title"><div class="container source-layout"><div><p class="eyebrow">${t.sourceLabel}</p><h2 id="source-title">${lines(t.sourceTitle)}</h2><p class="source-intro">${t.sourceIntro}</p><a class="text-link source-repo" href="${esc(first.code)}">${githubIcon}${t.repo}${diagonal}</a><a class="text-link source-issues" href="${esc(first.code)}/issues">${t.contribute}${arrow}</a></div>
       <div class="terminal"><div class="terminal-bar"><span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>~/gamestudio42</span><span class="terminal-shell">bash</span></div>
-        <div class="terminal-project"><span class="terminal-repo-name">${esc(first.title)}</span><label class="repo-picker" hidden>${t.chooseRepo}<select id="repo-select">${worlds.map((game) => `<option value="${esc(game.name)}">${esc(game.title)}</option>`).join("")}</select></label><button hidden class="icon-button command-copy" type="button" data-copy-commands data-copied="${t.commandsCopied}" data-copy-failed="${t.commandsFailed}" aria-label="${t.copyCommands}">${copyIcon}</button></div>
+        <div class="terminal-project"><span class="terminal-repo-name">${esc(first.title)}</span><label class="repo-picker" hidden>${t.chooseRepo}<select id="repo-select">${[first, ...games.filter(game => game.name !== first.name)].map((game) => `<option value="${esc(game.name)}">${esc(game.title)}</option>`).join("")}</select></label><button hidden class="icon-button command-copy" type="button" data-copy-commands data-copied="${t.commandsCopied}" data-copy-failed="${t.commandsFailed}" aria-label="${t.copyCommands}">${copyIcon}</button></div>
         <pre id="clone-commands"><code>git clone ${esc(first.code)}.git
-cd ${esc(first.name)}
-pnpm install
-pnpm dev</code></pre><div class="terminal-footer"><span class="status-dot"></span>MIT LICENSE <span>↗ OPEN SOURCE</span></div><p class="dev-note">${t.devNote}</p></div>
+cd ${esc(first.name)}</code></pre><div class="terminal-guide"><a class="project-guide" href="${esc(first.code)}#readme">${t.projectGuide}${diagonal}</a><p class="dev-note">${t.devNote}</p></div><div class="terminal-footer"><span class="status-dot"></span><a class="project-license" href="${esc(first.code)}/blob/${esc(first.default_branch || "main")}/LICENSE">${t.projectLicense}</a><span>↗ OPEN SOURCE</span></div></div>
     </div></section>
     <section class="closing container"><p>${t.outro}</p><a href="#games" class="circle-link" aria-label="${t.explore}">${arrow}</a></section>
   </main>
-  <footer class="site-footer container"><div class="footer-top">${logo(locale.path)}<p>${t.footerNote}</p><a class="text-link" href="#top">${t.backTop}<span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© ${new Date().getUTCFullYear()} GAME STUDIO 42</span><a href="https://github.com/gamestudio42/gamestudio42.github.io/blob/main/LICENSE">MIT LICENSE</a><a href="https://github.com/gamestudio42">GITHUB ${diagonal}</a>${languageNav(locale, t)}</div></footer>
+  <footer class="site-footer container"><div class="footer-top">${logo(locale.path)}<p>${t.footerNote}</p><a class="text-link" href="#top">${t.backTop}<span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© ${new Date().getUTCFullYear()} GAME STUDIO 42</span><a href="https://github.com/gamestudio42/gamestudio42.github.io/blob/main/LICENSE">${t.siteLicense}</a><a href="https://github.com/gamestudio42">GITHUB ${diagonal}</a>${languageNav(locale, t)}</div></footer>
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
   <script id="games-data" type="application/json">${json}</script>
   <script src="/site.js" defer></script>
