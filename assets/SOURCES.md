@@ -20,3 +20,9 @@ Fonte variável servida localmente. Licença SIL Open Font License 1.1, incluíd
 - Vazante: `https://raw.githubusercontent.com/gamestudio42/vazante/main/docs/screenshots/battle.jpg` (captura oficial de gameplay; convertida para WebP em duas resoluções). Código MIT; créditos de recursos de terceiros em https://github.com/gamestudio42/vazante/blob/main/docs/assets.md.
 
 A imagem de compartilhamento `og-image.jpg` é composta a partir das capturas oficiais acima. A fonte editável é `brand/social-card.svg` (1200 × 630).
+
+## Sítio
+
+- `sitio-*.webp`: https://github.com/gamestudio42/sitio/blob/main/docs/screenshots/farm.png
+- © 2026 Game Studio 42, CC-BY-4.0. Obtida em 29/10/2026; versões WebP 1600 × 900 e 800 × 450, sem alterações na cena.
+- Licenciamento: https://github.com/gamestudio42/sitio/blob/main/LICENSING.md

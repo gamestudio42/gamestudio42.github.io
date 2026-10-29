@@ -179,5 +179,40 @@
       "fr": "Menez vos escouades dans Porto Velário, protégez le ravitaillement et fortifiez votre base contre la horde. Prenez le contrôle d’un soldat dans la même bataille.",
       "de": "Führe Trupps durch Porto Velário, schütze Versorgungslaster und befestige deine Basis gegen die Horde. Übernimm in derselben Schlacht die Kontrolle über einen Soldaten."
     }
+  },
+  {
+    "name": "sitio",
+    "title": "Sítio",
+    "tagline": {
+      "en": "The farm that becomes a village.",
+      "pt": "A fazenda que vira vila.",
+      "es": "La granja que se convierte en pueblo.",
+      "fr": "La ferme qui devient un village.",
+      "de": "Der Hof, aus dem ein Dorf wird."
+    },
+    "description": {
+      "en": "Grow coffee, organize family work and turn a small farm into a community. Plan each month, tend your harvests and build what lasts.",
+      "pt": "Cultive café, organize o trabalho das famílias e transforme uma pequena fazenda em uma comunidade. Planeje cada mês, cuide das colheitas e construa o que fica.",
+      "es": "Cultiva café, organiza el trabajo de las familias y transforma una pequeña granja en una comunidad. Planifica cada mes, cuida las cosechas y construye lo que perdura.",
+      "fr": "Cultivez le café, organisez le travail des familles et transformez une petite ferme en communauté. Planifiez chaque mois, soignez vos récoltes et bâtissez ce qui dure.",
+      "de": "Baue Kaffee an, organisiere die Arbeit der Familien und verwandle einen kleinen Hof in eine Gemeinschaft. Plane jeden Monat, kümmere dich um die Ernte und schaffe Bleibendes."
+    },
+    "cover": "/assets/games/sitio-full.webp",
+    "coverSmall": "/assets/games/sitio-800.webp",
+    "coverWidth": 1600,
+    "coverHeight": 900,
+    "genre": "farm-management",
+    "tech": [
+      "TypeScript",
+      "React",
+      "Web Worker"
+    ],
+    "order": 0.75,
+    "play": "https://gamestudio42.github.io/sitio/",
+    "code": "https://github.com/gamestudio42/sitio",
+    "fork": "https://github.com/gamestudio42/sitio/fork",
+    "commits": "https://github.com/gamestudio42/sitio/commits",
+    "atom": "https://github.com/gamestudio42/sitio/releases.atom",
+    "default_branch": "main"
   }
 ]

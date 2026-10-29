@@ -10,13 +10,13 @@ const quiet = () => {};
 
 test("offline build includes Oasis and every existing catalog entry without requests", async () => {
   const games = await collectGames({ curated, offline: true, request: () => assert.fail("offline request") });
-  assert.deepEqual(games.map((game) => game.name), ["plot42", "vazante", "urbe-oasis", "neo-urbe", "urbe", "mineboss"]);
+  assert.deepEqual(games.map((game) => game.name), ["plot42", "vazante", "sitio", "urbe-oasis", "neo-urbe", "urbe", "mineboss"]);
   assert.equal(games.find((game) => game.name === "urbe-oasis").play, "https://gamestudio42.github.io/urbe-oasis/");
 });
 
 test("GitHub outage preserves complete local metadata and does not invent live statistics", async () => {
   const games = await collectGames({ curated, request: async () => { throw new Error("network unavailable"); }, warn: quiet });
-  assert.equal(games.length, 6);
+  assert.equal(games.length, 7);
   for (const game of games) {
     assert.equal(game.title, curated.find((saved) => saved.name === game.name).title);
     assert.equal(game.stars, undefined);
@@ -39,7 +39,7 @@ test("Oasis is fetched even without the discovery topic and keeps its real local
   assert.equal(oasis.cover, "/assets/games/urbe-oasis-full.webp");
   assert.equal(oasis.tagline.pt, "Uma nova descrição.");
   assert.equal(oasis.tagline.en, curated.find((game) => game.name === "urbe-oasis").tagline.en);
-  assert.equal(games.length, 6);
+  assert.equal(games.length, 7);
 });
 
 test("discovery paginates, adds valid new games and rejects malformed manifests", async () => {
@@ -52,7 +52,7 @@ test("discovery paginates, adds valid new games and rejects malformed manifests"
     throw new Error("404");
   };
   const games = await collectGames({ curated, request, warn: quiet });
-  assert.equal(games.length, 7);
+  assert.equal(games.length, 8);
   const added = games.find((game) => game.name === "new-world");
   assert.equal(added.play, "https://gamestudio42.github.io/new-world/");
   assert.deepEqual(added.tech, ["TypeScript"]);
@@ -72,10 +72,12 @@ test("every locale contains the full portfolio, valid anchors and SEO alternates
     const html = page(locale, curated);
     assert.ok(html.includes(`<html lang="${locale.htmlLang}">`));
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
-    assert.equal((html.match(/<article /g) || []).length, 5);
+    assert.equal((html.match(/<article /g) || []).length, 6);
     assert.equal((html.match(/rel="alternate"/g) || []).length, 6);
     assert.ok(html.includes('id="oasis"'));
     assert.ok(html.includes('id="game-vazante"'));
+    assert.ok(html.includes('id="game-sitio"'));
+    assert.ok(html.includes(COPY[locale.id].genres["farm-management"]));
     assert.ok(html.includes(COPY[locale.id].genres["real-time-tactics"]));
     assert.ok(html.includes('href="https://gamestudio42.github.io/plot42/"'));
     assert.ok(html.includes('href="https://gamestudio42.github.io/urbe-oasis/"'));
