@@ -50,6 +50,7 @@ function normalize(repo, manifest, saved) {
   return {
     ...saved,
     name,
+    default_branch: branch,
     title: manifest.title,
     tagline: { ...saved?.tagline, ...tagline },
     // Studio art direction stays local; upstream favicons cannot replace screenshots.

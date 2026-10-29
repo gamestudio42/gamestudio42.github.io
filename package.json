@@ -1,0 +1,13 @@
+{
+  "name": "gamestudio42-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/catalog.test.mjs",
+    "build": "node scripts/build.mjs --offline",
+    "test:ui": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  }
+}

@@ -6,7 +6,7 @@ layout responsivo e acesso direto para jogar, explorar o código e contribuir.
 
 ## Desenvolvimento local
 
-Requer Node.js 22+. Não há dependências npm nem bundler.
+Requer Node.js 22+. O build estático não precisa de dependências npm nem bundler. Os testes de navegador usam Playwright como dependência de desenvolvimento.
 
 ```sh
 node scripts/build.mjs --offline
@@ -17,7 +17,7 @@ Abra [localhost:4173/pt/](http://localhost:4173/pt/). O modo offline usa o catá
 versionado e não precisa de rede ou credenciais. `dist/` é gerado e não deve ser editado.
 
 ```sh
-node --test                 # catálogo, falhas de rede, HTML e idiomas
+node --test tests/catalog.test.mjs # catálogo, falhas de rede, HTML e idiomas
 node scripts/build.mjs      # atualiza metadados via GitHub antes de gerar dist/
 ```
 
@@ -41,7 +41,7 @@ inkscape brand/social-card.svg --export-filename=/tmp/gs42-social.png
 magick /tmp/gs42-social.png -quality 90 og-image.jpg
 ```
 
-O catálogo inclui Urbe, Neo Urbe, Urbe Oasis, MineBoss, Vazante e a coleção Plot 42.
+O catálogo inclui Urbe, Neo Urbe, Urbe Oasis, MineBoss, Vazante, Sítio e a coleção Plot 42.
 Urbe Oasis participa da abertura, do catálogo e de uma seção própria. A capa local
 é preservada mesmo quando o manifesto do jogo aponta para um favicon.
 
@@ -78,8 +78,10 @@ metadados verificados, links e screenshots locais. `coverWidth` e `coverHeight`
 representam as dimensões reais da imagem `-full.webp`; `coverSmall` tem 800 px
 de largura. Não use arte conceitual como se fosse gameplay.
 
-A área de comandos oferece os três projetos Urbe, cujo fluxo Node.js/pnpm foi
-verificado. Os demais jogos continuam com links diretos para seus repositórios.
+A área de contribuição oferece todos os projetos do catálogo. Ao selecionar um
+projeto, os comandos de clone, README, issues e licença acompanham a seleção.
+A instalação segue o guia de cada repositório. `default_branch` define a branch
+do link de licença, inclusive `master` no MineBoss.
 
 ## Idiomas e acessibilidade
 
@@ -92,6 +94,22 @@ O conteúdo e os links de navegação funcionam sem JavaScript. JS acrescenta me
 mobile, seleção de repositório, cópia e jogo aleatório. O site respeita
 `prefers-reduced-motion`, oferece foco visível, link de salto e mensagens de cópia
 anunciadas por leitores de tela. O jogo aleatório exclui coletâneas.
+
+## Verificações de PR
+
+```sh
+npm ci
+npm test
+npm run build
+npx playwright install chromium
+npm run test:ui
+```
+
+Os testes de navegador precisam de Python 3 para servir `dist/`. O workflow
+`Pull request checks` verifica os cinco idiomas em desktop e celular, alinhamento
+dos cards, seleção de projetos, cópia do contato e navegação por teclado.
+Capturas do catálogo e relatórios ficam nos artefatos da execução por sete dias.
+Esse workflow tem acesso somente de leitura e não publica o site.
 
 ## Publicação
 
