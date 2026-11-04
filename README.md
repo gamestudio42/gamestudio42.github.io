@@ -17,7 +17,7 @@ Abra [localhost:4173/pt/](http://localhost:4173/pt/). O modo offline usa o catá
 versionado e não precisa de rede ou credenciais. `dist/` é gerado e não deve ser editado.
 
 ```sh
-node --test tests/catalog.test.mjs # catálogo, falhas de rede, HTML e idiomas
+npm test # catálogo, falhas de rede, HTML, idiomas e previews
 node scripts/build.mjs      # atualiza metadados via GitHub antes de gerar dist/
 ```
 
@@ -111,6 +111,7 @@ extra por jogo. Escape fecha o painel e devolve o foco ao card.
 npm ci
 npm test
 npm run build
+npm run build:preview
 npx playwright install chromium
 npm run test:ui
 ```
@@ -120,14 +121,54 @@ Os testes de navegador precisam de Python 3 para servir `dist/`. O workflow
 dos cards, seleção de projetos, cópia do contato e navegação por teclado.
 Também confere os links de compartilhamento de todos os jogos, cópia e fallback,
 retorno de foco e cancelamento/erro da API nativa (simulada nos testes).
-Capturas do catálogo, do painel de compartilhamento e relatórios ficam nos artefatos da execução por sete dias.
+Capturas do catálogo (incluindo Dead Sector e Void Frontier), do painel de compartilhamento e relatórios ficam nos artefatos da execução por sete dias.
 Esse workflow tem acesso somente de leitura e não publica o site.
 
 ## Publicação
 
-O workflow Pages roda os testes, gera `dist/` e publica pelo GitHub Pages em pushes
-para `main`, diariamente ou via `workflow_dispatch`. O build também gera `404.html`,
-`robots.txt`, `sitemap.xml` e `games.json` (mantido como catálogo público).
+O workflow `Pages` roda os testes e gera o catálogo online em pushes para `main`,
+diariamente ou via `workflow_dispatch`. Ele atualiza a raiz da branch de saída
+`gh-pages`, preservando `pr-preview/`. `Pages deploy` publica essa branch como
+artefato do GitHub Pages. **Settings → Pages continua em GitHub Actions**; não é
+necessário mudar para publicação por branch. O build gera `404.html`, `robots.txt`,
+`sitemap.xml` e `games.json`.
+
+### Preview de pull requests
+
+- `Pull request checks` testa o site e produz `preview-pr-N`, com o catálogo
+  local e base `/pr-preview/pr-N/`, somente após os checks passarem.
+- `Pages preview`, definido na `main`, verifica número do PR, repositório,
+  commit atual e estado aberto antes de copiar o artefato estático para
+  `gh-pages/pr-preview/pr-N/`. Funciona também com forks; nenhum código do PR
+  é executado pelo job com permissão de escrita.
+- O comentário fixo do PR aponta para a prévia e sua versão em português.
+  `Pages deploy` publica o conjunto completo, incluindo produção e demais PRs.
+- Ao fechar ou mesclar, a prévia é removida. Os jobs que escrevem na branch
+  compartilham uma fila para não apagar os arquivos uns dos outros.
+- Previews não carregam analytics e usam `noindex,nofollow`. Idiomas, assets,
+  fontes e logo ficam no subcaminho; jogar e compartilhar continuam apontando
+  para os jogos publicados. A preferência de idioma da prévia é independente.
+
+**Primeira ativação:** estes workflows precisam ser mesclados na `main` antes
+que o publicador de previews possa rodar. O primeiro push na `main` prepara
+`gh-pages` e publica o site. PRs abertos depois disso recebem o link automaticamente;
+para PRs já abertos, envie um novo commit ou reexecute seus checks.
+O PR que introduz esta infraestrutura entrega o artefato e a validação local,
+mas não tem URL pública de preview antes dessa ativação.
+
+Para reproduzir o mesmo subcaminho localmente:
+
+```sh
+npm run build
+npm run build:preview
+python3 -m http.server 4173 --directory dist
+# http://localhost:4173/pr-preview/pr-999/pt/
+```
+
+`npm run test:ui` cobre também o preview: navegação entre idiomas, 404,
+carregamento das imagens locais e links de compartilhamento. Os testes de
+publicação recusam artefatos de outro PR/repositório, expirados ou duplicados,
+e ignoram commits antigos e PRs fechados.
 
 O GoatCounter existente continua habilitado. Fonte e screenshots são servidos
 localmente; o visitante não precisa consultar a API do GitHub para ver o catálogo.

@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+const curated = JSON.parse(readFileSync(new URL('../data/games.json', import.meta.url), 'utf8'));
 import { COPY } from '../scripts/content.mjs';
 
 for (const locale of ['en', 'pt', 'es', 'fr', 'de']) {
@@ -6,7 +8,7 @@ for (const locale of ['en', 'pt', 'es', 'fr', 'de']) {
     await page.goto(locale === 'en' ? '/' : `/${locale}/`);
     await page.evaluate(() => document.fonts.ready);
     const cards = page.locator('.game-card');
-    await expect(cards).toHaveCount(6);
+    await expect(cards).toHaveCount(curated.length - 1);
     const actions = await page.locator('.game-card .card-actions').evaluateAll(items => items.map(item => item.getBoundingClientRect().top));
     if (testInfo.project.name === 'desktop') {
       for (let i = 0; i < actions.length; i += 2) expect(Math.abs(actions[i] - actions[i + 1])).toBeLessThan(1);
@@ -15,6 +17,14 @@ for (const locale of ['en', 'pt', 'es', 'fr', 'de']) {
     await expect(page.locator('.snap-store-link')).toHaveAttribute('href', 'https://snapcraft.io/vazante');
     await page.locator('#games').scrollIntoViewIfNeeded();
     await testInfo.attach(`catalog-${locale}`, { body: await page.screenshot(), contentType: 'image/png' });
+    for (const name of ['dead-sector', 'void-frontier']) {
+      const game = page.locator(`#game-${name}`);
+      await game.scrollIntoViewIfNeeded();
+      await game.locator('img').evaluate(img => img.decode());
+      await expect(game.locator('img')).toHaveJSProperty('complete', true);
+      expect(await game.locator('img').evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+    }
+    await testInfo.attach(`new-games-${locale}`, { body: await page.screenshot(), contentType: 'image/png' });
     const t = COPY[locale];
     const dialog = page.getByRole('dialog');
     for (const trigger of await page.locator('[data-share]').all()) {
@@ -44,8 +54,8 @@ for (const locale of ['en', 'pt', 'es', 'fr', 'de']) {
       await expect(trigger).toBeFocused();
     }
     const select = page.locator('#repo-select');
-    await expect(select.locator('option')).toHaveCount(7);
-    for (const [name, branch] of [['sitio', 'main'], ['vazante', 'main'], ['mineboss', 'master'], ['plot42', 'main'], ['urbe', 'main'], ['neo-urbe', 'main'], ['urbe-oasis', 'main']]) {
+    await expect(select.locator('option')).toHaveCount(curated.length);
+    for (const [name, branch] of curated.map(game => [game.name, game.default_branch])) {
       await select.selectOption(name);
       const repo = `https://github.com/gamestudio42/${name}`;
       await expect(page.locator('.project-guide')).toHaveAttribute('href', `${repo}#readme`);
@@ -140,4 +150,31 @@ test('native sharing receives the game and handles cancellation and failure', as
   await native.click();
   await expect(dialog.getByRole('status')).toHaveText('Não foi possível compartilhar. Copie o link ou escolha uma rede.');
   await expect(dialog.getByRole('button', { name: 'Copiar link', exact: true })).toBeEnabled();
+});
+
+
+test('PR preview keeps assets, language switching and sharing inside the right scope', async ({ page }) => {
+  const base = '/pr-preview/pr-999/';
+  const requests = [];
+  page.on('request', request => requests.push(new URL(request.url()).pathname));
+  await page.addInitScript(() => localStorage.setItem('gs42-lang', 'pt'));
+  await page.goto(base + 'pt/#games');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex,nofollow');
+  await expect(page.locator('script[data-goatcounter]')).toHaveCount(0);
+  await expect(page.locator('.brand').first()).toHaveAttribute('href', base + 'pt/');
+  await page.locator('#game-dead-sector').scrollIntoViewIfNeeded();
+  await expect(page.locator('#game-dead-sector img')).toHaveJSProperty('complete', true);
+  expect(await page.locator('#game-dead-sector img').evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+  await page.locator('[data-share="void-frontier"]').click();
+  await expect(page.locator('#share-url')).toHaveValue('https://gamestudio42.github.io/void-frontier/');
+  await page.keyboard.press('Escape');
+  await page.locator('.site-header .language-picker summary').click();
+  await page.locator('.site-header [data-lang="de"]').click();
+  await expect(page).toHaveURL(new RegExp(base + 'de/#games$'));
+  expect(await page.evaluate(() => localStorage.getItem('gs42-lang'))).toBe('pt');
+  await page.goto(base);
+  await expect(page).toHaveURL(new RegExp(base + 'de/$'));
+  await page.goto(base + '404.html');
+  await expect(page.locator('.button-primary')).toHaveAttribute('href', base);
+  expect(requests.filter(path => /^\/(?:assets|brand)\//.test(path) || ['/site.js', '/styles.css'].includes(path))).toEqual([]);
 });

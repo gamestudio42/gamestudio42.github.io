@@ -214,5 +214,75 @@
     "commits": "https://github.com/gamestudio42/sitio/commits",
     "atom": "https://github.com/gamestudio42/sitio/releases.atom",
     "default_branch": "main"
+  },
+  {
+    "name": "dead-sector",
+    "title": "Dead Sector",
+    "tagline": {
+      "en": "Every shot is heard. Every order has a price.",
+      "pt": "Cada disparo é ouvido. Cada ordem tem um preço.",
+      "es": "Cada disparo se oye. Cada orden tiene un precio.",
+      "fr": "Chaque tir s’entend. Chaque ordre a un prix.",
+      "de": "Jeder Schuss wird gehört. Jeder Befehl hat seinen Preis."
+    },
+    "description": {
+      "en": "Command two squads through a zombie outbreak. Plan routes, control the noise and bring survivors home — every loss stays with your campaign.",
+      "pt": "Comande dois esquadrões em um surto zumbi. Planeje rotas, controle o ruído e traga os sobreviventes de volta — cada perda acompanha sua campanha.",
+      "es": "Dirige dos escuadrones durante un brote zombi. Planea rutas, controla el ruido y trae de vuelta a los supervivientes: cada pérdida permanece en la campaña.",
+      "fr": "Commandez deux escouades face à une épidémie zombie. Planifiez les trajets, maîtrisez le bruit et ramenez les survivants : chaque perte marque la campagne.",
+      "de": "Führe zwei Trupps durch einen Zombieausbruch. Plane Routen, kontrolliere den Lärm und bringe Überlebende zurück — jeder Verlust bleibt in der Kampagne."
+    },
+    "cover": "/assets/games/dead-sector-full.webp",
+    "coverSmall": "/assets/games/dead-sector-800.webp",
+    "coverWidth": 1600,
+    "coverHeight": 900,
+    "genre": "tactics",
+    "order": 4,
+    "tech": [
+      "TypeScript",
+      "Phaser",
+      "WebAudio"
+    ],
+    "play": "https://gamestudio42.github.io/dead-sector/",
+    "code": "https://github.com/gamestudio42/dead-sector",
+    "fork": "https://github.com/gamestudio42/dead-sector/fork",
+    "commits": "https://github.com/gamestudio42/dead-sector/commits",
+    "atom": "https://github.com/gamestudio42/dead-sector/releases.atom",
+    "default_branch": "main"
+  },
+  {
+    "name": "void-frontier",
+    "title": "Void Frontier",
+    "tagline": {
+      "en": "No friction. No brakes you didn’t fire yourself.",
+      "pt": "Sem atrito. Só há freio quando você aciona os propulsores.",
+      "es": "Sin fricción. Solo frenas cuando activas los propulsores.",
+      "fr": "Sans friction. Pour freiner, allumez vos propulseurs.",
+      "de": "Keine Reibung. Bremsen musst du mit deinen Triebwerken."
+    },
+    "description": {
+      "en": "Pilot a ship through asteroid fields with Newtonian flight. Mine, trade, take contracts and face pirates as you upgrade your ship and build a fleet.",
+      "pt": "Pilote uma nave entre asteroides com voo newtoniano. Minere, negocie, aceite contratos e enfrente piratas enquanto aprimora sua nave e forma uma frota.",
+      "es": "Pilota una nave entre asteroides con vuelo newtoniano. Extrae minerales, comercia, acepta contratos y combate piratas mientras mejoras tu nave y formas una flota.",
+      "fr": "Pilotez un vaisseau parmi les astéroïdes en vol newtonien. Extrayez du minerai, négociez, acceptez des contrats et affrontez les pirates pour améliorer votre vaisseau et créer une flotte.",
+      "de": "Steuere ein Schiff mit newtonscher Flugphysik durch Asteroidenfelder. Baue Erz ab, handle, erfülle Aufträge und bekämpfe Piraten, während du dein Schiff aufrüstest und eine Flotte aufbaust."
+    },
+    "cover": "/assets/games/void-frontier-full.webp",
+    "coverSmall": "/assets/games/void-frontier-800.webp",
+    "coverWidth": 1280,
+    "coverHeight": 720,
+    "genre": "space-action-rpg",
+    "order": 5,
+    "tech": [
+      "TypeScript",
+      "Three.js",
+      "React"
+    ],
+    "play": "https://gamestudio42.github.io/void-frontier/",
+    "code": "https://github.com/gamestudio42/void-frontier",
+    "fork": "https://github.com/gamestudio42/void-frontier/fork",
+    "commits": "https://github.com/gamestudio42/void-frontier/commits",
+    "atom": "https://github.com/gamestudio42/void-frontier/releases.atom",
+    "default_branch": "main"
   }
 ]

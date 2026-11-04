@@ -24,6 +24,7 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - run: npm run build:preview
       - run: npx playwright install --with-deps chromium
       - run: npm run test:ui
       - uses: actions/upload-artifact@v4
@@ -33,4 +34,16 @@ jobs:
           path: |
             playwright-report/
             test-results/
+          retention-days: 7
+      - name: Build the PR preview
+        if: github.event_name == 'pull_request'
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: node scripts/build.mjs --offline --base-path "/pr-preview/pr-${PR_NUMBER}/" --out-dir dist-preview
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'pull_request'
+        with:
+          name: preview-pr-${{ github.event.pull_request.number }}
+          path: dist-preview/
+          include-hidden-files: true
           retention-days: 7
