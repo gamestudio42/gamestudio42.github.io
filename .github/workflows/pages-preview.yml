@@ -37,10 +37,18 @@ jobs:
         with:
           script: |
             const repo = context.repo;
+            const { previewPlan, previewRemovalPlan } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/preview-plan.mjs`);
             if (context.eventName === 'pull_request_target') {
               const number = context.payload.pull_request.number;
               const { data: pr } = await github.rest.pulls.get({ ...repo, pull_number: number });
-              if (pr.state !== 'closed') return;
+              const plan = await previewRemovalPlan(pr, async (path, ref) => {
+                const { data } = await github.rest.repos.getContent({ ...repo, path, ref });
+                return data;
+              });
+              if (!plan) {
+                core.info('No published preview to remove (or PR reopened).');
+                return;
+              }
               core.setOutput('number', number);
               core.setOutput('mode', 'remove');
               return;
@@ -51,7 +59,6 @@ jobs:
             if (candidates.length !== 1) throw new Error('Expected one PR preview artifact');
             const number = Number(candidates[0].name.slice('preview-pr-'.length));
             const { data: pr } = await github.rest.pulls.get({ ...repo, pull_number: number });
-            const { previewPlan } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/preview-plan.mjs`);
             const plan = previewPlan(run, artifacts, pr);
             if (!plan) return;
             core.setOutput('number', plan.number);

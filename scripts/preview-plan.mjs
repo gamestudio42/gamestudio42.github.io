@@ -10,3 +10,18 @@ export function previewPlan(run, artifacts, pr) {
   if (!pr.head.repo || pr.head.repo.full_name !== run.head_repository?.full_name) throw new Error("Repository mismatch");
   return { number, artifactId: artifact.id };
 }
+
+
+/** Closing a PR with no published preview is an idempotent no-op. */
+export async function previewRemovalPlan(pr, readDirectory) {
+  if (pr.state !== "closed") return null;
+  if (!Number.isSafeInteger(pr.number) || pr.number < 1) throw new Error("Invalid PR number");
+  let entries;
+  try { entries = await readDirectory(`pr-preview/pr-${pr.number}`, "gh-pages"); }
+  catch (error) {
+    if (error.status === 404) return null; // Missing branch or preview directory.
+    throw error;
+  }
+  if (!Array.isArray(entries)) throw new Error("Expected a preview directory");
+  return entries.length ? { number: pr.number } : null;
+}
