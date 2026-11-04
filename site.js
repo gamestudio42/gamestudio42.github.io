@@ -1,13 +1,15 @@
 (function () {
   "use strict";
+  const base = document.querySelector('meta[name="site-base"]')?.content || "/";
   const PATHS = { en: "/", pt: "/pt/", es: "/es/", fr: "/fr/", de: "/de/" };
-  const KEY = "gs42-lang";
+  for (const lang of Object.keys(PATHS)) PATHS[lang] = base + PATHS[lang].slice(1);
+  const KEY = base === "/" ? "gs42-lang" : `gs42-lang:${base}`;
   const here = document.documentElement.lang.split("-")[0];
   let stored;
   try { stored = localStorage.getItem(KEY); } catch { /* Storage can be disabled. */ }
 
   // Explicit locale URLs always win. Only the root negotiates the initial language.
-  if (location.pathname === "/" || location.pathname === "/index.html") {
+  if (location.pathname === base || location.pathname === `${base}index.html`) {
     const browserLocale = (navigator.language || "en").toLowerCase().split("-")[0];
     const preferred = PATHS[stored] ? stored : PATHS[browserLocale] ? browserLocale : "en";
     if (preferred !== "en") {

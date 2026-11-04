@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/catalog.test.mjs",
+    "test": "node --test tests/*.test.mjs",
     "build": "node scripts/build.mjs --offline",
-    "test:ui": "playwright test"
+    "test:ui": "playwright test",
+    "build:preview": "node scripts/build.mjs --offline --base-path /pr-preview/pr-999/ --out-dir dist/pr-preview/pr-999"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1"
