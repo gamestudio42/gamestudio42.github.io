@@ -576,3 +576,25 @@ a:hover { color: var(--accent); }
 .project-guide svg { width: 18px; flex-shrink: 0; }
 .terminal-guide .dev-note { padding: 8px 0 0; margin: 0; }
 .terminal-footer .project-license { min-height: 32px; display: inline-flex; align-items: center; text-decoration: underline; text-underline-offset: 3px; }
+
+/* One sharing dialog serves every card without changing the catalogue grid. */
+.share-button { width: 44px; flex: 0 0 44px; padding-inline: 12px; }
+body:has(.share-dialog[open]) { overflow: hidden; }
+.share-dialog { width: min(480px, calc(100% - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 28px; border: 1px solid var(--line); background: var(--panel); color: var(--text); box-shadow: 0 24px 96px #0008; }
+.share-dialog::backdrop { background: #050805cc; backdrop-filter: blur(5px); }
+.share-heading { display: flex; align-items: flex-start; gap: 16px; justify-content: space-between; }
+.share-heading h2 { font-size: 30px; letter-spacing: -.04em; line-height: 1.15; overflow-wrap: anywhere; }
+.share-close { flex: 0 0 44px; margin: -10px -10px 0 0; font-size: 28px; }
+#share-hint { margin-top: 16px; font-size: 14px; }
+.share-url-label { display: block; margin-top: 24px; color: var(--muted); font-size: 12px; }
+.share-url { display: block; width: 100%; min-width: 0; padding: 12px; margin: 6px 0 12px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: 14px/1.5 var(--mono); }
+.share-dialog .button { width: 100%; cursor: pointer; }
+.share-networks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.share-networks a { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 48px; border: 1px solid var(--line); padding: 10px 14px; font-size: 14px; }
+.share-networks a:hover { border-color: var(--accent); }
+.share-native { margin-top: 12px; background: transparent; border-color: var(--line); }
+.share-native:disabled { opacity: .6; cursor: wait; }
+.share-status { min-height: 1.6em; margin-top: 16px; font-size: 13px; color: var(--accent); }
+@media (max-width: 700px) {
+  .share-dialog { margin-block: auto 16px; padding: 24px; }
+}

@@ -109,18 +109,85 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove("visible"), 3500);
   }
+  function copyFeedback(button, message) {
+    const status = button.closest("dialog")?.querySelector(".share-status");
+    if (status) status.textContent = message;
+    else notify(message);
+  }
   async function copy(text, button) {
     try {
       await navigator.clipboard.writeText(text);
-      notify(button.dataset.copied);
+      copyFeedback(button, button.dataset.copied);
     } catch {
-      notify(button.dataset.copyFailed);
+      copyFeedback(button, button.dataset.copyFailed);
     }
   }
   document.querySelectorAll("[data-copy]").forEach((button) => {
     button.hidden = false;
     button.addEventListener("click", () => copy(button.dataset.copy, button));
   });
+
+  const shareDialog = document.getElementById("share-dialog");
+  if (shareDialog && typeof shareDialog.showModal === "function") {
+    const urlInput = shareDialog.querySelector(".share-url");
+    const copyButton = shareDialog.querySelector(".share-copy");
+    const nativeButton = shareDialog.querySelector(".share-native");
+    const status = shareDialog.querySelector(".share-status");
+    let opener;
+    let shareData;
+    document.querySelectorAll("[data-share]").forEach((button) => {
+      button.hidden = false;
+      button.addEventListener("click", () => {
+        const game = playable.find((item) => item.name === button.dataset.share);
+        if (!game) return;
+        opener = button;
+        shareData = { title: game.title, text: shareDialog.dataset.text.replace("{title}", () => game.title), url: game.play };
+        shareDialog.querySelector("#share-title").textContent = shareDialog.dataset.title.replace("{title}", () => game.title);
+        urlInput.value = game.play;
+        copyButton.dataset.copy = game.play;
+        status.textContent = "";
+        const message = `${shareData.text} ${shareData.url}`;
+        const intents = {
+          WhatsApp: ["https://wa.me/", { text: message }],
+          X: ["https://x.com/intent/tweet", { text: shareData.text, url: shareData.url }],
+          Threads: ["https://www.threads.com/intent/post", { text: message }],
+          Bluesky: ["https://bsky.app/intent/compose", { text: message }],
+        };
+        shareDialog.querySelectorAll("[data-network]").forEach((anchor) => {
+          const [base, params] = intents[anchor.dataset.network];
+          anchor.href = `${base}?${new URLSearchParams(params)}`;
+        });
+        nativeButton.hidden = typeof navigator.share !== "function";
+        shareDialog.showModal();
+      });
+    });
+    shareDialog.addEventListener("keydown", (event) => {
+      if (event.key !== "Tab") return;
+      const controls = [...shareDialog.querySelectorAll("button, a[href], input")].filter(el => !el.hidden && !el.disabled);
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+    shareDialog.querySelector(".share-close").addEventListener("click", () => shareDialog.close());
+    shareDialog.addEventListener("click", (event) => {
+      const bounds = shareDialog.getBoundingClientRect();
+      if (event.target === shareDialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) shareDialog.close();
+    });
+    shareDialog.addEventListener("close", () => opener?.focus({ preventScroll: true }));
+    nativeButton.addEventListener("click", async () => {
+      nativeButton.disabled = true;
+      status.textContent = "";
+      try { await navigator.share(shareData); }
+      catch (error) { if (error.name !== "AbortError") status.textContent = shareDialog.dataset.failed; }
+      finally { nativeButton.disabled = false; }
+    });
+  }
 
   const select = document.getElementById("repo-select");
   const commands = document.querySelector("#clone-commands code");
