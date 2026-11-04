@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { basePath, previewHtml, previewCss } from '../scripts/preview.mjs';
-import { previewPlan } from '../scripts/preview-plan.mjs';
+import { previewPlan, previewRemovalPlan } from '../scripts/preview-plan.mjs';
 import { page, notFoundPage } from '../scripts/render.mjs';
 import { LOCALES } from '../scripts/content.mjs';
 const games = JSON.parse(readFileSync(new URL('../data/games.json', import.meta.url)));
@@ -50,4 +50,19 @@ test('publisher rejects artifact spoofing, expired/duplicate artifacts and repos
   assert.throws(() => previewPlan(run, [{ ...artifact, expired: true }], pr));
   assert.throws(() => previewPlan(run, [{ ...artifact, name: '../preview-pr-123' }], pr));
   assert.throws(() => previewPlan({ ...run, head_repository: { full_name: 'other/repo' } }, [artifact], pr));
+});
+
+
+test('preview cleanup is idempotent for missing previews and only removes closed PR directories', async () => {
+  const closed = { number: 9, state: 'closed' };
+  assert.equal(await previewRemovalPlan(closed, async () => { throw { status: 404 }; }), null);
+  assert.equal(await previewRemovalPlan(closed, async () => []), null);
+  assert.equal(await previewRemovalPlan({ ...closed, state: 'open' }, () => assert.fail('should not read')), null);
+  assert.deepEqual(await previewRemovalPlan(closed, async (path, ref) => {
+    assert.equal(path, 'pr-preview/pr-9');
+    assert.equal(ref, 'gh-pages');
+    return [{ name: 'index.html', type: 'file' }];
+  }), { number: 9 });
+  await assert.rejects(previewRemovalPlan(closed, async () => { throw new Error('permission denied'); }), /permission denied/);
+  await assert.rejects(previewRemovalPlan(closed, async () => ({ type: 'file' })), /directory/);
 });
