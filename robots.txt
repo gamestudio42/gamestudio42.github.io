@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /pr-preview/
+Sitemap: https://gamestudio42.github.io/sitemap.xml

@@ -1,0 +1,308 @@
+[
+  {
+    "name": "plot42",
+    "title": "Plot 42",
+    "tagline": {
+      "en": "Six games. One studio lot.",
+      "pt": "Seis jogos. Um lote do estúdio.",
+      "es": "Seis juegos. Un lote del estudio.",
+      "fr": "Six jeux. Un lot d'atelier.",
+      "de": "Sechs Spiele. Ein Studio-Grundstück."
+    },
+    "cover": "/assets/games/plot42-full.webp",
+    "genre": "collection",
+    "tech": [
+      "TypeScript",
+      "PixiJS",
+      "Web Worker"
+    ],
+    "order": 0,
+    "play": "https://gamestudio42.github.io/plot42/",
+    "code": "https://github.com/gamestudio42/plot42",
+    "fork": "https://github.com/gamestudio42/plot42/fork",
+    "discussions": "https://github.com/gamestudio42/plot42/discussions",
+    "commits": "https://github.com/gamestudio42/plot42/commits",
+    "atom": "https://github.com/gamestudio42/plot42/releases.atom",
+    "coverSmall": "/assets/games/plot42-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
+    "default_branch": "main",
+    "stars": 0,
+    "forks": 0,
+    "pushedAt": "2026-11-04T14:04:17Z"
+  },
+  {
+    "name": "vazante",
+    "snapStore": "https://snapcraft.io/vazante",
+    "title": "Vazante",
+    "tagline": {
+      "en": "Command the squads. Hold the city. Take the rifle.",
+      "pt": "Comande os esquadrões. Defenda a cidade. Assuma o rifle.",
+      "es": "Dirige los escuadrones. Defiende la ciudad. Toma el fusil.",
+      "fr": "Commandez les escouades. Défendez la ville. Prenez le fusil.",
+      "de": "Befehle deinen Trupps. Halte die Stadt. Greif zum Gewehr."
+    },
+    "cover": "/assets/games/vazante-full.webp",
+    "coverSmall": "/assets/games/vazante-800.webp",
+    "coverWidth": 1600,
+    "coverHeight": 900,
+    "genre": "real-time-tactics",
+    "tech": [
+      "TypeScript",
+      "Three.js",
+      "React",
+      "Web Worker"
+    ],
+    "order": 0.5,
+    "play": "https://gamestudio42.github.io/vazante/",
+    "code": "https://github.com/gamestudio42/vazante",
+    "fork": "https://github.com/gamestudio42/vazante/fork",
+    "commits": "https://github.com/gamestudio42/vazante/commits",
+    "atom": "https://github.com/gamestudio42/vazante/releases.atom",
+    "default_branch": "main",
+    "description": {
+      "en": "Lead squads through Porto Velário, protect supply trucks and fortify your base against the horde. Take direct control of a soldier in the same battle.",
+      "pt": "Lidere esquadrões por Porto Velário, proteja caminhões de suprimentos e fortifique sua base contra a horda. Assuma o controle de um soldado na mesma batalha.",
+      "es": "Dirige escuadrones por Porto Velário, protege los camiones de suministros y fortifica tu base contra la horda. Controla a un soldado en la misma batalla.",
+      "fr": "Menez vos escouades dans Porto Velário, protégez le ravitaillement et fortifiez votre base contre la horde. Prenez le contrôle d’un soldat dans la même bataille.",
+      "de": "Führe Trupps durch Porto Velário, schütze Versorgungslaster und befestige deine Basis gegen die Horde. Übernimm in derselben Schlacht die Kontrolle über einen Soldaten."
+    }
+  },
+  {
+    "name": "sitio",
+    "title": "Sítio",
+    "tagline": {
+      "en": "The farm that becomes a village.",
+      "pt": "A fazenda que vira vila.",
+      "es": "La granja que se convierte en pueblo.",
+      "fr": "La ferme qui devient un village.",
+      "de": "Der Hof, aus dem ein Dorf wird."
+    },
+    "description": {
+      "en": "Grow coffee, organize family work and turn a small farm into a community. Plan each month, tend your harvests and build what lasts.",
+      "pt": "Cultive café, organize o trabalho das famílias e transforme uma pequena fazenda em uma comunidade. Planeje cada mês, cuide das colheitas e construa o que fica.",
+      "es": "Cultiva café, organiza el trabajo de las familias y transforma una pequeña granja en una comunidad. Planifica cada mes, cuida las cosechas y construye lo que perdura.",
+      "fr": "Cultivez le café, organisez le travail des familles et transformez une petite ferme en communauté. Planifiez chaque mois, soignez vos récoltes et bâtissez ce qui dure.",
+      "de": "Baue Kaffee an, organisiere die Arbeit der Familien und verwandle einen kleinen Hof in eine Gemeinschaft. Plane jeden Monat, kümmere dich um die Ernte und schaffe Bleibendes."
+    },
+    "cover": "/assets/games/sitio-full.webp",
+    "coverSmall": "/assets/games/sitio-800.webp",
+    "coverWidth": 1600,
+    "coverHeight": 900,
+    "genre": "farm-management",
+    "tech": [
+      "TypeScript",
+      "React",
+      "Web Worker"
+    ],
+    "order": 0.75,
+    "play": "https://gamestudio42.github.io/sitio/",
+    "code": "https://github.com/gamestudio42/sitio",
+    "fork": "https://github.com/gamestudio42/sitio/fork",
+    "commits": "https://github.com/gamestudio42/sitio/commits",
+    "atom": "https://github.com/gamestudio42/sitio/releases.atom",
+    "default_branch": "main"
+  },
+  {
+    "name": "urbe-oasis",
+    "title": "Urbe Oasis",
+    "tagline": {
+      "en": "Shade the lots. Follow the spring.",
+      "pt": "Faça sombra nos lotes. Siga a nascente.",
+      "es": "Da sombra a los lotes. Sigue el manantial.",
+      "fr": "Ombrage les parcelles. Suis la source.",
+      "de": "Beschatte die Grundstücke. Folge der Quelle."
+    },
+    "cover": "/assets/games/urbe-oasis-full.webp",
+    "coverSmall": "/assets/games/urbe-oasis-800.webp",
+    "coverWidth": 1280,
+    "coverHeight": 720,
+    "genre": "city-builder",
+    "tech": [
+      "TypeScript",
+      "PixiJS",
+      "Web Worker"
+    ],
+    "order": 1,
+    "play": "https://gamestudio42.github.io/urbe-oasis/",
+    "code": "https://github.com/gamestudio42/urbe-oasis",
+    "fork": "https://github.com/gamestudio42/urbe-oasis/fork",
+    "commits": "https://github.com/gamestudio42/urbe-oasis/commits",
+    "atom": "https://github.com/gamestudio42/urbe-oasis/releases.atom",
+    "default_branch": "main",
+    "discussions": "https://github.com/gamestudio42/urbe-oasis/discussions",
+    "stars": 1,
+    "forks": 0,
+    "pushedAt": "2026-11-04T09:56:55Z"
+  },
+  {
+    "name": "neo-urbe",
+    "title": "Neo Urbe",
+    "tagline": {
+      "en": "Raise a neon skyline. Keep the grid alive.",
+      "pt": "Erga um horizonte de neon. Mantenha a rede viva.",
+      "es": "Levanta un horizonte de neón. Mantén viva la red.",
+      "fr": "Dresse un horizon néon. Garde le réseau en vie.",
+      "de": "Errichte eine Neon-Skyline. Halt das Netz am Leben."
+    },
+    "cover": "/assets/games/neo-urbe-full.webp",
+    "genre": "city-builder",
+    "tech": [
+      "TypeScript",
+      "PixiJS",
+      "Web Worker"
+    ],
+    "order": 2,
+    "play": "https://gamestudio42.github.io/neo-urbe/",
+    "code": "https://github.com/gamestudio42/neo-urbe",
+    "fork": "https://github.com/gamestudio42/neo-urbe/fork",
+    "discussions": "https://github.com/gamestudio42/neo-urbe/discussions",
+    "commits": "https://github.com/gamestudio42/neo-urbe/commits",
+    "atom": "https://github.com/gamestudio42/neo-urbe/releases.atom",
+    "coverSmall": "/assets/games/neo-urbe-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
+    "default_branch": "main",
+    "stars": 1,
+    "forks": 0,
+    "pushedAt": "2026-11-04T00:19:04Z"
+  },
+  {
+    "name": "urbe",
+    "title": "Urbe",
+    "tagline": {
+      "en": "You set the conditions. The city decides the rest.",
+      "pt": "Você cria as condições. A cidade decide o resto.",
+      "es": "Tú pones las condiciones. La ciudad decide el resto.",
+      "fr": "Vous posez les conditions. La ville décide du reste.",
+      "de": "Du setzt die Bedingungen. Die Stadt entscheidet den Rest."
+    },
+    "cover": "/assets/games/urbe-full.webp",
+    "genre": "city-builder",
+    "tech": [
+      "TypeScript",
+      "PixiJS",
+      "Web Worker"
+    ],
+    "order": 2.5,
+    "play": "https://gamestudio42.github.io/urbe/",
+    "code": "https://github.com/gamestudio42/urbe",
+    "fork": "https://github.com/gamestudio42/urbe/fork",
+    "discussions": "https://github.com/gamestudio42/urbe/discussions",
+    "commits": "https://github.com/gamestudio42/urbe/commits",
+    "atom": "https://github.com/gamestudio42/urbe/releases.atom",
+    "coverSmall": "/assets/games/urbe-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
+    "default_branch": "main",
+    "stars": 1,
+    "forks": 0,
+    "pushedAt": "2026-11-04T00:47:46Z"
+  },
+  {
+    "name": "mineboss",
+    "title": "MineBoss",
+    "tagline": {
+      "en": "A block adventure in the browser. Build, explore, fight optional bosses.",
+      "pt": "Aventura de blocos no navegador. Construa, explore e lute com chefões opcionais.",
+      "es": "Una aventura de bloques en el navegador. Construye, explora y lucha contra jefes opcionales.",
+      "fr": "Une aventure de blocs dans le navigateur. Construisez, explorez, affrontez des boss optionnels.",
+      "de": "Ein Block-Abenteuer im Browser. Bauen, erkunden, optionale Bosse bekämpfen."
+    },
+    "cover": "/assets/games/mineboss-full.webp",
+    "genre": "voxel-sandbox",
+    "tech": [
+      "TypeScript",
+      "three.js",
+      "Vite"
+    ],
+    "order": 3,
+    "play": "https://gamestudio42.github.io/mineboss/",
+    "code": "https://github.com/gamestudio42/mineboss",
+    "fork": "https://github.com/gamestudio42/mineboss/fork",
+    "discussions": "https://github.com/gamestudio42/mineboss/discussions",
+    "commits": "https://github.com/gamestudio42/mineboss/commits",
+    "atom": "https://github.com/gamestudio42/mineboss/releases.atom",
+    "coverSmall": "/assets/games/mineboss-800.webp",
+    "coverWidth": 1280,
+    "coverHeight": 720,
+    "default_branch": "master",
+    "stars": 1,
+    "forks": 0,
+    "pushedAt": "2026-10-22T20:24:00Z"
+  },
+  {
+    "name": "dead-sector",
+    "title": "Dead Sector",
+    "tagline": {
+      "en": "Every shot is heard. Every order has a price.",
+      "pt": "Cada disparo é ouvido. Cada ordem tem um preço.",
+      "es": "Cada disparo se oye. Cada orden tiene un precio.",
+      "fr": "Chaque tir s'entend. Chaque ordre a un prix.",
+      "de": "Jeder Schuss wird gehört. Jeder Befehl hat seinen Preis."
+    },
+    "description": {
+      "en": "Command two squads through a zombie outbreak. Plan routes, control the noise and bring survivors home — every loss stays with your campaign.",
+      "pt": "Comande dois esquadrões em um surto zumbi. Planeje rotas, controle o ruído e traga os sobreviventes de volta — cada perda acompanha sua campanha.",
+      "es": "Dirige dos escuadrones durante un brote zombi. Planea rutas, controla el ruido y trae de vuelta a los supervivientes: cada pérdida permanece en la campaña.",
+      "fr": "Commandez deux escouades face à une épidémie zombie. Planifiez les trajets, maîtrisez le bruit et ramenez les survivants : chaque perte marque la campagne.",
+      "de": "Führe zwei Trupps durch einen Zombieausbruch. Plane Routen, kontrolliere den Lärm und bringe Überlebende zurück — jeder Verlust bleibt in der Kampagne."
+    },
+    "cover": "/assets/games/dead-sector-full.webp",
+    "coverSmall": "/assets/games/dead-sector-800.webp",
+    "coverWidth": 1600,
+    "coverHeight": 900,
+    "genre": "tactics",
+    "order": 4,
+    "tech": [
+      "TypeScript",
+      "Phaser",
+      "WebAudio"
+    ],
+    "play": "https://gamestudio42.github.io/dead-sector/",
+    "code": "https://github.com/gamestudio42/dead-sector",
+    "fork": "https://github.com/gamestudio42/dead-sector/fork",
+    "commits": "https://github.com/gamestudio42/dead-sector/commits",
+    "atom": "https://github.com/gamestudio42/dead-sector/releases.atom",
+    "default_branch": "main",
+    "discussions": "https://github.com/gamestudio42/dead-sector/discussions",
+    "stars": 0,
+    "forks": 0,
+    "pushedAt": "2026-11-04T09:49:38Z"
+  },
+  {
+    "name": "void-frontier",
+    "title": "Void Frontier",
+    "tagline": {
+      "en": "No friction. No brakes you didn’t fire yourself.",
+      "pt": "Sem atrito. Só há freio quando você aciona os propulsores.",
+      "es": "Sin fricción. Solo frenas cuando activas los propulsores.",
+      "fr": "Sans friction. Pour freiner, allumez vos propulseurs.",
+      "de": "Keine Reibung. Bremsen musst du mit deinen Triebwerken."
+    },
+    "description": {
+      "en": "Pilot a ship through asteroid fields with Newtonian flight. Mine, trade, take contracts and face pirates as you upgrade your ship and build a fleet.",
+      "pt": "Pilote uma nave entre asteroides com voo newtoniano. Minere, negocie, aceite contratos e enfrente piratas enquanto aprimora sua nave e forma uma frota.",
+      "es": "Pilota una nave entre asteroides con vuelo newtoniano. Extrae minerales, comercia, acepta contratos y combate piratas mientras mejoras tu nave y formas una flota.",
+      "fr": "Pilotez un vaisseau parmi les astéroïdes en vol newtonien. Extrayez du minerai, négociez, acceptez des contrats et affrontez les pirates pour améliorer votre vaisseau et créer une flotte.",
+      "de": "Steuere ein Schiff mit newtonscher Flugphysik durch Asteroidenfelder. Baue Erz ab, handle, erfülle Aufträge und bekämpfe Piraten, während du dein Schiff aufrüstest und eine Flotte aufbaust."
+    },
+    "cover": "/assets/games/void-frontier-full.webp",
+    "coverSmall": "/assets/games/void-frontier-800.webp",
+    "coverWidth": 1280,
+    "coverHeight": 720,
+    "genre": "space-action-rpg",
+    "order": 5,
+    "tech": [
+      "TypeScript",
+      "Three.js",
+      "React"
+    ],
+    "play": "https://gamestudio42.github.io/void-frontier/",
+    "code": "https://github.com/gamestudio42/void-frontier",
+    "fork": "https://github.com/gamestudio42/void-frontier/fork",
+    "commits": "https://github.com/gamestudio42/void-frontier/commits",
+    "atom": "https://github.com/gamestudio42/void-frontier/releases.atom",
+    "default_branch": "main"
+  }
+]
