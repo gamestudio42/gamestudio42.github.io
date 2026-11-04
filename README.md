@@ -91,9 +91,19 @@ não é redirecionada por uma escolha anterior. A troca manual preserva query e
 âncora; bloqueios de armazenamento não impedem os controles de funcionar.
 
 O conteúdo e os links de navegação funcionam sem JavaScript. JS acrescenta menu
-mobile, seleção de repositório, cópia e jogo aleatório. O site respeita
+mobile, seleção de repositório, cópia, compartilhamento e jogo aleatório. O site respeita
 `prefers-reduced-motion`, oferece foco visível, link de salto e mensagens de cópia
 anunciadas por leitores de tela. O jogo aleatório exclui coletâneas.
+
+## Compartilhamento dos jogos
+
+O ícone de compartilhamento de cada card abre um painel com o link jogável,
+cópia, WhatsApp, X, Threads e Bluesky. As redes abrem seus compositores em outra
+aba; a pessoa escolhe se deseja publicar. Não há SDK de rede social.
+“Mais aplicativos” aparece quando o navegador oferece `navigator.share`.
+O link permanece selecionável se a cópia ou o compartilhamento nativo falhar.
+Os textos usam o idioma da página e os jogos vêm do catálogo, sem configuração
+extra por jogo. Escape fecha o painel e devolve o foco ao card.
 
 ## Verificações de PR
 
@@ -108,7 +118,9 @@ npm run test:ui
 Os testes de navegador precisam de Python 3 para servir `dist/`. O workflow
 `Pull request checks` verifica os cinco idiomas em desktop e celular, alinhamento
 dos cards, seleção de projetos, cópia do contato e navegação por teclado.
-Capturas do catálogo e relatórios ficam nos artefatos da execução por sete dias.
+Também confere os links de compartilhamento de todos os jogos, cópia e fallback,
+retorno de foco e cancelamento/erro da API nativa (simulada nos testes).
+Capturas do catálogo, do painel de compartilhamento e relatórios ficam nos artefatos da execução por sete dias.
 Esse workflow tem acesso somente de leitura e não publica o site.
 
 ## Publicação

@@ -7,6 +7,7 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="
 const diagonal = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>';
 const codeIcon = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16"/></svg>';
 const copyIcon = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V4H4v11h4"/></svg>';
+const shareIcon = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m9 10.5 6-4m-6 7 6 4"/></svg>';
 const githubIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path stroke="none" d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.06c-3.09.67-3.74-1.31-3.74-1.31-.51-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.7 1.14 1.7 1.14.99 1.7 2.6 1.21 3.23.92.1-.72.39-1.21.7-1.49-2.47-.28-5.06-1.23-5.06-5.49 0-1.21.43-2.2 1.14-2.97-.11-.28-.49-1.41.11-2.94 0 0 .93-.3 3.05 1.14a10.6 10.6 0 0 1 5.56 0c2.12-1.44 3.04-1.14 3.04-1.14.61 1.53.23 2.66.12 2.94.71.77 1.14 1.76 1.14 2.97 0 4.27-2.6 5.2-5.08 5.48.4.35.75 1.02.75 2.06V22c0 .3.2.64.76.53A11.1 11.1 0 0 0 12 .9Z"/></svg>';
 
 function photo(game, t, { hero = false, sizes = "(max-width: 700px) 100vw, 50vw" } = {}) {
@@ -63,7 +64,7 @@ function card(game, lang, t, index, count) {
     <p>${esc(game.description?.[lang] || game.tagline[lang] || game.tagline.en || "")}</p>
     <div class="card-actions"><a class="text-link play-link" href="${esc(game.play)}" aria-label="${esc(t.play)} — ${esc(game.title)}">${esc(t.play)} ${arrow}</a>
       <a class="code-link" href="${esc(game.code)}" aria-label="${esc(t.code)} — ${esc(game.title)}">${codeIcon}${esc(t.code)}</a>
-      <button hidden class="icon-button share-button" type="button" data-copy="${esc(game.play)}" data-copied="${esc(t.copied)}" data-copy-failed="${esc(t.copyFailed)}" aria-label="${esc(t.share)} — ${esc(game.title)}">${copyIcon}</button>
+      <button hidden class="icon-button share-button" type="button" data-share="${esc(game.name)}" aria-haspopup="dialog" aria-controls="share-dialog" title="${esc(t.share)}" aria-label="${esc(t.share)} — ${esc(game.title)}">${shareIcon}</button>
     </div>
     ${snapStore ? `<div class="store-actions"><span>${esc(t.installLinux)}</span><a class="snap-store-link" href="${esc(snapStore)}" aria-label="${esc(t.snapStoreLabel.replace("{title}", game.title))}"><img src="https://snapcraft.io/en/dark/install.svg" width="182" height="56" alt="Get it from the Snap Store" loading="lazy" decoding="async"></a></div>` : ""}</div>
   </article>`;
@@ -145,6 +146,15 @@ cd ${esc(first.name)}</code></pre><div class="terminal-guide"><a class="project-
     <section class="closing container"><p>${t.outro}</p><a href="#games" class="circle-link" aria-label="${t.explore}">${arrow}</a></section>
   </main>
   <footer class="site-footer container"><div class="footer-top">${logo(locale.path)}<p>${t.footerNote}</p><a class="text-link" href="#top">${t.backTop}<span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© ${new Date().getUTCFullYear()} GAME STUDIO 42</span><a href="https://github.com/gamestudio42/gamestudio42.github.io/blob/main/LICENSE">${t.siteLicense}</a><a href="https://github.com/gamestudio42">GITHUB ${diagonal}</a>${languageNav(locale, t)}</div></footer>
+  <dialog id="share-dialog" class="share-dialog" aria-labelledby="share-title" aria-describedby="share-hint" data-title="${esc(t.shareTitle)}" data-text="${esc(t.shareText)}" data-failed="${esc(t.shareFailed)}">
+    <div class="share-heading"><h2 id="share-title"></h2><button type="button" class="icon-button share-close" aria-label="${esc(t.shareClose)}"><span aria-hidden="true">×</span></button></div>
+    <p id="share-hint">${esc(t.shareHint)}</p>
+    <label class="share-url-label" for="share-url">${esc(t.gameLink)}</label><input id="share-url" class="share-url" type="text" readonly dir="ltr">
+    <button type="button" class="button button-primary share-copy" data-copy="" data-copied="${esc(t.copied)}" data-copy-failed="${esc(t.copyFailed)}" autofocus>${esc(t.copyLink)}${copyIcon}</button>
+    <div class="share-networks">${["WhatsApp", "X", "Threads", "Bluesky"].map(network => `<a data-network="${network}" target="_blank" rel="noopener noreferrer">${network}${diagonal}</a>`).join("")}</div>
+    <button type="button" class="button share-native" hidden>${esc(t.shareNative)}${shareIcon}</button>
+    <p class="share-status" role="status" aria-live="polite" aria-atomic="true"></p>
+  </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
   <script id="games-data" type="application/json">${json}</script>
   <script src="/site.js" defer></script>

@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { COPY } from '../scripts/content.mjs';
 
 for (const locale of ['en', 'pt', 'es', 'fr', 'de']) {
   test(`${locale}: cards align and every project can be explored`, async ({ page }, testInfo) => {
@@ -14,6 +15,34 @@ for (const locale of ['en', 'pt', 'es', 'fr', 'de']) {
     await expect(page.locator('.snap-store-link')).toHaveAttribute('href', 'https://snapcraft.io/vazante');
     await page.locator('#games').scrollIntoViewIfNeeded();
     await testInfo.attach(`catalog-${locale}`, { body: await page.screenshot(), contentType: 'image/png' });
+    const t = COPY[locale];
+    const dialog = page.getByRole('dialog');
+    for (const trigger of await page.locator('[data-share]').all()) {
+      const card = trigger.locator('xpath=ancestor::article');
+      const title = await card.locator('h3').innerText();
+      const url = await card.locator('.play-link').getAttribute('href');
+      await trigger.click();
+      await expect(dialog).toHaveAccessibleName(t.shareTitle.replace('{title}', title));
+      await expect(dialog.getByLabel(t.gameLink, { exact: true })).toHaveValue(url);
+      const text = t.shareText.replace('{title}', title);
+      const destinations = { WhatsApp: 'https://wa.me/', X: 'https://x.com/intent/tweet', Threads: 'https://www.threads.com/intent/post', Bluesky: 'https://bsky.app/intent/compose' };
+      for (const [network, destination] of Object.entries(destinations)) {
+        const link = dialog.getByRole('link', { name: network, exact: true });
+        const intent = new URL(await link.getAttribute('href'));
+        expect(intent.origin + intent.pathname).toBe(destination);
+        expect(intent.searchParams.get('text')).toBe(network === 'X' ? text : `${text} ${url}`);
+        if (network === 'X') expect(intent.searchParams.get('url')).toBe(url);
+        await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      }
+      if (title === 'Sítio') {
+        const path = testInfo.outputPath(`sharing-${locale}.png`);
+        await page.screenshot({ path });
+        await testInfo.attach(`sharing-${locale}`, { path, contentType: 'image/png' });
+      }
+      await page.keyboard.press('Escape');
+      await expect(dialog).not.toBeVisible();
+      await expect(trigger).toBeFocused();
+    }
     const select = page.locator('#repo-select');
     await expect(select.locator('option')).toHaveCount(7);
     for (const [name, branch] of [['sitio', 'main'], ['vazante', 'main'], ['mineboss', 'master'], ['plot42', 'main'], ['urbe', 'main'], ['neo-urbe', 'main'], ['urbe-oasis', 'main']]) {
@@ -52,4 +81,63 @@ test('mobile navigation closes and focuses the destination', async ({ page }, te
   await page.keyboard.press('Escape');
   await expect(toggle).toBeFocused();
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+});
+
+
+test('sharing copies the current game, retains manual fallback and contains keyboard focus', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.addInitScript(() => Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }));
+  await page.goto('/pt/');
+  const trigger = page.getByRole('button', { name: 'Compartilhar jogo — Sítio', exact: true });
+  await trigger.focus();
+  await page.keyboard.press('Enter');
+  const dialog = page.getByRole('dialog');
+  const copy = dialog.getByRole('button', { name: 'Copiar link', exact: true });
+  await expect(copy).toBeFocused();
+  await expect(dialog.locator('.share-native')).toBeHidden();
+  for (let i = 0; i < 10; i++) {
+    await page.keyboard.press('Tab');
+    expect(await dialog.evaluate(el => el.contains(document.activeElement))).toBe(true);
+  }
+  await copy.click();
+  await expect(dialog.getByRole('status')).toHaveText('Link copiado');
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://gamestudio42.github.io/sitio/');
+  await page.evaluate(() => { navigator.clipboard.writeText = async () => { throw new Error('denied'); }; });
+  await copy.click();
+  await expect(dialog.getByRole('status')).toHaveText('Não foi possível copiar. Copie o link diretamente.');
+  await dialog.getByLabel('Link do jogo', { exact: true }).click();
+  await page.keyboard.press('ControlOrMeta+A');
+  expect(await dialog.locator('input').evaluate(el => el.value.slice(el.selectionStart, el.selectionEnd))).toBe('https://gamestudio42.github.io/sitio/');
+  await dialog.getByRole('button', { name: 'Fechar', exact: true }).click();
+  await expect(trigger).toBeFocused();
+  await page.getByRole('button', { name: 'Compartilhar jogo — Vazante', exact: true }).click();
+  await expect(dialog.locator('input')).toHaveValue('https://gamestudio42.github.io/vazante/');
+  await expect(dialog.getByRole('status')).toBeEmpty();
+  await page.mouse.click(2, 2);
+  await expect(dialog).not.toBeVisible();
+});
+
+test('native sharing receives the game and handles cancellation and failure', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.nativeCalls = [];
+    window.shareResult = 'success';
+    Object.defineProperty(navigator, 'share', { configurable: true, value: async data => {
+      window.nativeCalls.push(data);
+      if (window.shareResult !== 'success') throw new DOMException('test', window.shareResult);
+    } });
+  });
+  await page.goto('/pt/');
+  await page.getByRole('button', { name: 'Compartilhar jogo — Sítio', exact: true }).click();
+  const dialog = page.getByRole('dialog');
+  const native = dialog.getByRole('button', { name: 'Mais aplicativos' });
+  await native.click();
+  expect(await page.evaluate(() => window.nativeCalls)).toEqual([{ title: 'Sítio', text: 'Jogue Sítio, da Game Studio 42, no navegador.', url: 'https://gamestudio42.github.io/sitio/' }]);
+  await page.evaluate(() => { window.shareResult = 'AbortError'; });
+  await native.click();
+  await expect(dialog.getByRole('status')).toBeEmpty();
+  await expect(native).toBeEnabled();
+  await page.evaluate(() => { window.shareResult = 'NotAllowedError'; });
+  await native.click();
+  await expect(dialog.getByRole('status')).toHaveText('Não foi possível compartilhar. Copie o link ou escolha uma rede.');
+  await expect(dialog.getByRole('button', { name: 'Copiar link', exact: true })).toBeEnabled();
 });
