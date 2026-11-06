@@ -40,7 +40,7 @@
       "pt": "Comande os esquadrões. Defenda a cidade. Assuma o rifle.",
       "es": "Dirige los escuadrones. Defiende la ciudad. Toma el fusil.",
       "fr": "Commandez les escouades. Défendez la ville. Prenez le fusil.",
-      "de": "Befehle deinen Trupps. Halte die Stadt. Greif zum Gewehr."
+      "de": "Befehle deinen Trupps. Halte die Stadt, greif zum Gewehr."
     },
     "cover": "/assets/games/vazante-full.webp",
     "coverSmall": "/assets/games/vazante-800.webp",
@@ -66,7 +66,11 @@
       "es": "Dirige escuadrones por Porto Velário, protege los camiones de suministros y fortifica tu base contra la horda. Controla a un soldado en la misma batalla.",
       "fr": "Menez vos escouades dans Porto Velário, protégez le ravitaillement et fortifiez votre base contre la horde. Prenez le contrôle d’un soldat dans la même bataille.",
       "de": "Führe Trupps durch Porto Velário, schütze Versorgungslaster und befestige deine Basis gegen die Horde. Übernimm in derselben Schlacht die Kontrolle über einen Soldaten."
-    }
+    },
+    "discussions": "https://github.com/gamestudio42/vazante/discussions",
+    "stars": 1,
+    "forks": 2,
+    "pushedAt": "2026-11-06T11:42:41Z"
   },
   {
     "name": "sitio",
@@ -133,7 +137,7 @@
     "discussions": "https://github.com/gamestudio42/urbe-oasis/discussions",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-04T09:56:55Z"
+    "pushedAt": "2026-11-05T19:06:18Z"
   },
   {
     "name": "neo-urbe",
@@ -268,13 +272,13 @@
     "discussions": "https://github.com/gamestudio42/dead-sector/discussions",
     "stars": 0,
     "forks": 0,
-    "pushedAt": "2026-11-04T09:49:38Z"
+    "pushedAt": "2026-11-06T11:46:08Z"
   },
   {
     "name": "void-frontier",
     "title": "Void Frontier",
     "tagline": {
-      "en": "No friction. No brakes you didn’t fire yourself.",
+      "en": "No friction. No brakes you didn't fire yourself.",
       "pt": "Sem atrito. Só há freio quando você aciona os propulsores.",
       "es": "Sin fricción. Solo frenas cuando activas los propulsores.",
       "fr": "Sans friction. Pour freiner, allumez vos propulseurs.",
@@ -303,6 +307,98 @@
     "fork": "https://github.com/gamestudio42/void-frontier/fork",
     "commits": "https://github.com/gamestudio42/void-frontier/commits",
     "atom": "https://github.com/gamestudio42/void-frontier/releases.atom",
-    "default_branch": "main"
+    "default_branch": "main",
+    "discussions": "https://github.com/gamestudio42/void-frontier/discussions",
+    "stars": 1,
+    "forks": 0,
+    "pushedAt": "2026-11-05T22:11:19Z"
+  },
+  {
+    "name": "noosphere",
+    "default_branch": "main",
+    "title": "Noosphere",
+    "tagline": {
+      "en": "An ecosystem of living ideas.",
+      "pt": "Um ecossistema de ideias vivas.",
+      "es": "Un ecosistema de ideas vivas.",
+      "fr": "Un écosystème d'idées vivantes.",
+      "de": "Ein Ökosystem lebendiger Ideen."
+    },
+    "cover": "https://raw.githubusercontent.com/gamestudio42/noosphere/main/docs/screenshots/cover.jpg",
+    "genre": "creative-sandbox",
+    "tech": [
+      "TypeScript",
+      "React",
+      "Canvas 2D",
+      "WebAudio"
+    ],
+    "order": 6,
+    "play": "https://gamestudio42.github.io/noosphere/",
+    "code": "https://github.com/gamestudio42/noosphere",
+    "fork": "https://github.com/gamestudio42/noosphere/fork",
+    "discussions": "https://github.com/gamestudio42/noosphere/discussions",
+    "commits": "https://github.com/gamestudio42/noosphere/commits",
+    "atom": "https://github.com/gamestudio42/noosphere/releases.atom",
+    "stars": 1,
+    "forks": 0,
+    "pushedAt": "2026-11-06T11:33:54Z"
+  },
+  {
+    "name": "void-dominion",
+    "default_branch": "main",
+    "title": "Void Dominion",
+    "tagline": {
+      "en": "Command the Helion Directorate against General Varek.",
+      "pt": "Comande a Diretoria Helion contra o general Varek.",
+      "es": "Comanda la Dirección Helion contra el general Varek.",
+      "fr": "Commandez la Direction Helion contre le général Varek.",
+      "de": "Befehlige die Helion-Direktion gegen General Varek."
+    },
+    "cover": "https://raw.githubusercontent.com/gamestudio42/void-dominion/main/apps/game/public/favicon.svg",
+    "genre": "real-time-strategy",
+    "tech": [
+      "TypeScript",
+      "Three.js",
+      "React"
+    ],
+    "order": 7,
+    "play": "https://gamestudio42.github.io/void-dominion/",
+    "code": "https://github.com/gamestudio42/void-dominion",
+    "fork": "https://github.com/gamestudio42/void-dominion/fork",
+    "discussions": "https://github.com/gamestudio42/void-dominion/discussions",
+    "commits": "https://github.com/gamestudio42/void-dominion/commits",
+    "atom": "https://github.com/gamestudio42/void-dominion/releases.atom",
+    "stars": 0,
+    "forks": 0,
+    "pushedAt": "2026-11-06T11:51:55Z"
+  },
+  {
+    "name": "afterfall",
+    "default_branch": "main",
+    "title": "Afterfall",
+    "tagline": {
+      "en": "Scavenge by day, hold by night, rebuild the world.",
+      "pt": "Colete de dia, resista à noite, reconstrua o mundo.",
+      "es": "Recolecta de día, resiste de noche, reconstruye el mundo.",
+      "fr": "Fouillez le jour, tenez la nuit, reconstruisez le monde.",
+      "de": "Sammle am Tag, halte die Nacht, baue die Welt wieder auf."
+    },
+    "cover": "https://raw.githubusercontent.com/gamestudio42/afterfall/main/apps/web/public/favicon.svg",
+    "genre": "colony-builder",
+    "tech": [
+      "TypeScript",
+      "Three.js",
+      "React"
+    ],
+    "order": 8,
+    "play": "https://gamestudio42.github.io/afterfall/",
+    "code": "https://github.com/gamestudio42/afterfall",
+    "fork": "https://github.com/gamestudio42/afterfall/fork",
+    "discussions": "https://github.com/gamestudio42/afterfall/discussions",
+    "commits": "https://github.com/gamestudio42/afterfall/commits",
+    "atom": "https://github.com/gamestudio42/afterfall/releases.atom",
+    "stars": 0,
+    "forks": 0,
+    "pushedAt": "2026-11-06T11:42:32Z"
   }
 ]
