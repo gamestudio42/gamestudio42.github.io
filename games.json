@@ -311,7 +311,7 @@
     "discussions": "https://github.com/gamestudio42/void-frontier/discussions",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-05T22:11:19Z"
+    "pushedAt": "2026-11-11T02:58:00Z"
   },
   {
     "name": "noosphere",
@@ -399,6 +399,35 @@
     "atom": "https://github.com/gamestudio42/afterfall/releases.atom",
     "stars": 0,
     "forks": 0,
-    "pushedAt": "2026-11-10T13:57:06Z"
+    "pushedAt": "2026-11-11T14:08:35Z"
+  },
+  {
+    "name": "gamestudio-kids",
+    "default_branch": "main",
+    "title": "Game Studio Kids",
+    "tagline": {
+      "en": "Draw it. Build it. Play it.",
+      "pt": "Desenhe. Monte. Jogue.",
+      "es": "Dibújalo. Móntalo. Juégalo.",
+      "fr": "Dessine-le. Construis-le. Joue-le.",
+      "de": "Zeichne es. Bau es. Spiel es."
+    },
+    "cover": "https://raw.githubusercontent.com/gamestudio42/gamestudio-kids/main/docs/screenshots/play.png",
+    "genre": "game-maker",
+    "tech": [
+      "JavaScript",
+      "Canvas",
+      "PWA"
+    ],
+    "order": 10,
+    "play": "https://gamestudio42.github.io/gamestudio-kids/",
+    "code": "https://github.com/gamestudio42/gamestudio-kids",
+    "fork": "https://github.com/gamestudio42/gamestudio-kids/fork",
+    "discussions": "https://github.com/gamestudio42/gamestudio-kids/discussions",
+    "commits": "https://github.com/gamestudio42/gamestudio-kids/commits",
+    "atom": "https://github.com/gamestudio42/gamestudio-kids/releases.atom",
+    "stars": 0,
+    "forks": 0,
+    "pushedAt": "2026-11-11T01:43:18Z"
   }
 ]
