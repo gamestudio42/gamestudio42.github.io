@@ -10,7 +10,7 @@ const quiet = () => {};
 
 test("offline build includes Oasis and every existing catalog entry without requests", async () => {
   const games = await collectGames({ curated, offline: true, request: () => assert.fail("offline request") });
-  assert.deepEqual(games.map((game) => game.name), ["plot42", "vazante", "sitio", "urbe-oasis", "neo-urbe", "urbe", "mineboss", "dead-sector", "void-frontier"]);
+  assert.deepEqual(games.map((game) => game.name), ["plot42", "vazante", "sitio", "urbe-oasis", "neo-urbe", "urbe", "mineboss", "dead-sector", "void-frontier", "void-dominion", "afterfall"]);
   assert.equal(games.find((game) => game.name === "urbe-oasis").play, "https://gamestudio42.github.io/urbe-oasis/");
 });
 
@@ -77,8 +77,17 @@ test("every locale contains the full portfolio, valid anchors and SEO alternates
     assert.ok(html.includes('id="oasis"'));
     assert.ok(html.includes('id="game-vazante"'));
     assert.ok(html.includes('id="game-sitio"'));
+    assert.ok(html.includes('id="game-void-dominion"'));
+    assert.ok(html.includes('id="game-afterfall"'));
     assert.ok(html.includes(COPY[locale.id].genres["farm-management"]));
     assert.ok(html.includes(COPY[locale.id].genres["real-time-tactics"]));
+    assert.ok(html.includes(COPY[locale.id].genres["real-time-strategy"]));
+    assert.ok(html.includes(COPY[locale.id].genres["colony-builder"]));
+    assert.ok(html.includes('/assets/games/void-dominion-full.webp'));
+    assert.ok(html.includes('/assets/games/afterfall-full.webp'));
+    assert.ok(!html.includes('apps/web/public/favicon.svg'));
+    assert.ok(!html.includes('apps/game/public/favicon.svg'));
+    assert.ok(!/id="game-(afterfall|void-dominion)"[\s\S]*?favicon\.svg/.test(html));
     assert.ok(html.includes('href="https://gamestudio42.github.io/plot42/"'));
     assert.ok(html.includes('href="https://gamestudio42.github.io/urbe-oasis/"'));
     assert.ok(html.includes('application/ld+json'));
@@ -173,6 +182,19 @@ test("new games keep gameplay covers and translations across discovery and outag
         assert.ok(game.description[locale.id]);
         assert.ok(COPY[locale.id].genres[game.genre]);
         assert.ok(page(locale, games).includes(`id="game-${name}"`));
+      }
+    }
+    for (const name of ['void-dominion', 'afterfall']) {
+      const game = games.find(item => item.name === name);
+      assert.equal(game.cover, `/assets/games/${name}-full.webp`);
+      assert.equal(game.coverSmall, `/assets/games/${name}-800.webp`);
+      assert.equal(game.play, `https://gamestudio42.github.io/${name}/`);
+      assert.ok(!game.cover.includes('favicon'));
+      for (const locale of LOCALES) {
+        assert.ok(game.tagline[locale.id]);
+        assert.ok(COPY[locale.id].genres[game.genre]);
+        assert.ok(page(locale, games).includes(`id="game-${name}"`));
+        assert.ok(page(locale, games).includes(game.cover));
       }
     }
   }
