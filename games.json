@@ -70,7 +70,7 @@
     "discussions": "https://github.com/gamestudio42/vazante/discussions",
     "stars": 1,
     "forks": 2,
-    "pushedAt": "2026-11-07T22:00:41Z"
+    "pushedAt": "2026-11-12T11:33:42Z"
   },
   {
     "name": "sitio",
@@ -311,7 +311,36 @@
     "discussions": "https://github.com/gamestudio42/void-frontier/discussions",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-11T02:58:00Z"
+    "pushedAt": "2026-11-12T03:11:15Z"
+  },
+  {
+    "name": "ascii-racing",
+    "default_branch": "main",
+    "title": "ASCII Racing",
+    "tagline": {
+      "en": "Isometric combat racing, drawn entirely in ASCII.",
+      "pt": "Corrida de combate isométrica, desenhada toda em ASCII.",
+      "es": "Carreras de combate isométricas, dibujadas por completo en ASCII.",
+      "fr": "Course de combat isométrique, dessinée entièrement en ASCII.",
+      "de": "Isometrisches Kampfrennen, komplett in ASCII gezeichnet."
+    },
+    "cover": "https://raw.githubusercontent.com/gamestudio42/ascii-racing/main/docs/screenshots/race.jpg",
+    "genre": "combat-racing",
+    "tech": [
+      "JavaScript",
+      "Canvas 2D",
+      "Web Audio"
+    ],
+    "order": 6,
+    "play": "https://gamestudio42.github.io/ascii-racing/",
+    "code": "https://github.com/gamestudio42/ascii-racing",
+    "fork": "https://github.com/gamestudio42/ascii-racing/fork",
+    "discussions": "https://github.com/gamestudio42/ascii-racing/discussions",
+    "commits": "https://github.com/gamestudio42/ascii-racing/commits",
+    "atom": "https://github.com/gamestudio42/ascii-racing/releases.atom",
+    "stars": 0,
+    "forks": 0,
+    "pushedAt": "2026-11-12T04:30:46Z"
   },
   {
     "name": "noosphere",
@@ -341,7 +370,7 @@
     "atom": "https://github.com/gamestudio42/noosphere/releases.atom",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-07T22:48:24Z"
+    "pushedAt": "2026-11-12T14:51:55Z"
   },
   {
     "name": "void-dominion",
@@ -370,7 +399,7 @@
     "atom": "https://github.com/gamestudio42/void-dominion/releases.atom",
     "stars": 0,
     "forks": 0,
-    "pushedAt": "2026-11-06T18:19:39Z"
+    "pushedAt": "2026-11-12T06:04:40Z"
   },
   {
     "name": "afterfall",
@@ -399,7 +428,7 @@
     "atom": "https://github.com/gamestudio42/afterfall/releases.atom",
     "stars": 0,
     "forks": 0,
-    "pushedAt": "2026-11-11T14:08:35Z"
+    "pushedAt": "2026-11-12T12:00:42Z"
   },
   {
     "name": "gamestudio-kids",
