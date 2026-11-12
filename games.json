@@ -410,7 +410,6 @@
   },
   {
     "name": "void-dominion",
-    "default_branch": "main",
     "title": "Void Dominion",
     "tagline": {
       "en": "Command the Helion Directorate against General Varek.",
@@ -419,7 +418,10 @@
       "fr": "Commandez la Direction Helion contre le général Varek.",
       "de": "Befehlige die Helion-Direktion gegen General Varek."
     },
-    "cover": "https://raw.githubusercontent.com/gamestudio42/void-dominion/main/apps/game/public/favicon.svg",
+    "cover": "/assets/games/void-dominion-full.webp",
+    "coverSmall": "/assets/games/void-dominion-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
     "genre": "real-time-strategy",
     "tech": [
       "TypeScript",
@@ -430,16 +432,19 @@
     "play": "https://gamestudio42.github.io/void-dominion/",
     "code": "https://github.com/gamestudio42/void-dominion",
     "fork": "https://github.com/gamestudio42/void-dominion/fork",
-    "discussions": "https://github.com/gamestudio42/void-dominion/discussions",
     "commits": "https://github.com/gamestudio42/void-dominion/commits",
     "atom": "https://github.com/gamestudio42/void-dominion/releases.atom",
+    "default_branch": "main",
+    "platforms": [
+      "browser"
+    ],
+    "discussions": "https://github.com/gamestudio42/void-dominion/discussions",
     "stars": 0,
     "forks": 0,
     "pushedAt": "2026-11-12T06:04:40Z"
   },
   {
     "name": "afterfall",
-    "default_branch": "main",
     "title": "Afterfall",
     "tagline": {
       "en": "Scavenge by day, hold by night, rebuild the world.",
@@ -448,7 +453,10 @@
       "fr": "Fouillez le jour, tenez la nuit, reconstruisez le monde.",
       "de": "Sammle am Tag, halte die Nacht, baue die Welt wieder auf."
     },
-    "cover": "https://raw.githubusercontent.com/gamestudio42/afterfall/main/apps/web/public/favicon.svg",
+    "cover": "/assets/games/afterfall-full.webp",
+    "coverSmall": "/assets/games/afterfall-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
     "genre": "colony-builder",
     "tech": [
       "TypeScript",
@@ -459,12 +467,16 @@
     "play": "https://gamestudio42.github.io/afterfall/",
     "code": "https://github.com/gamestudio42/afterfall",
     "fork": "https://github.com/gamestudio42/afterfall/fork",
-    "discussions": "https://github.com/gamestudio42/afterfall/discussions",
     "commits": "https://github.com/gamestudio42/afterfall/commits",
     "atom": "https://github.com/gamestudio42/afterfall/releases.atom",
+    "default_branch": "main",
+    "platforms": [
+      "browser"
+    ],
+    "discussions": "https://github.com/gamestudio42/afterfall/discussions",
     "stars": 0,
     "forks": 0,
-    "pushedAt": "2026-11-12T12:00:42Z"
+    "pushedAt": "2026-11-12T21:57:39Z"
   },
   {
     "name": "gamestudio-kids",
