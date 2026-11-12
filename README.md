@@ -1,8 +1,12 @@
 # Game Studio 42
 
 Site público do estúdio, publicado em [gamestudio42.github.io](https://gamestudio42.github.io/).
-Uma apresentação dos jogos e do desenvolvimento aberto, com screenshots reais,
-layout responsivo e acesso direto para jogar, explorar o código e contribuir.
+
+**Open-source games. Play anywhere. Fork everything.**
+
+Apresentação dos jogos e do desenvolvimento aberto em várias plataformas
+(navegador, desktop via Snap Store, e mobile no roadmap), com screenshots reais,
+layout responsivo e acesso direto para jogar, instalar, explorar o código e contribuir.
 
 ## Desenvolvimento local
 
@@ -77,6 +81,12 @@ Para assegurar presença também offline, adicione o jogo a `data/games.json` co
 metadados verificados, links e screenshots locais. `coverWidth` e `coverHeight`
 representam as dimensões reais da imagem `-full.webp`; `coverSmall` tem 800 px
 de largura. Não use arte conceitual como se fosse gameplay.
+
+Plataformas por jogo são data-driven em `platforms` (ids conhecidos: `browser`,
+`snap`, `godot`, `mobile-soon`). Só marque o que for verificável. Para Linux na
+Snap Store, inclua também `snapStore` com a URL pública do listing (por exemplo
+`https://snapcraft.io/neo-urbe`). O card mostra badges localizados a partir
+desses ids; ids desconhecidos são ignorados.
 
 A área de contribuição oferece todos os projetos do catálogo. Ao selecionar um
 projeto, os comandos de clone, README, issues e licença acompanham a seleção.

@@ -14,15 +14,20 @@ for (const locale of ['en', 'pt', 'es', 'fr', 'de']) {
       for (let i = 0; i < actions.length; i += 2) expect(Math.abs(actions[i] - actions[i + 1])).toBeLessThan(1);
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
-    await expect(page.locator('.snap-store-link')).toHaveAttribute('href', 'https://snapcraft.io/vazante');
+    await expect(page.locator('.snap-store-link[href="https://snapcraft.io/vazante"]')).toHaveCount(1);
+    await expect(page.locator('.snap-store-link')).toHaveCount(curated.filter((game) => game.snapStore).length);
+    await expect(page.locator('#game-neo-urbe .platform')).toContainText(COPY[locale].platformLabels.snap);
+    await expect(page.locator('#game-sitio .platform')).toContainText(COPY[locale].platformLabels.browser);
+    await expect(page.locator('#game-sitio .platform')).not.toContainText(COPY[locale].platformLabels.snap);
     await page.locator('#games').scrollIntoViewIfNeeded();
     await testInfo.attach(`catalog-${locale}`, { body: await page.screenshot(), contentType: 'image/png' });
     for (const name of ['dead-sector', 'void-frontier']) {
       const game = page.locator(`#game-${name}`);
+      const cover = game.locator('.game-image img');
       await game.scrollIntoViewIfNeeded();
-      await game.locator('img').evaluate(img => img.decode());
-      await expect(game.locator('img')).toHaveJSProperty('complete', true);
-      expect(await game.locator('img').evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+      await cover.evaluate(img => img.decode());
+      await expect(cover).toHaveJSProperty('complete', true);
+      expect(await cover.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
     }
     await testInfo.attach(`new-games-${locale}`, { body: await page.screenshot(), contentType: 'image/png' });
     const t = COPY[locale];
@@ -141,7 +146,7 @@ test('native sharing receives the game and handles cancellation and failure', as
   const dialog = page.getByRole('dialog');
   const native = dialog.getByRole('button', { name: 'Mais aplicativos' });
   await native.click();
-  expect(await page.evaluate(() => window.nativeCalls)).toEqual([{ title: 'Sítio', text: 'Jogue Sítio, da Game Studio 42, no navegador.', url: 'https://gamestudio42.github.io/sitio/' }]);
+  expect(await page.evaluate(() => window.nativeCalls)).toEqual([{ title: 'Sítio', text: 'Jogue Sítio, da Game Studio 42.', url: 'https://gamestudio42.github.io/sitio/' }]);
   await page.evaluate(() => { window.shareResult = 'AbortError'; });
   await native.click();
   await expect(dialog.getByRole('status')).toBeEmpty();
@@ -163,8 +168,8 @@ test('PR preview keeps assets, language switching and sharing inside the right s
   await expect(page.locator('script[data-goatcounter]')).toHaveCount(0);
   await expect(page.locator('.brand').first()).toHaveAttribute('href', base + 'pt/');
   await page.locator('#game-dead-sector').scrollIntoViewIfNeeded();
-  await expect(page.locator('#game-dead-sector img')).toHaveJSProperty('complete', true);
-  expect(await page.locator('#game-dead-sector img').evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+  await expect(page.locator('#game-dead-sector .game-image img')).toHaveJSProperty('complete', true);
+  expect(await page.locator('#game-dead-sector .game-image img').evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
   await page.locator('[data-share="void-frontier"]').click();
   await expect(page.locator('#share-url')).toHaveValue('https://gamestudio42.github.io/void-frontier/');
   await page.keyboard.press('Escape');

@@ -81,9 +81,14 @@ test("every locale contains the full portfolio, valid anchors and SEO alternates
     assert.ok(html.includes(COPY[locale.id].genres["real-time-tactics"]));
     assert.ok(html.includes('href="https://gamestudio42.github.io/plot42/"'));
     assert.ok(html.includes('href="https://gamestudio42.github.io/urbe-oasis/"'));
+    assert.ok(html.includes('application/ld+json'));
+    assert.ok(html.includes('"@type":"Organization"'));
+    assert.ok(html.includes(COPY[locale.id].title.split(" — ")[0]));
+    assert.ok(!html.includes("to play in your browser and make your own"));
     assert.ok(!html.includes("undefined"));
     for (const [, anchor] of html.matchAll(/href="#([^"]+)"/g)) assert.ok(html.includes(`id="${anchor}"`), `${locale.id} missing ${anchor}`);
     assert.deepEqual(Object.keys(COPY[locale.id]).sort(), Object.keys(COPY.en).sort());
+    assert.deepEqual(Object.keys(COPY[locale.id].platformLabels).sort(), Object.keys(COPY.en.platformLabels).sort());
   }
 });
 
@@ -110,30 +115,44 @@ test("404 has recovery links for all five languages and is not indexed", () => {
   for (const locale of LOCALES) assert.ok(html.includes(`href="${locale.path}"`));
 });
 
-test("Snap Store is optional, localized and retained across catalog refreshes", async () => {
+test("Snap Store and platform badges are optional, localized and retained across catalog refreshes", async () => {
   const request = async (path) => {
     if (path.startsWith("/orgs/")) return [];
     if (path.includes("/vazante/")) return { title: "Vazante", genre: "real-time-tactics", tagline: {} };
     throw new Error("404");
   };
+  const withSnap = curated.filter((game) => game.snapStore).map((game) => game.name).sort();
+  assert.deepEqual(withSnap, ["dead-sector", "neo-urbe", "urbe-oasis", "vazante", "void-frontier"]);
   for (const offline of [true, false]) {
     const games = await collectGames({ curated, request, offline, warn: quiet });
-    assert.deepEqual(games.filter((game) => game.snapStore).map((game) => game.name), ["vazante"]);
+    assert.deepEqual(games.filter((game) => game.snapStore).map((game) => game.name).sort(), withSnap);
     for (const locale of LOCALES) {
       const html = page(locale, games);
-      assert.equal((html.match(/class="snap-store-link"/g) || []).length, 1);
+      assert.equal((html.match(/class="snap-store-link"/g) || []).length, withSnap.length);
       assert.ok(html.includes('href="https://snapcraft.io/vazante"'));
+      assert.ok(html.includes('href="https://snapcraft.io/neo-urbe"'));
       assert.ok(html.includes('src="https://snapcraft.io/en/dark/install.svg" width="182" height="56"'));
       assert.ok(html.includes(COPY[locale.id].installLinux));
       assert.ok(html.includes(COPY[locale.id].snapStoreLabel.replace("{title}", "Vazante")));
-      assert.equal((html.match(/ · Linux/g) || []).length, 1);
+      assert.ok(html.includes(COPY[locale.id].platformLabels.browser));
+      assert.ok(html.includes(COPY[locale.id].platformLabels.snap));
+      assert.equal((html.match(new RegExp(COPY[locale.id].platformLabels.snap.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g")) || []).length, withSnap.length);
     }
   }
-  const withoutStore = curated.map(({ snapStore, ...game }) => game);
+  const withoutStore = curated.map(({ snapStore, platforms, ...game }) => ({ ...game, platforms: ["browser"] }));
   assert.ok(!page(LOCALES[0], withoutStore).includes('class="snap-store-link"'));
+  assert.ok(!page(LOCALES[0], withoutStore).includes(COPY.en.platformLabels.snap));
   const futureGame = structuredClone(withoutStore);
-  futureGame.find((game) => game.name === "urbe").snapStore = "https://snapcraft.io/another-game";
+  const urbe = futureGame.find((game) => game.name === "urbe");
+  urbe.snapStore = "https://snapcraft.io/another-game";
+  urbe.platforms = ["browser", "snap"];
   assert.ok(page(LOCALES[0], futureGame).includes('href="https://snapcraft.io/another-game"'));
+  assert.ok(page(LOCALES[0], futureGame).includes(COPY.en.platformLabels.snap));
+  urbe.platforms = ["browser", "godot", "mobile-soon", "unknown"];
+  const futureHtml = page(LOCALES[0], futureGame);
+  assert.ok(futureHtml.includes(COPY.en.platformLabels.godot));
+  assert.ok(futureHtml.includes(COPY.en.platformLabels["mobile-soon"]));
+  assert.ok(!futureHtml.includes("unknown"));
 });
 
 
