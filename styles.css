@@ -122,8 +122,9 @@ a:hover { color: var(--accent); }
 .image-arrow { position: absolute; bottom: 16px; right: 16px; width: 40px; height: 40px; display: grid; place-items: center; background: #101310d9; color: white; transition: background .2s, color .2s; }
 .game-image:hover .image-arrow { background: var(--game-accent); color: var(--bg); }
 .game-meta { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--game-accent); font: 10px/1.6 var(--mono); text-transform: uppercase; letter-spacing: .07em; }
-.platform { color: var(--muted); display: flex; gap: 6px; align-items: center; }
-.platform i { width: 5px; height: 5px; border-radius: 50%; background: var(--game-accent); }
+.platform { color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: flex-end; text-align: right; }
+.platform i { width: 5px; height: 5px; border-radius: 50%; background: var(--game-accent); flex-shrink: 0; }
+.platform-sep { color: var(--muted); }
 .game-title { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; }
 .game-title h3 { font-size: 35px; }
 .game-title > span { color: #76806e; font-size: 22px; }
