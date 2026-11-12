@@ -26,7 +26,10 @@
     "coverSmall": "/assets/games/plot42-800.webp",
     "coverWidth": 1200,
     "coverHeight": 750,
-    "default_branch": "main"
+    "default_branch": "main",
+    "platforms": [
+      "browser"
+    ]
   },
   {
     "name": "urbe",
@@ -55,7 +58,10 @@
     "coverSmall": "/assets/games/urbe-800.webp",
     "coverWidth": 1200,
     "coverHeight": 750,
-    "default_branch": "main"
+    "default_branch": "main",
+    "platforms": [
+      "browser"
+    ]
   },
   {
     "name": "neo-urbe",
@@ -84,7 +90,12 @@
     "coverSmall": "/assets/games/neo-urbe-800.webp",
     "coverWidth": 1200,
     "coverHeight": 750,
-    "default_branch": "main"
+    "default_branch": "main",
+    "snapStore": "https://snapcraft.io/neo-urbe",
+    "platforms": [
+      "browser",
+      "snap"
+    ]
   },
   {
     "name": "mineboss",
@@ -113,7 +124,10 @@
     "coverSmall": "/assets/games/mineboss-800.webp",
     "coverWidth": 1280,
     "coverHeight": 720,
-    "default_branch": "master"
+    "default_branch": "master",
+    "platforms": [
+      "browser"
+    ]
   },
   {
     "name": "urbe-oasis",
@@ -141,7 +155,12 @@
     "fork": "https://github.com/gamestudio42/urbe-oasis/fork",
     "commits": "https://github.com/gamestudio42/urbe-oasis/commits",
     "atom": "https://github.com/gamestudio42/urbe-oasis/releases.atom",
-    "default_branch": "main"
+    "default_branch": "main",
+    "snapStore": "https://snapcraft.io/urbe-oasis",
+    "platforms": [
+      "browser",
+      "snap"
+    ]
   },
   {
     "name": "vazante",
@@ -178,7 +197,11 @@
       "es": "Dirige escuadrones por Porto Velário, protege los camiones de suministros y fortifica tu base contra la horda. Controla a un soldado en la misma batalla.",
       "fr": "Menez vos escouades dans Porto Velário, protégez le ravitaillement et fortifiez votre base contre la horde. Prenez le contrôle d’un soldat dans la même bataille.",
       "de": "Führe Trupps durch Porto Velário, schütze Versorgungslaster und befestige deine Basis gegen die Horde. Übernimm in derselben Schlacht die Kontrolle über einen Soldaten."
-    }
+    },
+    "platforms": [
+      "browser",
+      "snap"
+    ]
   },
   {
     "name": "sitio",
@@ -213,7 +236,10 @@
     "fork": "https://github.com/gamestudio42/sitio/fork",
     "commits": "https://github.com/gamestudio42/sitio/commits",
     "atom": "https://github.com/gamestudio42/sitio/releases.atom",
-    "default_branch": "main"
+    "default_branch": "main",
+    "platforms": [
+      "browser"
+    ]
   },
   {
     "name": "dead-sector",
@@ -248,7 +274,12 @@
     "fork": "https://github.com/gamestudio42/dead-sector/fork",
     "commits": "https://github.com/gamestudio42/dead-sector/commits",
     "atom": "https://github.com/gamestudio42/dead-sector/releases.atom",
-    "default_branch": "main"
+    "default_branch": "main",
+    "snapStore": "https://snapcraft.io/dead-sector",
+    "platforms": [
+      "browser",
+      "snap"
+    ]
   },
   {
     "name": "void-frontier",
@@ -283,6 +314,11 @@
     "fork": "https://github.com/gamestudio42/void-frontier/fork",
     "commits": "https://github.com/gamestudio42/void-frontier/commits",
     "atom": "https://github.com/gamestudio42/void-frontier/releases.atom",
-    "default_branch": "main"
+    "default_branch": "main",
+    "snapStore": "https://snapcraft.io/void-frontier",
+    "platforms": [
+      "browser",
+      "snap"
+    ]
   }
 ]

@@ -15,6 +15,33 @@ function photo(game, t, { hero = false, sizes = "(max-width: 700px) 100vw, 50vw"
   return `<img src="${esc(game.cover)}"${source} width="${game.coverWidth || 1200}" height="${game.coverHeight || 750}" alt="${esc(t.screenshot)} — ${esc(game.title)}" ${hero ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 }
 
+function jsonLd(locale, title, description) {
+  const url = SITE + locale.path;
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE}/#organization`,
+        name: "Game Studio 42",
+        url: SITE + "/",
+        description,
+        sameAs: ["https://github.com/gamestudio42"],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${url}#website`,
+        url,
+        name: title,
+        description,
+        inLanguage: locale.htmlLang,
+        publisher: { "@id": `${SITE}/#organization` },
+      },
+    ],
+  };
+  return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
+}
+
 function head(locale, title, description, { noindex = false } = {}) {
   const url = SITE + locale.path;
   return `<meta charset="UTF-8">
@@ -36,6 +63,7 @@ function head(locale, title, description, { noindex = false } = {}) {
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${SITE}/og-image.jpg?v=2">
+  ${noindex ? "" : jsonLd(locale, title, description)}
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png?v=2" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -53,13 +81,29 @@ function logo(home) {
   return `<a class="brand" href="${home}" aria-label="Game Studio 42"><span class="brand-mark" aria-hidden="true"></span><span>GAME STUDIO <b>42</b><small>INDEPENDENT & OPEN SOURCE</small></span></a>`;
 }
 
+/** Platform ids come from game.platforms; unknown ids are ignored. snapStore stays the install URL. */
+function platformLine(game, t) {
+  const labels = t.platformLabels || {};
+  const fromData = Array.isArray(game.platforms)
+    ? game.platforms.filter((id) => typeof id === "string" && labels[id])
+    : [];
+  const ids = fromData.length
+    ? fromData
+    : [
+        ...(game.play ? ["browser"] : []),
+        ...(safeUrl(game.snapStore) ? ["snap"] : []),
+      ].filter((id) => labels[id]);
+  if (!ids.length) return "";
+  return `<span class="platform"><i></i>${ids.map((id) => esc(labels[id])).join('<span class="platform-sep" aria-hidden="true"> · </span>')}</span>`;
+}
+
 function card(game, lang, t, index, count) {
   const snapStore = safeUrl(game.snapStore);
   return `<article class="game-card game-${esc(game.name)}" id="game-${esc(game.name)}">
     <a class="game-image" href="${esc(game.play)}" aria-label="${esc(t.play)} — ${esc(game.title)}">
       ${photo(game, t, { sizes: "(max-width: 700px) 100vw, 50vw" })}<span class="game-number">${String(index + 1).padStart(2, "0")}</span><span class="image-arrow">${diagonal}</span>
     </a>
-    <div class="game-info"><div class="game-meta"><span>${esc(t.genres[game.genre] || game.genre)}</span><span class="platform"><i></i>${t.browser}${snapStore ? " · Linux" : ""}</span></div>
+    <div class="game-info"><div class="game-meta"><span>${esc(t.genres[game.genre] || game.genre)}</span>${platformLine(game, t)}</div>
     <div class="game-title"><h3><a href="${esc(game.play)}">${esc(game.title)}</a></h3><span aria-hidden="true">↗</span></div>
     <p>${esc(game.description?.[lang] || game.tagline[lang] || game.tagline.en || "")}</p>
     <div class="card-actions"><a class="text-link play-link" href="${esc(game.play)}" aria-label="${esc(t.play)} — ${esc(game.title)}">${esc(t.play)} ${arrow}</a>
