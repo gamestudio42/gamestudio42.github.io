@@ -21,13 +21,14 @@ for (const locale of ['en', 'pt', 'es', 'fr', 'de']) {
     await expect(page.locator('#game-sitio .platform')).not.toContainText(COPY[locale].platformLabels.snap);
     await page.locator('#games').scrollIntoViewIfNeeded();
     await testInfo.attach(`catalog-${locale}`, { body: await page.screenshot(), contentType: 'image/png' });
-    for (const name of ['dead-sector', 'void-frontier']) {
+    for (const name of ['dead-sector', 'void-frontier', 'void-dominion', 'afterfall']) {
       const game = page.locator(`#game-${name}`);
       const cover = game.locator('.game-image img');
       await game.scrollIntoViewIfNeeded();
       await cover.evaluate(img => img.decode());
       await expect(cover).toHaveJSProperty('complete', true);
       expect(await cover.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+      await expect(cover).toHaveAttribute('src', `/assets/games/${name}-full.webp`);
     }
     await testInfo.attach(`new-games-${locale}`, { body: await page.screenshot(), contentType: 'image/png' });
     const t = COPY[locale];

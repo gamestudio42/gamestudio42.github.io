@@ -320,5 +320,67 @@
       "browser",
       "snap"
     ]
+  },
+  {
+    "name": "void-dominion",
+    "title": "Void Dominion",
+    "tagline": {
+      "en": "Command the Helion Directorate against General Varek.",
+      "pt": "Comande a Diretoria Helion contra o general Varek.",
+      "es": "Comanda la Dirección Helion contra el general Varek.",
+      "fr": "Commandez la Direction Helion contre le général Varek.",
+      "de": "Befehlige die Helion-Direktion gegen General Varek."
+    },
+    "cover": "/assets/games/void-dominion-full.webp",
+    "coverSmall": "/assets/games/void-dominion-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
+    "genre": "real-time-strategy",
+    "tech": [
+      "TypeScript",
+      "Three.js",
+      "React"
+    ],
+    "order": 7,
+    "play": "https://gamestudio42.github.io/void-dominion/",
+    "code": "https://github.com/gamestudio42/void-dominion",
+    "fork": "https://github.com/gamestudio42/void-dominion/fork",
+    "commits": "https://github.com/gamestudio42/void-dominion/commits",
+    "atom": "https://github.com/gamestudio42/void-dominion/releases.atom",
+    "default_branch": "main",
+    "platforms": [
+      "browser"
+    ]
+  },
+  {
+    "name": "afterfall",
+    "title": "Afterfall",
+    "tagline": {
+      "en": "Scavenge by day, hold by night, rebuild the world.",
+      "pt": "Colete de dia, resista à noite, reconstrua o mundo.",
+      "es": "Recolecta de día, resiste de noche, reconstruye el mundo.",
+      "fr": "Fouillez le jour, tenez la nuit, reconstruisez le monde.",
+      "de": "Sammle am Tag, halte die Nacht, baue die Welt wieder auf."
+    },
+    "cover": "/assets/games/afterfall-full.webp",
+    "coverSmall": "/assets/games/afterfall-800.webp",
+    "coverWidth": 1200,
+    "coverHeight": 750,
+    "genre": "colony-builder",
+    "tech": [
+      "TypeScript",
+      "Three.js",
+      "React"
+    ],
+    "order": 8,
+    "play": "https://gamestudio42.github.io/afterfall/",
+    "code": "https://github.com/gamestudio42/afterfall",
+    "fork": "https://github.com/gamestudio42/afterfall/fork",
+    "commits": "https://github.com/gamestudio42/afterfall/commits",
+    "atom": "https://github.com/gamestudio42/afterfall/releases.atom",
+    "default_branch": "main",
+    "platforms": [
+      "browser"
+    ]
   }
 ]
