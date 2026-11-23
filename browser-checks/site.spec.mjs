@@ -82,7 +82,51 @@ test('contact is copyable and failure leaves the address available', async ({ pa
   await page.evaluate(() => { navigator.clipboard.writeText = async () => { throw new Error('denied'); }; });
   await copy.click();
   await expect(page.getByRole('status')).toHaveText('Selecione o endereço acima e copie manualmente.');
-  await expect(page.locator('.contact-actions a')).toHaveText('talkgamestudio42@gmail.com');
+  await expect(page.locator('.contact-actions a[href^="mailto:"]')).toHaveText('talkgamestudio42@gmail.com');
+});
+
+test('patreon links sit with contact links and name the studio rewards', async ({ page }, testInfo) => {
+  const patreon = 'https://www.patreon.com/c/GameStudio42';
+  await page.goto('/pt/');
+  const cta = page.locator('.patreon-cta');
+  await cta.scrollIntoViewIfNeeded();
+  await expect(cta).toContainText('Apoie o estúdio');
+  for (const reward of ['créditos dos jogos', 'bastidores', 'próximo jogo ou recurso', 'builds de teste']) {
+    await expect(cta).toContainText(reward);
+  }
+  const ctaLink = cta.getByRole('link', { name: 'Apoiar no Patreon' });
+  await expect(ctaLink).toBeVisible();
+  await expect(ctaLink).toHaveAttribute('href', patreon);
+  await expect(ctaLink).toHaveAttribute('rel', 'noopener noreferrer');
+  await expect(ctaLink).toHaveAttribute('target', '_blank');
+  const contact = page.locator('.contact-patreon');
+  await expect(contact).toHaveAttribute('href', patreon);
+  await expect(contact).toHaveAttribute('rel', 'noopener noreferrer');
+  const footer = page.locator('.site-footer a[href="' + patreon + '"]');
+  await expect(footer).toBeVisible();
+  await expect(footer).toHaveAttribute('rel', 'noopener noreferrer');
+  if (testInfo.project.name === 'desktop') {
+    const header = page.locator('.header-patreon');
+    await expect(header).toBeVisible();
+    await expect(header).toHaveAttribute('href', patreon);
+    await expect(header).toHaveAttribute('rel', 'noopener noreferrer');
+    await expect(page.locator('.nav-mobile-patreon')).toBeHidden();
+  } else {
+    await expect(page.locator('.header-patreon')).toBeHidden();
+    await page.getByRole('button', { name: /Menu/ }).click();
+    const mobile = page.locator('.nav-mobile-patreon');
+    await expect(mobile).toBeVisible();
+    await expect(mobile).toHaveAttribute('href', patreon);
+    await expect(mobile).toHaveAttribute('rel', 'noopener noreferrer');
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  await page.goto('/');
+  await expect(page.locator('#patreon-cta-title')).toHaveText('Support the studio');
+  for (const reward of ["games' credits", 'Behind-the-scenes', 'next game or feature', 'test builds']) {
+    await expect(page.locator('.patreon-cta')).toContainText(reward);
+  }
+  const youtube = await page.locator('a[href*="youtube.com"]').evaluateAll((links) => links.map((link) => link.href));
+  for (const url of youtube) expect(url).toBe('https://www.youtube.com/@gamestudio42br');
 });
 
 test('mobile navigation closes and focuses the destination', async ({ page }, testInfo) => {
