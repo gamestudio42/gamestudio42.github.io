@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { collectGames, safeUrl } from "../scripts/catalog.mjs";
-import { page, notFoundPage } from "../scripts/render.mjs";
+import { esc, page, notFoundPage } from "../scripts/render.mjs";
 import { COPY, LOCALES } from "../scripts/content.mjs";
 
 const curated = JSON.parse(readFileSync(new URL("../data/games.json", import.meta.url), "utf8"));
@@ -92,6 +92,17 @@ test("every locale contains the full portfolio, valid anchors and SEO alternates
     assert.ok(html.includes('href="https://gamestudio42.github.io/urbe-oasis/"'));
     assert.ok(html.includes('application/ld+json'));
     assert.ok(html.includes('"@type":"Organization"'));
+    const patreon = "https://www.patreon.com/c/GameStudio42";
+    assert.equal((html.match(new RegExp(patreon.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g")) || []).length, 6);
+    const patreonAnchors = [...html.matchAll(new RegExp(`<a\\b[^>]*href="${patreon.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[^>]*>`, "g"))];
+    assert.equal(patreonAnchors.length, 5);
+    for (const [anchor] of patreonAnchors) {
+      assert.match(anchor, /target="_blank"/);
+      assert.match(anchor, /rel="noopener noreferrer"/);
+    }
+    assert.ok(html.includes(COPY[locale.id].supportCtaTitle));
+    for (const reward of COPY[locale.id].supportCtaRewards) assert.ok(html.includes(esc(reward)), reward);
+    for (const url of html.match(/https?:\/\/(?:www\.)?youtube\.com\/[^"'<\s]*/g) || []) assert.equal(url, "https://www.youtube.com/@gamestudio42br");
     assert.ok(html.includes(COPY[locale.id].title.split(" — ")[0]));
     assert.ok(!html.includes("to play in your browser and make your own"));
     assert.ok(!html.includes("undefined"));

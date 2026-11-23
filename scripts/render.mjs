@@ -9,6 +9,9 @@ const codeIcon = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path 
 const copyIcon = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V4H4v11h4"/></svg>';
 const shareIcon = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m9 10.5 6-4m-6 7 6 4"/></svg>';
 const githubIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path stroke="none" d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.06c-3.09.67-3.74-1.31-3.74-1.31-.51-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.7 1.14 1.7 1.14.99 1.7 2.6 1.21 3.23.92.1-.72.39-1.21.7-1.49-2.47-.28-5.06-1.23-5.06-5.49 0-1.21.43-2.2 1.14-2.97-.11-.28-.49-1.41.11-2.94 0 0 .93-.3 3.05 1.14a10.6 10.6 0 0 1 5.56 0c2.12-1.44 3.04-1.14 3.04-1.14.61 1.53.23 2.66.12 2.94.71.77 1.14 1.76 1.14 2.97 0 4.27-2.6 5.2-5.08 5.48.4.35.75 1.02.75 2.06V22c0 .3.2.64.76.53A11.1 11.1 0 0 0 12 .9Z"/></svg>';
+const patreonIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path stroke="none" d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/></svg>';
+const PATREON_URL = "https://www.patreon.com/c/GameStudio42";
+const externalLink = 'target="_blank" rel="noopener noreferrer"';
 
 function photo(game, t, { hero = false, sizes = "(max-width: 700px) 100vw, 50vw" } = {}) {
   const source = game.coverSmall ? ` srcset="${esc(game.coverSmall)} 800w, ${esc(game.cover)} ${game.coverWidth}w" sizes="${sizes}"` : "";
@@ -26,7 +29,7 @@ function jsonLd(locale, title, description) {
         name: "Game Studio 42",
         url: SITE + "/",
         description,
-        sameAs: ["https://github.com/gamestudio42"],
+        sameAs: ["https://github.com/gamestudio42", PATREON_URL],
       },
       {
         "@type": "WebSite",
@@ -133,8 +136,8 @@ export function page(locale, games) {
   <a class="skip-link" href="#main">${t.skip}</a>
   <header class="site-header">
     <div class="header-inner">${logo(locale.path)}
-      <nav class="nav-links" id="main-nav" aria-label="${t.navigation}"><a data-section="games" href="#games">${t.games}</a><a data-section="studio" href="#studio">${t.studio}</a><a data-section="community" href="#community">${t.communityNav}</a><a data-section="support" class="nav-support" href="#support">${t.supportNav}</a><a class="nav-mobile-github" href="https://github.com/gamestudio42">GitHub ${diagonal}</a></nav>
-      <div class="header-tools">${languageNav(locale, t)}<a class="header-github icon-button" href="https://github.com/gamestudio42" aria-label="${t.github}">${githubIcon}</a><button class="menu-toggle" hidden type="button" aria-expanded="false" aria-controls="main-nav">${t.menu}<span aria-hidden="true">☰</span></button></div>
+      <nav class="nav-links" id="main-nav" aria-label="${t.navigation}"><a data-section="games" href="#games">${t.games}</a><a data-section="studio" href="#studio">${t.studio}</a><a data-section="community" href="#community">${t.communityNav}</a><a data-section="support" class="nav-support" href="#support">${t.supportNav}</a><a class="nav-mobile-github" href="https://github.com/gamestudio42">GitHub ${diagonal}</a><a class="nav-mobile-patreon" href="${PATREON_URL}" ${externalLink}>${esc(t.patreon)} ${diagonal}</a></nav>
+      <div class="header-tools">${languageNav(locale, t)}<div class="header-social"><a class="header-patreon icon-button" href="${PATREON_URL}" ${externalLink} aria-label="${esc(t.patreonLabel)}">${patreonIcon}</a><a class="header-github icon-button" href="https://github.com/gamestudio42" aria-label="${t.github}">${githubIcon}</a></div><button class="menu-toggle" hidden type="button" aria-expanded="false" aria-controls="main-nav">${t.menu}<span aria-hidden="true">☰</span></button></div>
     </div>
   </header>
   <main id="main">
@@ -174,11 +177,12 @@ export function page(locale, games) {
     <section class="support-section section container" id="support" aria-labelledby="support-title">
       <p class="eyebrow">${t.supportLabel}</p>
       <div class="support-heading"><h2 id="support-title">${t.supportTitle}</h2><p>${t.supportIntro}</p></div>
+      <aside class="patreon-cta" aria-labelledby="patreon-cta-title"><div><p class="eyebrow">${esc(t.supportCtaEyebrow)}</p><h3 id="patreon-cta-title">${esc(t.supportCtaTitle)}</h3><p>${esc(t.supportCtaBody)}</p><ul class="patreon-rewards">${t.supportCtaRewards.map((item) => `<li>${esc(item)}</li>`).join("")}</ul></div><a class="button button-primary" href="${PATREON_URL}" ${externalLink}>${esc(t.supportCtaAction)}${arrow}</a></aside>
       <div class="support-grid">
         <article><h3>${t.sponsorTitle}</h3><p>${t.sponsorBody}</p><p class="support-status">${t.sponsorStatus}</p><a class="text-link" href="mailto:talkgamestudio42@gmail.com?subject=${encodeURIComponent(t.sponsorSubject)}">${t.sponsorAction}${arrow}</a></article>
         <article><h3>${t.servicesTitle}</h3><p>${t.servicesBody}</p><ul class="service-examples">${t.serviceExamples.map(item => `<li>${esc(item)}</li>`).join("")}</ul><a class="button button-primary" href="mailto:talkgamestudio42@gmail.com?subject=${encodeURIComponent(t.servicesSubject)}">${t.servicesAction}${arrow}</a></article>
       </div>
-      <div class="contact-direct"><h3>${t.contactLabel}</h3><p>${t.contactHint}</p><div class="contact-actions"><a href="mailto:talkgamestudio42@gmail.com">talkgamestudio42@gmail.com</a><button hidden type="button" class="text-link" data-copy="talkgamestudio42@gmail.com" data-copied="${t.emailCopied}" data-copy-failed="${t.emailCopyFailed}">${t.copyEmail}${copyIcon}</button></div></div>
+      <div class="contact-direct"><h3>${t.contactLabel}</h3><p>${t.contactHint}</p><div class="contact-actions"><a href="mailto:talkgamestudio42@gmail.com">talkgamestudio42@gmail.com</a><a class="contact-patreon text-link" href="${PATREON_URL}" ${externalLink}>${esc(t.patreon)}${diagonal}</a><button hidden type="button" class="text-link" data-copy="talkgamestudio42@gmail.com" data-copied="${t.emailCopied}" data-copy-failed="${t.emailCopyFailed}">${t.copyEmail}${copyIcon}</button></div></div>
       <p class="support-note">${t.supportNote}</p>
     </section>
     <section class="source-section" id="open-source" aria-labelledby="source-title"><div class="container source-layout"><div><p class="eyebrow">${t.sourceLabel}</p><h2 id="source-title">${lines(t.sourceTitle)}</h2><p class="source-intro">${t.sourceIntro}</p><a class="text-link source-repo" href="${esc(first.code)}">${githubIcon}${t.repo}${diagonal}</a><a class="text-link source-issues" href="${esc(first.code)}/issues">${t.contribute}${arrow}</a></div>
@@ -189,7 +193,7 @@ cd ${esc(first.name)}</code></pre><div class="terminal-guide"><a class="project-
     </div></section>
     <section class="closing container"><p>${t.outro}</p><a href="#games" class="circle-link" aria-label="${t.explore}">${arrow}</a></section>
   </main>
-  <footer class="site-footer container"><div class="footer-top">${logo(locale.path)}<p>${t.footerNote}</p><a class="text-link" href="#top">${t.backTop}<span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© ${new Date().getUTCFullYear()} GAME STUDIO 42</span><a href="https://github.com/gamestudio42/gamestudio42.github.io/blob/main/LICENSE">${t.siteLicense}</a><a href="https://github.com/gamestudio42">GITHUB ${diagonal}</a>${languageNav(locale, t)}</div></footer>
+  <footer class="site-footer container"><div class="footer-top">${logo(locale.path)}<p>${t.footerNote}</p><a class="text-link" href="#top">${t.backTop}<span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© ${new Date().getUTCFullYear()} GAME STUDIO 42</span><a href="https://github.com/gamestudio42/gamestudio42.github.io/blob/main/LICENSE">${t.siteLicense}</a><a href="${PATREON_URL}" ${externalLink}>PATREON ${diagonal}</a><a href="https://github.com/gamestudio42">GITHUB ${diagonal}</a>${languageNav(locale, t)}</div></footer>
   <dialog id="share-dialog" class="share-dialog" aria-labelledby="share-title" aria-describedby="share-hint" data-title="${esc(t.shareTitle)}" data-text="${esc(t.shareText)}" data-failed="${esc(t.shareFailed)}">
     <div class="share-heading"><h2 id="share-title"></h2><button type="button" class="icon-button share-close" aria-label="${esc(t.shareClose)}"><span aria-hidden="true">×</span></button></div>
     <p id="share-hint">${esc(t.shareHint)}</p>
