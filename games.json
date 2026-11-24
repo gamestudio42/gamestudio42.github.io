@@ -76,8 +76,8 @@
     ],
     "discussions": "https://github.com/gamestudio42/vazante/discussions",
     "stars": 1,
-    "forks": 2,
-    "pushedAt": "2026-11-22T13:15:03Z"
+    "forks": 3,
+    "pushedAt": "2026-11-24T10:45:03Z"
   },
   {
     "name": "sitio",
@@ -152,7 +152,7 @@
     "discussions": "https://github.com/gamestudio42/urbe-oasis/discussions",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-20T02:52:09Z"
+    "pushedAt": "2026-11-24T10:58:46Z"
   },
   {
     "name": "neo-urbe",
@@ -189,7 +189,7 @@
     ],
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-20T02:40:37Z"
+    "pushedAt": "2026-11-23T21:14:42Z"
   },
   {
     "name": "urbe",
@@ -224,7 +224,7 @@
     ],
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-04T00:47:46Z"
+    "pushedAt": "2026-11-24T10:53:09Z"
   },
   {
     "name": "mineboss",
@@ -259,7 +259,7 @@
     ],
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-23T20:59:12Z"
+    "pushedAt": "2026-11-23T21:09:43Z"
   },
   {
     "name": "dead-sector",
@@ -303,7 +303,7 @@
     "discussions": "https://github.com/gamestudio42/dead-sector/discussions",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-20T02:47:33Z"
+    "pushedAt": "2026-11-24T10:53:48Z"
   },
   {
     "name": "void-frontier",
@@ -347,7 +347,7 @@
     "discussions": "https://github.com/gamestudio42/void-frontier/discussions",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-20T02:40:06Z"
+    "pushedAt": "2026-11-24T10:43:21Z"
   },
   {
     "name": "ascii-racing",
@@ -376,7 +376,7 @@
     "atom": "https://github.com/gamestudio42/ascii-racing/releases.atom",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-20T04:17:18Z"
+    "pushedAt": "2026-11-24T11:26:00Z"
   },
   {
     "name": "noosphere",
@@ -406,7 +406,7 @@
     "atom": "https://github.com/gamestudio42/noosphere/releases.atom",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-23T21:00:06Z"
+    "pushedAt": "2026-11-23T21:08:19Z"
   },
   {
     "name": "prestes",
@@ -471,7 +471,7 @@
     "discussions": "https://github.com/gamestudio42/void-dominion/discussions",
     "stars": 0,
     "forks": 0,
-    "pushedAt": "2026-11-20T05:34:46Z"
+    "pushedAt": "2026-11-23T21:14:19Z"
   },
   {
     "name": "afterfall",
@@ -506,7 +506,7 @@
     "discussions": "https://github.com/gamestudio42/afterfall/discussions",
     "stars": 1,
     "forks": 0,
-    "pushedAt": "2026-11-22T13:22:49Z"
+    "pushedAt": "2026-11-24T16:15:12Z"
   },
   {
     "name": "gamestudio-kids",
@@ -535,6 +535,6 @@
     "atom": "https://github.com/gamestudio42/gamestudio-kids/releases.atom",
     "stars": 0,
     "forks": 0,
-    "pushedAt": "2026-11-23T20:59:44Z"
+    "pushedAt": "2026-11-23T21:08:53Z"
   }
 ]
