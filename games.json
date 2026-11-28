@@ -409,36 +409,6 @@
     "pushedAt": "2026-11-25T19:51:05Z"
   },
   {
-    "name": "prestes",
-    "default_branch": "main",
-    "title": "Prestes",
-    "tagline": {
-      "en": "Command the Coluna Prestes across Brazil, 1922–1927.",
-      "pt": "Comande a Coluna Prestes pelo Brasil, 1922–1927.",
-      "es": "Dirige la Columna Prestes a través de Brasil, 1922–1927.",
-      "fr": "Menez la Colonne Prestes à travers le Brésil, 1922–1927.",
-      "de": "Führe die Coluna Prestes quer durch Brasilien, 1922–1927."
-    },
-    "cover": "https://raw.githubusercontent.com/gamestudio42/prestes/main/docs/screenshots/cover.jpg",
-    "genre": "real-time-tactics",
-    "tech": [
-      "TypeScript",
-      "Three.js",
-      "React",
-      "Web Worker"
-    ],
-    "order": 6,
-    "play": "https://gamestudio42.github.io/prestes/",
-    "code": "https://github.com/gamestudio42/prestes",
-    "fork": "https://github.com/gamestudio42/prestes/fork",
-    "discussions": "https://github.com/gamestudio42/prestes/discussions",
-    "commits": "https://github.com/gamestudio42/prestes/commits",
-    "atom": "https://github.com/gamestudio42/prestes/releases.atom",
-    "stars": 1,
-    "forks": 0,
-    "pushedAt": "2026-11-20T04:20:05Z"
-  },
-  {
     "name": "void-dominion",
     "title": "Void Dominion",
     "tagline": {
